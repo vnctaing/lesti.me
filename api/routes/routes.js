@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const livereload = require('express-livereload');
+
+livereload(app, config={})
 
 
 app.use(cors());
