@@ -1,4 +1,6 @@
 var path = require('path');
+var webpack = require('webpack');
+
 
 module.exports = {
     entry: "./frontend/src/entry.js",
@@ -20,6 +22,14 @@ module.exports = {
             }
         ]
     },
+    plugins: [new webpack.ProvidePlugin({
+                'React': 'react',
+                'ReactDOM': 'react-dom',
+                'jQuery': 'jquery',
+                '$': 'jquery',
+                'Promise': 'exports?global.Promise!es6-promise',
+                'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+            })],
     resolve: {
         extensions: ['', '.js', '.json', '.jsx']
     }
