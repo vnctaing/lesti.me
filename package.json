@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --progress --colors --watch",
-    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --inline --hot --colors"
+    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --inline --hot --colors",
+    "api": "node api/routes/routes.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +25,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "es6-promise": "^3.1.2",
     "express": "^4.13.4",
     "lodash": "^4.5.0",
