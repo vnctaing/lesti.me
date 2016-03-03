@@ -6,7 +6,6 @@ const livereload = require('express-livereload');
 
 livereload(app, config={})
 
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -21,6 +21,6 @@ export function fetchUserProfile() {
     return fetch(`http://localhost:3000/user`)
               .then(response => response.json())
               .then(json => dispatch(receivedUserProfile(json)))
-              .catch(console.log('hi'));
+              .catch(e => console.log('error', e));
   }
 }

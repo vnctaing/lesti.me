@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --progress --colors --watch",
-    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --inline --hot --colors",
+    "dev": "webpack-dev-server --progress --inline --hot --colors",
     "api": "node api/routes/routes.js"
   },
   "author": "",
@@ -34,6 +34,9 @@
     "path": "^0.12.7",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-redux": "^4.4.0",
+    "react-router": "^2.0.0",
+    "react-router-redux": "^4.0.0",
     "redux": "^3.3.1",
     "redux-thunk": "^1.0.3",
     "whatwg-fetch": "^0.11.0"
