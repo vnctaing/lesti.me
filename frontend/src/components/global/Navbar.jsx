@@ -1,5 +1,8 @@
 export default class Navbar extends React.Component {
   render(){
-    return <div>fuck that shit.</div>;
+    return (<div>
+    Super Navbar
+    </div>)
+    {this.props.children};
   }
 }

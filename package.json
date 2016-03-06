@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --progress --colors --watch",
-    "dev": "webpack-dev-server --progress --inline --hot --colors",
+    "dev": "webpack-dev-server --progress --inline --hot --colors --content-base frontend/",
     "api": "node api/routes/routes.js"
   },
   "author": "",
