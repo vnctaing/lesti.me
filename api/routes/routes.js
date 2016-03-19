@@ -22,8 +22,8 @@ app.get('/user', (req, res) => {
         },
         leaderboard: [
           {
-            'picture': 'https://38.media.tumblr.com/avatar_97cf3b9b5a51_128.png',
-            'name': 'Leonardo Di Carprio',
+            'picture': 'http://cdn-media.ellentv.com/2014/11/06/jim-carrey-episode-480x360.jpg',
+            'name': 'Jim Carrey',
             'esteem': 432
           },
           {

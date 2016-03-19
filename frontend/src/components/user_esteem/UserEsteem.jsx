@@ -9,12 +9,12 @@ const UserEsteem = (props) => {
         <div>
             {props.route.foobar}
             <UserProfile user={user} />
+            <LeaderBoard leaderboard={user.leaderboard}/>
             <hr/>
         </div>
     )
 };
 
-            // <LeaderBoard />
 
 
 export default connect(state => ({ esteemApp: state.esteemApp }))(UserEsteem);
