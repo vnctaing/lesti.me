@@ -4,15 +4,17 @@ import { connect } from 'react-redux';
 
 
 const UserEsteem = (props) => {
+    const { user } = props.esteemApp;
     return (
         <div>
             {props.route.foobar}
-            <UserProfile />
+            <UserProfile user={user} />
             <hr/>
-            <LeaderBoard />
         </div>
     )
 };
 
+            // <LeaderBoard />
 
-export default connect(state => ({ cards: state.cards }))(UserEsteem);
+
+export default connect(state => ({ esteemApp: state.esteemApp }))(UserEsteem);

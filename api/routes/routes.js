@@ -14,7 +14,7 @@ app.get('/user', (req, res) => {
   res.json(
     {
       "user": {
-        profilePicture: 'http://i.skyrock.net/2788/84772788/pics/3207102241_1_2_S1ql29fn.jpg',
+        profilePicture: 'http://www.actuanews.fr/photo/art/grande/6102770-9111496.jpg?v=1386069669',
         stats:{
           esteemCount: 42,
           averageEsteem: 645,
