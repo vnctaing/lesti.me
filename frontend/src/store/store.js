@@ -33,5 +33,3 @@ const store = createStore(
   )
 );
 export default store;
-
-store.dispatch(fetchUserProfile());

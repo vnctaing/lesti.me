@@ -13,7 +13,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Navbar}>
-        <Route path="de" component={UserEsteem} />
+        <Route path="/:username" component={UserEsteem} />
       </Route>
     </Router>
   </Provider>,

@@ -14,6 +14,7 @@ app.get('/user', (req, res) => {
   res.json(
     {
       "user": {
+        name: 'Jammy',
         profilePicture: 'http://www.actuanews.fr/photo/art/grande/6102770-9111496.jpg?v=1386069669',
         stats:{
           esteemCount: 42,
@@ -22,11 +23,13 @@ app.get('/user', (req, res) => {
         },
         leaderboard: [
           {
+            id: 1,
             'picture': 'http://cdn-media.ellentv.com/2014/11/06/jim-carrey-episode-480x360.jpg',
             'name': 'Jim Carrey',
             'esteem': 432
           },
           {
+            id:2,
             'picture': 'https://38.media.tumblr.com/avatar_97cf3b9b5a51_128.png',
             'name': 'Leonardo Caprio',
             'esteem': 123

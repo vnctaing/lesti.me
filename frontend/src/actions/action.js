@@ -6,7 +6,10 @@ export function receivedUserProfile (json) {
     }
 }
 
-
+/**
+ * Action creator fired just before fetching data for a user profile
+ * @type {Function}
+ */
 export const REQUESTING_USER_PROFILE = 'REQUESTING_USER_PROFILE';
 export function requestingUserProfile () {
   return {
