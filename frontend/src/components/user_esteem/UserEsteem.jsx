@@ -6,8 +6,6 @@ import { bindActionCreators } from 'redux';
 
 
 
-console.log('actionCreators', actionCreators)
-console.log('actionCreators binded', bindActionCreators(actionCreators))
 function mapStateToProps(state){
     return {
         esteemApp: state.esteemApp
@@ -17,6 +15,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(actionCreators, dispatch) }
 }
+
 
 
 

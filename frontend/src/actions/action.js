@@ -23,7 +23,7 @@ export function requestingUserProfile () {
  * of a plain object. Therefore, the returned function can delay the action dispatches
  * @return {[fn]} [Promise]
  */
-export function fetchUserProfile() {
+export function fetchUserProfile(username) {
   return function (dispatch) {
     dispatch(requestingUserProfile());
     return fetch(`http://localhost:3000/user`)
