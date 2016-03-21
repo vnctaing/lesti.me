@@ -18,9 +18,10 @@ export function requestingUserProfile () {
 }
 
 /**
- * Thunk action creator, in order to be able to do async actions
+ * Thunk action creator, in order to be able to do async actions.
+ * The redux-thunk middleware let us have access the `dispatch` fn
  * Redux-thunk middleware let us use action creator that returns a function instead
- * of a plain object. Therefore, the returned function can delay the action dispatches
+ * of a plain object. Therefore, the returned function can delay the dispatched action 
  * @return {[fn]} [Promise]
  */
 export function fetchUserProfile(username) {
