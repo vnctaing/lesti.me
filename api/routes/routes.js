@@ -26,38 +26,38 @@ const appraiseeSchema = new Schema({
     appraiseeName: String,
     esteem: Number,
     description: String,
-    appraiser: String
+    appraiser: String,
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
 });
 const Appraisee = mongoose.model('Appraisee', appraiseeSchema);
 
 
 app.get('/user', (req, res) => {
-  res.json(
-    {
-      "user": {
-        name: 'Jammy',
-        profilePicture: 'http://www.actuanews.fr/photo/art/grande/6102770-9111496.jpg?v=1386069669',
+  res.json({
+    "user": {
+      name: 'Jammy',
+      profilePicture: 'http://www.actuanews.fr/photo/art/grande/6102770-9111496.jpg?v=1386069669',
+      leaderboard: [
+        {
+          'id': 1,
+          'picture': 'http://cdn-media.ellentv.com/2014/11/06/jim-carrey-episode-480x360.jpg',
+          'name': 'Jim Carrey',
+          'esteem': 432,
+          'description': 'lacteur le plus nul de la terre',
+          'lastChange': '26/01/1996'
         },
-        leaderboard: [
-          {
-            id: 1,
-            'picture': 'http://cdn-media.ellentv.com/2014/11/06/jim-carrey-episode-480x360.jpg',
-            'name': 'Jim Carrey',
-            'esteem': 432,
-            'description': 'lacteur le plus nul de la terre',
-            'lastChange': '26/01/1996'
-          },
-          {
-            id:2,
-            'picture': 'https://38.media.tumblr.com/avatar_97cf3b9b5a51_128.png',
-            'name': 'Leonardo Caprio',
-            'esteem': 123,
-            'description': 'Acteur oscarise au bout de 6 nomination',
-            'lastChange': '26/01/1996'
-          }
-        ]
-      
-    });
+        {
+          'id':2,
+          'picture': 'https://38.media.tumblr.com/avatar_97cf3b9b5a51_128.png',
+          'name': 'Leonardo Caprio',
+          'esteem': 123,
+          'description': 'Acteur oscarise au bout de 6 nomination',
+          'lastChange': '26/01/1996'
+        }
+      ]
+    }
+  });
 });
 
 app.post('/appraisee', (req,res) => {
@@ -70,7 +70,8 @@ app.post('/appraisee', (req,res) => {
 
   appraiseeToAdd.save(function (err, appraiseeToAdd) {
    if (err) return console.error(err);
-   console.log('added',appraiseeToAdd);
+   console.log('Successfully Added : ');
+   console.log(appraiseeToAdd);
   });
   res.status(200).send('k');
 })
