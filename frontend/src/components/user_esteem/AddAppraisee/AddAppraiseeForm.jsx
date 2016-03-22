@@ -1,14 +1,14 @@
 import { reduxForm } from 'redux-form';
 
 let AddAppraiseeForm = (props) => {
-  const { fields: {username, esteem, description, list}, handleSubmit } = props;
+  const { fields: {appraiseeName, esteem, description, list}, handleSubmit } = props;
   return (
     <div>
       <h3>Ajouter quelqu'un dans votre estime</h3>
       <form action="">
         <div>
           <label htmlFor="">Nom affiché</label>
-          <input type="text" {...username}/>
+          <input type="text" {...appraiseeName}/>
         </div>
         <div>
           <label htmlFor="">Estime</label>
@@ -37,7 +37,7 @@ let AddAppraiseeForm = (props) => {
 
 AddAppraiseeForm = reduxForm({
   form: 'add_appraisee',
-  fields: ['username', 'esteem', 'description', 'list'], // a list of all your fields in your form
+  fields: ['appraiseeName', 'esteem', 'description', 'list'], // a list of all your fields in your form
 })(AddAppraiseeForm)
 
 

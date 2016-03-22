@@ -34,3 +34,33 @@ export function fetchUserProfile(username) {
   }
 }
 
+
+const ADDING_APPRAISEE = 'ADDING_APPRAISEE';
+export function addingAppraisee (formData) {
+  return {
+    type: ADDING_APPRAISEE,
+  }
+}
+
+export function postingNewAppraisee(formData){
+  return function(dispatch){
+    dispatch(addingAppraisee());
+    return fetch(`http://localhost:3000/appraisee`,{
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: formData.appraiseeName,
+          esteem: formData.esteem,
+          description: formData.description,
+          list: formData.list
+        })
+      })
+    .then(response=> response.json())
+    .then(json=> console.log('json', json))
+    .catch(e=> console.log('error',e));
+  }
+}
+

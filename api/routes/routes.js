@@ -39,6 +39,10 @@ app.get('/user', (req, res) => {
     });
 });
 
+app.post('/appraisee', (req,res) => {
+  console.log('req', req.body);
+})
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });

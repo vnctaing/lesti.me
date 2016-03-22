@@ -1,12 +1,19 @@
 import { connect } from 'react-redux';
 import { initialize } from 'redux-form';
 import AddAppraiseeForm from './AddAppraiseeForm.jsx';
+import * as actionCreators from '../../../actions/action.js';
 
 
+
+/**
+ * AddAppraisee is the container component, it is the component connected
+ * to the Redux Store, it also pass `handleSubmit` to `AddAppraiseeForm`
+ * component
+ */
 class AddAppraisee extends React.Component {
     handleSubmit(data){
-        console.log('submission data', data);
-        this.props.dispatch(initialize('add_appraisee',{}, ['username','esteem']));
+        this.props.dispatch(actionCreators.postingNewAppraisee(data))
+        this.props.dispatch(initialize('add_appraisee',{}, ['appraiseeName','esteem','description', 'list']));
     }
 
     render() {
