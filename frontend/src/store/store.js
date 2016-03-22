@@ -5,6 +5,7 @@ import esteemApp from '../reducers/reducer.js'
 import { fetchUserProfile } from '../actions/action.js'
 import { routerReducer } from 'react-router-redux'
 // import DevTools from '../components/global/Devtools.jsx'
+import { reducer as formReducer } from 'redux-form';
 
 
 
@@ -25,7 +26,8 @@ const loggerMiddleware = createLogger()
 const store = createStore(
   combineReducers({
     esteemApp,
-    routing: routerReducer
+    routing: routerReducer,
+    form: formReducer
   }),
   applyMiddleware(
     thunkMiddleware, // lets us dispatch() functions

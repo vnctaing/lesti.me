@@ -1,31 +1,22 @@
-const AddAppraisee = (props) => {
-  return (
-    <div>
-      <h3>Ajouter quelqu'un dans votre estime</h3>
-      <form action="">
-        <div>
-          <label htmlFor="">Nom affiché</label>
-          <input type="text"/>
-        </div>
-        <div>
-          <label htmlFor="">Estime</label>
-          <input type="text"/>
-        </div>
-        <div>
-          <label htmlFor="">Description</label>
-          <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
-        <div>
-          <label htmlFor="">Liste</label>
-          <select name="B">
-            <option value="A">wesh</option>
-            <option value="B">aloors</option>
-            <option value="C">jul</option>
-          </select>
-        </div>        
-      </form>
-    </div>
-  );
-};
+import { connect } from 'react-redux';
+import { initialize } from 'redux-form';
+import AddAppraiseeForm from './AddAppraiseeForm.jsx';
 
-export default AddAppraisee;
+
+class AddAppraisee extends React.Component {
+    handleSubmit(data){
+        console.log('submission data', data);
+        this.props.dispatch(initialize('add_appraisee',{}, ['username','esteem']));
+    }
+
+    render() {
+        return(
+            <div>
+                <h1>AddAppraisee Page</h1>
+                <AddAppraiseeForm onSubmit={this.handleSubmit.bind(this)}/>
+            </div>
+        )
+    }
+}
+
+export default connect()(AddAppraisee);
