@@ -28,9 +28,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Navbar}>
-        <Route path="de/:username" component={UserEsteem} onEnter={fetchUserProfile(store)}>
+        <Route path="de/:appraiser" component={UserEsteem} onEnter={fetchUserProfile(store)}>
         </Route>
-        <Route path="de/:username/add" component={AddAppraisee}></Route>
+        <Route path="de/:appraiser/add" component={AddAppraisee}></Route>
         <Route path="signup" component={Navbar}></Route>
       </Route>
     </Router>

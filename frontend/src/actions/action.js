@@ -24,7 +24,7 @@ export function requestingUserProfile () {
  * of a plain object. Therefore, the returned function can delay the dispatched action 
  * @return {[fn]} [Promise]
  */
-export function fetchUserProfile(username) {
+export function fetchUserProfile(appraiser) {
   return function (dispatch) {
     dispatch(requestingUserProfile());
     return fetch(`http://localhost:3000/user`)
@@ -52,10 +52,11 @@ export function postingNewAppraisee(formData){
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: formData.appraiseeName,
+          appraiseeName: formData.appraiseeName,
           esteem: formData.esteem,
           description: formData.description,
-          list: formData.list
+          list: formData.list,
+          appraiser: formData.appraiser
         })
       })
     .then(response=> response.json())

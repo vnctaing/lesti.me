@@ -26,4 +26,4 @@ function esteemApp(state = initialState, action) {
   }
 }
 
-export default esteemApp
+export default esteemApp;
