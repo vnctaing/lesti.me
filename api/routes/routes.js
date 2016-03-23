@@ -4,33 +4,24 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const livereload = require('express-livereload');
 
+// Mongoose Models Imports
+const mongoose = require('mongoose');
+const Appraisee = require('../models/Appraisee');
+const User = require('../models/User');
 livereload(app, config={})
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const mongoose = require('mongoose');
+
+//Connect mongoose to mongodb server
 mongoose.connect('mongodb://localhost:27017');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('connected !')
 });
-
-
-
-
-const Schema = mongoose.Schema;
-const appraiseeSchema = new Schema({ 
-    appraiseeName: String,
-    esteem: Number,
-    description: String,
-    appraiser: String,
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
-});
-const Appraisee = mongoose.model('Appraisee', appraiseeSchema);
 
 
 app.get('/user', (req, res) => {
@@ -58,6 +49,22 @@ app.get('/user', (req, res) => {
       ]
     }
   });
+});
+
+
+app.post('/user', (req,res)=>{
+  const userToadd = new User({
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email
+  })
+
+  userToadd.save((err,userToadd) => {
+    if(err) return console.error(err)
+    console.log('Successfully Added : ');
+    console.log(userToadd);
+  });
+  res.status(200).send('k');
 });
 
 app.post('/appraisee', (req,res) => {

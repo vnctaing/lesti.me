@@ -65,3 +65,30 @@ export function postingNewAppraisee(formData){
   }
 }
 
+const REQUESTING_SIGN_UP = 'REQUESTING_SIGN_UP';
+export function requestingSignUp(){
+  return{
+    type: REQUESTING_SIGN_UP
+  }
+}
+export function signingUp(formData){
+  return function(dispatch){
+    dispatch(requestingSignUp());
+    return fetch(`http://localhost:3000/user`,{
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'username': formData.username,
+          'password': formData.password,
+          'email': formData.email
+        })
+      })
+    .then(response=> response.json())
+    .then(json=> console.log('json', json))
+    .catch(e=> console.log('error',e));
+  }
+}
+

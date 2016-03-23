@@ -14,8 +14,6 @@ class AddAppraisee extends React.Component {
     handleSubmit(data){
         const appraiser = this.props.params.appraiser;
         const req = Object.assign({},data,{appraiser});
-        console.log('req', req);
-
         this.props.dispatch(actionCreators.postingNewAppraisee(req))
         this.props.dispatch(initialize('add_appraisee',{}, ['appraiseeName','esteem','description', 'list']));
     }

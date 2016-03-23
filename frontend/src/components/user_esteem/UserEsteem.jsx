@@ -28,10 +28,8 @@ function mapDispatchToProps(dispatch) {
  */
 const UserEsteem = (props) => {
     const { user } = props.esteemApp;
-    // props.actions.fetchUserProfile();
     return (
         <div>
-            {props.route.foobar}
             <UserProfile user={user} />
             <LeaderBoard leaderboard={user.leaderboard}/>
             <hr/>
