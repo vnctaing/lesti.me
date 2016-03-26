@@ -7,6 +7,7 @@ import LeaderBoard from '../components/user_esteem/LeaderBoard/LeaderBoard.jsx'
 import AddAppraisee from '../components/user_esteem/AddAppraisee/AddAppraisee'
 import Navbar from '../components/global/Navbar.jsx'
 import Signup from '../components/signup/Signup.jsx'
+import Signin from '../components/signin/Signin.jsx'
 import * as actionCreators from '../actions/action.js';
 
 
@@ -33,6 +34,7 @@ ReactDOM.render(
         </Route>
         <Route path="de/:appraiser/add" component={AddAppraisee}></Route>
         <Route path="signup" component={Signup}></Route>
+        <Route path="signin" component={Signin}></Route>
       </Route>
     </Router>
   </Provider>,

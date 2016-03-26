@@ -1,3 +1,7 @@
+import SHA256 from "js-sha256";
+import { push } from 'react-router-redux'
+
+
 export const RECEIVED_USER_PROFILE = 'RECEIVED_USER_PROFILE';
 export function receivedUserProfile (json) {
     return {
@@ -71,6 +75,8 @@ export function requestingSignUp(){
     type: REQUESTING_SIGN_UP
   }
 }
+
+
 export function signingUp(formData){
   return function(dispatch){
     dispatch(requestingSignUp());
@@ -82,7 +88,7 @@ export function signingUp(formData){
         },
         body: JSON.stringify({
           'username': formData.username,
-          'password': formData.password,
+          'password': SHA256(formData.password),
           'email': formData.email
         })
       })
@@ -92,3 +98,47 @@ export function signingUp(formData){
   }
 }
 
+
+const REQUESTING_SIGN_IN = 'REQUESTING_SIGN_IN';
+export function signingIn(formData){
+  return function(dispatch){
+    dispatch(requestingSignUp());
+    dispatch(push('/foo'));
+    return fetch(`http://localhost:3000/login`,{
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'username': formData.username,
+          'password': SHA256(formData.password),
+        })
+      })
+    .then(response => response.json())
+    .then(json => {
+      if(json.status === 200)  {
+        dispatch(successfullySignIn());
+        console.log('lol');
+      }else{
+        dispatch(failedSignIn());
+      }
+     })
+    .catch(e => console.log('error',e));
+  }
+}
+
+const SUCCESSFULLY_SIGN_IN = 'SUCCESSFULLY_SIGN_IN';
+export function successfullySignIn(){
+    return{
+      type: SUCCESSFULLY_SIGN_IN
+    }
+}
+
+
+const FAILED_SIGN_IN = 'FAILED_SIGN_IN';
+export function failedSignIn (){
+  return{
+    type: FAILED_SIGN_IN
+  }
+}

@@ -67,6 +67,16 @@ app.post('/user', (req,res)=>{
   res.status(200).send('k');
 });
 
+app.post('/login', (req,res)=>{
+  User.findOne(req.body, function (err, person) {
+    if (err) console.log(err);
+    res.json({
+      status: 200, 
+      username: person.username
+    });
+  })
+});
+
 app.post('/appraisee', (req,res) => {
   const appraiseeToAdd = new Appraisee({
      appraiseeName: req.body.appraiseeName,
