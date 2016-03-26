@@ -31,7 +31,7 @@ export function requestingUserProfile () {
 export function fetchUserProfile(appraiser) {
   return function (dispatch) {
     dispatch(requestingUserProfile());
-    return fetch(`http://localhost:3000/user`)
+    return fetch(`http://localhost:3000/appraiser/${appraiser}`)
               .then(response => response.json())
               .then(json => dispatch(receivedUserProfile(json)))
               .catch(e => console.log('error', e));
@@ -103,7 +103,6 @@ const REQUESTING_SIGN_IN = 'REQUESTING_SIGN_IN';
 export function signingIn(formData){
   return function(dispatch){
     dispatch(requestingSignUp());
-    dispatch(push('/foo'));
     return fetch(`http://localhost:3000/login`,{
         method: 'post',
         headers: {
@@ -119,7 +118,7 @@ export function signingIn(formData){
     .then(json => {
       if(json.status === 200)  {
         dispatch(successfullySignIn());
-        console.log('lol');
+        dispatch(push('/foo'));
       }else{
         dispatch(failedSignIn());
       }

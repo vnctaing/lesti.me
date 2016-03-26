@@ -24,7 +24,7 @@ db.once('open', function() {
 });
 
 
-app.get('/user', (req, res) => {
+app.get('/appraiser/:appraiserName', (req, res) => {
   res.json({
     "user": {
       name: 'Jammy',
@@ -70,10 +70,15 @@ app.post('/user', (req,res)=>{
 app.post('/login', (req,res)=>{
   User.findOne(req.body, function (err, person) {
     if (err) console.log(err);
-    res.json({
-      status: 200, 
-      username: person.username
-    });
+    if (person) {
+      res.json({
+        status: 200, 
+        username: person.username,
+        password: person.password
+      })
+    }else{
+      res.json({status:404, 'message': 'Did not found user with that password'});
+    }
   })
 });
 

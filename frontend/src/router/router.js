@@ -22,7 +22,7 @@ const history = syncHistoryWithStore(browserHistory, store);
  */
 function fetchUserProfile(store) {
   return (nextState, replace) => {
-    store.dispatch(actionCreators.fetchUserProfile(nextState.params.username));
+    store.dispatch(actionCreators.fetchUserProfile(nextState.params.appraiser));
   };
 }
 
