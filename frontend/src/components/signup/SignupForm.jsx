@@ -6,7 +6,7 @@ let SignupForm = (props) => {
         <div>
             <form action="">
                 <label htmlFor="">Nom d'utilisateur :</label><input type="text" {...username}/>
-                <label htmlFor="">Mot de passe :</label><input type="text" {...password}/>
+                <label htmlFor="">Mot de passe :</label><input type="password" {...password}/>
                 <label htmlFor="">Email :</label><input type="text" {...email}/>
                 <button onClick={handleSubmit}>S'inscrire</button>
             </form>

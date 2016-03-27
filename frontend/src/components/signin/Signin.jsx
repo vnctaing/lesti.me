@@ -2,6 +2,8 @@ import SignInForm from './SignInForm.jsx';
 import {connect} from 'react-redux';
 import {initialize} from 'redux-form';
 import * as actionCreators from '../../actions/action.js';
+import { bindActionCreators } from 'redux';
+
 
 
 class Signin extends React.Component {
@@ -12,12 +14,27 @@ class Signin extends React.Component {
     }
 
     render() {
+        const {failed_sign_in }= this.props.esteemApp.sign_page.ui
+        const errorSign = failed_sign_in ? 'Identifiants incorrects.' : '';
         return(
         <div>
-            <h2>S'inscrire</h2>
+            <h2>Se connecter</h2>
+            <span>{errorSign}</span>
             <SignInForm onSubmit={this.handleSubmit.bind(this)} />
         </div>)        
     }
 };
 
-export default connect()(Signin);
+function mapStateToProps(state){
+    return {
+        esteemApp: state.esteemApp
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+  return { actions: bindActionCreators(actionCreators, dispatch) }
+}
+
+
+
+export default connect(mapStateToProps)(Signin);

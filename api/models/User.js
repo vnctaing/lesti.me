@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+const AppraiseeSchema = require('./Appraisee');
 
 
 const userSchema = new Schema({ 
@@ -8,6 +9,7 @@ const userSchema = new Schema({
     password: String,
     email: String,
     createdAt: { type: Date, default: Date.now },
+    appraisees: [AppraiseeSchema]
 });
 
 module.exports = mongoose.model('User', userSchema);

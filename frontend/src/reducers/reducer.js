@@ -1,4 +1,5 @@
-import {RECEIVED_USER_PROFILE} from '../actions/action.js'
+// import {RECEIVED_USER_PROFILE} from '../actions/action.js'
+import * as actions from '../actions/action.js';
 
 const initialState = {
   "user": {
@@ -9,18 +10,47 @@ const initialState = {
       lastChange: null
     },
     leaderboard: []
+  },
+  'sign_page':{
+    'ui':{
+      'failed_sign_in': false
+    }
   }
 }
 
 
 function esteemApp(state = initialState, action) {
   switch (action.type) {
-    case RECEIVED_USER_PROFILE:
+    case actions.RECEIVED_USER_PROFILE:
       return Object.assign(
         {},
         state,
         { user: action.user }
     )
+    case actions.FAILED_SIGN_IN:
+      return Object.assign(
+        {},
+        state,
+        {
+          'sign_page':{
+            'ui': {
+              'failed_sign_in': true
+            }
+          }
+        }
+      )
+    case actions.SUCCESSFULLY_SIGN_IN:
+    return Object.assign(
+      {},
+      state,
+      {
+        'sign_page':{
+          'ui': {
+            'failed_sign_in': false
+          }
+        }
+      }
+    )    
     default:
       return state
   }

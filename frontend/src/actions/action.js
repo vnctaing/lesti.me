@@ -2,6 +2,18 @@ import SHA256 from "js-sha256";
 import { push } from 'react-router-redux'
 
 
+export const USER_PROFILE_NOT_FOUND = 'USER_PROFILE_NOT_FOUND';
+export function userProfileNotFound (){
+  return function(dispatch){
+    dispatch(push('/foo'));
+    return {
+        type: RECEIVED_USER_PROFILE,
+        user: json.user
+    };     
+  }
+}
+
+
 export const RECEIVED_USER_PROFILE = 'RECEIVED_USER_PROFILE';
 export function receivedUserProfile (json) {
     return {
@@ -33,7 +45,11 @@ export function fetchUserProfile(appraiser) {
     dispatch(requestingUserProfile());
     return fetch(`http://localhost:3000/appraiser/${appraiser}`)
               .then(response => response.json())
-              .then(json => dispatch(receivedUserProfile(json)))
+              .then(json => {
+                json.status === 404 
+                  ? dispatch(push('/appraiser_not_found'))
+                  : dispatch(receivedUserProfile(json))                  
+              })                
               .catch(e => console.log('error', e));
   }
 }
@@ -76,6 +92,20 @@ export function requestingSignUp(){
   }
 }
 
+const SUCCESSFULLY_SIGN_UP = 'SUCCESSFULLY_SIGN_UP';
+export function successfullySignUp () {
+  return {
+    type: SUCCESSFULLY_SIGN_UP
+  }
+}
+
+const FAILED_SIGN_UP = 'FAILED_SIGN_UP';
+export function failedSignUp(){
+  return {
+    type: failedSignUp
+  }
+}
+
 
 export function signingUp(formData){
   return function(dispatch){
@@ -93,13 +123,20 @@ export function signingUp(formData){
         })
       })
     .then(response=> response.json())
-    .then(json=> console.log('json', json))
+    .then(json=> {
+      if(json.status === 200)  {
+        dispatch(successfullySignUp());
+        dispatch(push(`de/${json.appraiserName}`));
+      }else{
+        dispatch(failedSignUp());
+      }
+    })
     .catch(e=> console.log('error',e));
   }
 }
 
 
-const REQUESTING_SIGN_IN = 'REQUESTING_SIGN_IN';
+export const REQUESTING_SIGN_IN = 'REQUESTING_SIGN_IN';
 export function signingIn(formData){
   return function(dispatch){
     dispatch(requestingSignUp());
@@ -118,7 +155,7 @@ export function signingIn(formData){
     .then(json => {
       if(json.status === 200)  {
         dispatch(successfullySignIn());
-        dispatch(push('/foo'));
+        dispatch(push(`de/${json.username}`));
       }else{
         dispatch(failedSignIn());
       }
@@ -127,7 +164,7 @@ export function signingIn(formData){
   }
 }
 
-const SUCCESSFULLY_SIGN_IN = 'SUCCESSFULLY_SIGN_IN';
+export const SUCCESSFULLY_SIGN_IN = 'SUCCESSFULLY_SIGN_IN';
 export function successfullySignIn(){
     return{
       type: SUCCESSFULLY_SIGN_IN
@@ -135,7 +172,7 @@ export function successfullySignIn(){
 }
 
 
-const FAILED_SIGN_IN = 'FAILED_SIGN_IN';
+export const FAILED_SIGN_IN = 'FAILED_SIGN_IN';
 export function failedSignIn (){
   return{
     type: FAILED_SIGN_IN

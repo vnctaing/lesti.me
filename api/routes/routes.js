@@ -1,3 +1,5 @@
+
+'use strict';
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -8,7 +10,6 @@ const livereload = require('express-livereload');
 const mongoose = require('mongoose');
 const Appraisee = require('../models/Appraisee');
 const User = require('../models/User');
-livereload(app, config={})
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -25,7 +26,21 @@ db.once('open', function() {
 
 
 app.get('/appraiser/:appraiserName', (req, res) => {
+  //   console.log({username: req.params.appraiserName});
+  //   User.findOne({username: req.params.appraiserName}, function (err, person) {
+  //   if (err) console.log(err);
+  //   if (person) {
+  //     console.log('person', person);
+  //     res.json({
+  //       status: 200, 
+  //       username: person.username,
+  //     })
+  //   } else{
+  //     res.json({status:404, 'message': 'Did not found user with that password'});
+  //   }
+  // })
   res.json({
+    "status": 200,
     "user": {
       name: 'Jammy',
       profilePicture: 'http://www.actuanews.fr/photo/art/grande/6102770-9111496.jpg?v=1386069669',
@@ -63,8 +78,11 @@ app.post('/user', (req,res)=>{
     if(err) return console.error(err)
     console.log('Successfully Added : ');
     console.log(userToadd);
+    res.json({
+      status: 200,
+      appraiserName: userToadd.username
+    })
   });
-  res.status(200).send('k');
 });
 
 app.post('/login', (req,res)=>{
@@ -74,28 +92,59 @@ app.post('/login', (req,res)=>{
       res.json({
         status: 200, 
         username: person.username,
-        password: person.password
       })
-    }else{
+    } else{
       res.json({status:404, 'message': 'Did not found user with that password'});
     }
   })
 });
 
 app.post('/appraisee', (req,res) => {
-  const appraiseeToAdd = new Appraisee({
-     appraiseeName: req.body.appraiseeName,
-     esteem: req.body.esteem,
-     description: req.body.description,
-     appraiser: req.body.appraiser
-  });
+  let appraiser = null;
+  User.findOne({username: req.body.appraiser}, function (err, person) {
+    if (err) console.log(err);
+    person ? appraiser = person._id : console.log('did not found user');
+  })
+  .then((appraiser)=> {
+    const appraiseeToAdd = new Appraisee({
+       appraiseeName: req.body.appraiseeName,
+       appraiserName: req.body.appraiser,
+       _appraiser: appraiser._id,
+       esteem: req.body.esteem,
+       description: req.body.description
+    });
 
-  appraiseeToAdd.save(function (err, appraiseeToAdd) {
-   if (err) return console.error(err);
-   console.log('Successfully Added : ');
-   console.log(appraiseeToAdd);
-  });
-  res.status(200).send('k');
+    return appraiseeToAdd.save(function (err, appraiseeToAdd) {
+     if (err) return console.error(err);
+     console.log('Successfully Added : ');
+     console.log(appraiseeToAdd);
+    });
+  }).then((newAppraisee) => {
+    console.log({
+            "_id": newAppraisee._id,
+          });
+    User.update(
+      { _id: newAppraisee._appraiser},
+      { 
+        $push: { 
+          "appraisees": newAppraisee._id,
+        }
+      },
+      {upsert:true}
+    ).exec()
+    .then( function ( result ) { 
+        console.log( result )
+        resolve( result )
+    }, function ( error ) {
+        if ( error ) return reject( error )
+    });
+
+  })
+  // .then(lol=> {
+  //   console.log('lol')
+  //   res.status(200).send('k')
+  // });
+
 })
 
 app.listen(3000, function () {

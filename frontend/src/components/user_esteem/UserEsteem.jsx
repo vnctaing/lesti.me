@@ -3,7 +3,7 @@ import LeaderBoard from './LeaderBoard/LeaderBoard.jsx';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/action.js';
 import { bindActionCreators } from 'redux';
-
+import { Link } from 'react-router'
 
 
 function mapStateToProps(state){
@@ -28,8 +28,10 @@ function mapDispatchToProps(dispatch) {
  */
 const UserEsteem = (props) => {
     const { user } = props.esteemApp;
+    const addAppraiseeURL = `/de/${props.params.appraiser}/add`;
     return (
         <div>
+            <button><Link to={addAppraiseeURL}>Estimer quelqu'un</Link></button>
             <UserProfile user={user} />
             <LeaderBoard leaderboard={user.leaderboard}/>
             <hr/>
