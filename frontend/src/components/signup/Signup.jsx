@@ -14,7 +14,7 @@ class Signup extends React.Component {
     render() {
         return(
         <div>
-            <h2>S'inscrire</h2>
+            <h2 className="title title--boffset">S'inscrire</h2>
             <SignupForm onSubmit={this.handleSubmit.bind(this)} />
         </div>)        
     }

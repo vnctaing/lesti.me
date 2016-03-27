@@ -12,10 +12,9 @@ const UserProfile = (props) => {
     const {user} = props;
     const {leaderboard} = user;
     return (
-        <div>
-            <p>{user.name}'s profile</p>
+        <div className="profile container container-flex--hcenter">
             <UserProfilePicture profilePicture={user.profilePicture}/>
-            <UserProfileStats leaderboard={leaderboard} />
+            <UserProfileStats user={user} leaderboard={leaderboard} />
         </div>
     );
 }

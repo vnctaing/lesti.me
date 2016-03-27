@@ -5,7 +5,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import UserEsteem from '../components/user_esteem/UserEsteem.jsx';
 import LeaderBoard from '../components/user_esteem/LeaderBoard/LeaderBoard.jsx';
 import AddAppraisee from '../components/user_esteem/AddAppraisee/AddAppraisee';
-import Navbar from '../components/global/Navbar.jsx';
+import Layout from '../components/global/Layout.jsx';
 import Signup from '../components/signup/Signup.jsx';
 import Signin from '../components/signin/Signin.jsx';
 import ErrorPage from '../components/global/ErrorPage.jsx';
@@ -31,7 +31,7 @@ function fetchUserProfile(store) {
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Navbar}>
+      <Route path="/" component={Layout}>
         <IndexRoute component={Home}/>
         <Route path="de/:appraiser" component={UserEsteem} onEnter={fetchUserProfile(store)}>
         </Route>

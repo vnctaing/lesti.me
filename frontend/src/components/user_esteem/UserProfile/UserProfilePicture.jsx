@@ -4,7 +4,11 @@
  * might gain in UX complexity
  */
 const UserProfilePicture = (props) => {
-    return <img src={props.profilePicture}/>;
+    return (
+        <div className="profilePicture__container">
+            <img src={props.profilePicture}/>
+        </div>
+    );
 }
 
 export default UserProfilePicture;

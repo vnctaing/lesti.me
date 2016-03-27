@@ -4,12 +4,14 @@
  */
 const UserProfileStats = (props) => {
     const {leaderboard} = props;
+    const {user} = props;
     const ratings = leaderboard.map((a)=>a.esteem)
                                 .reduce((oldval,newval)=> oldval + newval, 0);
     const averageEsteem = ratings / leaderboard.length;
     
     return (
         <div>
+            <p>{user.name}'s profile</p>
             <p>Personne dans lestime : {leaderboard.length}</p>
             <p>Estime Moyenne : {averageEsteem}</p>
             <p>Dernier changement : {props.lastChange}</p>

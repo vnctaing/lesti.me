@@ -1,9 +1,4 @@
-html,
-body {
-   margin:0;
-   padding:0;
-   height:100%;
-}
+
 
 body{
     background: #fbf6f6;
@@ -33,7 +28,7 @@ body{
 }
 
 .content--offset{
-    padding-bottom: 60px
+    padding-bottom: 60px;
 }
 
 .container-flex--hcenter{
@@ -62,6 +57,7 @@ body{
     border-radius: 5px;
     margin: 10px;
     cursor: pointer;
+    font-size: 18px;
 }
 
 .btn--red{
@@ -82,6 +78,54 @@ body{
     background: #7BE6A2;
     border: 3px solid #7BE6A2;
     color: #fff;
+}
+
+.error{
+    color: #F76868;
+}
+
+
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+#wrapper {
+    min-height:100%;
+    position:relative;
+}
+#header {
+    background:#ededed;
+    padding:10px;
+}
+#content {
+    padding-bottom:130px; /* Height of the footer element */
+}
+#footer {
+    background: #544A4A;
+    width:100%;
+    height:100px;
+    position:absolute;
+    bottom:0;
+    left:0;
+    color: #fff;
+}
+
+.navbar__cred{
+    margin-bottom: 10px;
+}
+
+.navbar__links{
+    margin-left: 20px;
+
+}
+
+.navbar__wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .link{
@@ -113,5 +157,28 @@ body{
 .sign-up__form{
     // max-width: 350px;
 }
+
+.profile{
+    background: #7BE6A2;
+    color: #fff;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.profilePicture__container {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+}
+.profilePicture__container img {
+    display: block;
+/* Stretch 
+      height: 100%;
+      width: 100%; */
+min-width: 100%;
+min-height: 100%;
+}
+
 
 

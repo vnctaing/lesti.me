@@ -14,13 +14,10 @@ class Signin extends React.Component {
     }
 
     render() {
-        const {failed_sign_in }= this.props.esteemApp.sign_page.ui
-        const errorSign = failed_sign_in ? 'Identifiants incorrects.' : '';
         return(
         <div>
             <h2 className="title title--boffset">Se connecter</h2>
-            <span>{errorSign}</span>
-            <SignInForm onSubmit={this.handleSubmit.bind(this)} />
+            <SignInForm signIn={this.props.esteemApp.sign_page} onSubmit={this.handleSubmit.bind(this)} />
         </div>)        
     }
 };
