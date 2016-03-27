@@ -18,7 +18,7 @@ class Signin extends React.Component {
         const errorSign = failed_sign_in ? 'Identifiants incorrects.' : '';
         return(
         <div>
-            <h2>Se connecter</h2>
+            <h2 className="title title--boffset">Se connecter</h2>
             <span>{errorSign}</span>
             <SignInForm onSubmit={this.handleSubmit.bind(this)} />
         </div>)        

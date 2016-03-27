@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="301px" height="78px" viewBox="0 0 301 78" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <text id="lesti.me" sketch:type="MSTextLayer" font-family="Nunito" font-size="48" font-weight="normal" fill="#565656">
+            <tspan x="83" y="51">lesti.me</tspan>
+        </text>
+        <g id="Triangle-1-Copy-3-+-Triangle-1-Copy-4" sketch:type="MSLayerGroup" transform="translate(40.307096, 39.000000) scale(-1, 1) rotate(-156.000000) translate(-40.307096, -39.000000) translate(-0.192904, 25.000000)">
+            <path d="M24.0467423,1 C30.2354517,1 48.0934846,27.1774663 48.0934846,27.1774663 L1.98951966e-13,27.1774663 C1.98951966e-13,27.1774663 17.8580329,1 24.0467423,1 Z" id="Triangle-1-Copy-3" fill="#F76868" sketch:type="MSShapeGroup" transform="translate(24.046742, 14.088733) scale(1, -1) translate(-24.046742, -14.088733) "></path>
+            <path d="M56.9207698,1 C63.1094792,1 80.9675121,27.1774663 80.9675121,27.1774663 L32.8740275,27.1774663 C32.8740275,27.1774663 50.7320604,1 56.9207698,1 Z" id="Triangle-1-Copy-4" fill="#7BE6A2" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

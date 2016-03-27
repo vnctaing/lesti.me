@@ -1,0 +1,117 @@
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
+body{
+    background: #fbf6f6;
+    font-family: 'Nunito', sans-serif;
+    color : #565656;
+    position: relative;
+}
+
+.container{
+    padding: 0 20%;
+}
+
+.navbar{
+    background: #fff;
+    padding: 20px 0px;
+    margin-bottom: 40px;
+}
+
+.footer{
+    background: #565656;
+    padding: 20px 0px;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;
+    color: #fff;
+}
+
+.content--offset{
+    padding-bottom: 60px
+}
+
+.container-flex--hcenter{
+    display: flex;
+    align-items: center;
+}
+
+.container-flex--inline{
+    display: flex;
+    flex-direction: row;
+}
+
+.container-flex--space-between{
+    justify-content: space-between;
+}
+
+.container-flex--vcenter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn{
+    background: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.btn--red{
+    color: #F76868;
+    border: 3px solid #F76868;
+}
+.btn--red:hover{
+    background:#F76868;
+    color: #fff 
+}
+
+.btn--green{
+    color: #7BE6A2;
+    border: 3px solid #7BE6A2;
+}
+
+.btn--green:hover{
+    background: #7BE6A2;
+    border: 3px solid #7BE6A2;
+    color: #fff;
+}
+
+.link{
+    color: inherit;
+}
+
+.link:hover{
+    color: #7BE6A2
+}
+
+.title{
+    font-size: 32px;
+    font-weight: 800;
+}
+.title--boffset{
+    margin-bottom: 10px;
+}
+.label{
+    color: #9F9E9E;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.panel{
+    background: #fff;
+    padding: 10px
+}
+
+.sign-up__form{
+    // max-width: 350px;
+}
+
+
