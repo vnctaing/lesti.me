@@ -109,6 +109,10 @@ body{
     text-decoration: none;
 }
 
+.home__highlight{
+    font-size: 32px;
+}
+
 .btn--red{
     color: #F76868;
     border: 3px solid #F76868;

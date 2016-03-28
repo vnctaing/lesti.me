@@ -18,10 +18,10 @@ const Home = (props) => {
                         <i className="fa fa-arrow-up home__icon--green"></i>
                         <i className="fa fa-arrow-down home__icon--red"></i>
                     </div>
-                    <div>Faites monter ou descendre vos amis de votre estime.</div>
+                    <div className="home__highlight">Faites monter ou descendre vos amis de votre estime.</div>
                 </div>
                 <div className="container-flex--hcenter container-flex--space-between">
-                    <div>
+                    <div className="home__highlight">
                         Votre estime est approuvé ou non par les visiteurs
                     </div>
                     <div className="home__icon-container">
