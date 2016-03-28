@@ -1,6 +1,6 @@
 import UserProfilePicture from './UserProfilePicture.jsx'
 import UserProfileStats from './UserProfileStats.jsx'
-
+import {Link} from 'react-router'
 
 /**
  * UserProfile Component - The component that contains
@@ -12,10 +12,17 @@ const UserProfile = (props) => {
     const {user} = props;
     const {leaderboard} = user;
     return (
-        <div className="profile container container-flex--hcenter">
-            <UserProfilePicture profilePicture={user.profilePicture}/>
-            <UserProfileStats user={user} leaderboard={leaderboard} />
+        <div className="profile container">
+            <div>
+            </div>
+            <div className="container-flex--hcenter container-flex--space-between profile__text">
+                <UserProfilePicture profilePicture={user.profilePicture}/>
+                <UserProfileStats user={user} leaderboard={leaderboard} />
+                <button className="btn btn-redplain float-right"><Link to={props.addAppraiseeURL}><i className="fa fa-plus"></i>  Estimer quelqu'un</Link></button>
+
+            </div>
         </div>
+
     );
 }
 

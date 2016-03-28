@@ -31,9 +31,8 @@ const UserEsteem = (props) => {
     const addAppraiseeURL = `/de/${props.params.appraiser}/add`;
     return (
         <div>
-            <button><Link to={addAppraiseeURL}>Estimer quelqu'un</Link></button>
-            <UserProfile user={user} />
-            <LeaderBoard leaderboard={user.leaderboard}/>
+            <UserProfile addAppraiseeURL={addAppraiseeURL} user={user} />
+            <LeaderBoard  leaderboard={user.leaderboard}/>
             <hr/>
         </div>
     )

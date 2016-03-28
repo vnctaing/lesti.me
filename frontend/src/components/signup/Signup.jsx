@@ -13,7 +13,7 @@ class Signup extends React.Component {
 
     render() {
         return(
-        <div>
+        <div className="container">
             <h2 className="title title--boffset">S'inscrire</h2>
             <SignupForm onSubmit={this.handleSubmit.bind(this)} />
         </div>)        
