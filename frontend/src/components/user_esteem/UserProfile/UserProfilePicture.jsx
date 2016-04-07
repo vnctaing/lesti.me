@@ -4,9 +4,15 @@
  * might gain in UX complexity
  */
 const UserProfilePicture = (props) => {
+    const centeredPicture = {
+      backgroundImage: `url(${props.profilePicture})`,
+      backgroundPosition: 'center center',
+      backgroundSize: 'cover',
+    };
+
     return (
         <div className="profilePicture__container">
-            <img src={props.profilePicture}/>
+            <img style={centeredPicture}/>
         </div>
     );
 }
