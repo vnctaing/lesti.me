@@ -29,14 +29,15 @@ body{
 }
 
 .home__icon-container{
-    width: 200px;
-    height: 200px;
+    min-width: 90px;
+    min-height: 90px;
     border-radius: 50%;
-    font-size: 80px;
+    font-size: 51px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #fff;
+    padding: 25px;
 }
 
 .home__icon--green{
@@ -110,7 +111,8 @@ body{
 }
 
 .home__highlight{
-    font-size: 32px;
+    font-size: 28px;
+    padding: 30px;
 }
 
 .btn--red{

@@ -7,7 +7,6 @@ const Home = (props) => {
                 <div className="container">
                     <h1 className="home__headline">Votre estime sous forme de tableau</h1>
                     <div className="home__form-wrapper">
-                        <h4 className="home__form-headline">Nouveau sur Lesti.me ? Inscrivez-vous</h4>
                         <Signup/>
                     </div>
                 </div>

@@ -14,7 +14,7 @@ let SigninForm = (props) => {
                 <input type="text" {...username}/>
                 <label className="label">Mot de passe :</label>
                 <input type="text" {...password}/>
-                <button className="btn btn--green" onClick={handleSubmit}>S'inscrire</button>
+                <button className="btn btn--green" onClick={handleSubmit}>Se connecter</button>
                 </div>
             </form>
         </div>
