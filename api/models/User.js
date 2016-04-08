@@ -9,7 +9,7 @@ const userSchema = new Schema({
     password: String,
     email: String,
     createdAt: { type: Date, default: Date.now },
-    appraisees: [AppraiseeSchema]
+    appraisees: [{type: Schema.Types.ObjectId, ref: 'Appraisee'}]
 });
 
 module.exports = mongoose.model('User', userSchema);

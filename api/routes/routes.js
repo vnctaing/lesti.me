@@ -26,44 +26,45 @@ db.once('open', function() {
 
 
 app.get('/appraiser/:appraiserName', (req, res) => {
-  //   console.log({username: req.params.appraiserName});
-  //   User.findOne({username: req.params.appraiserName}, function (err, person) {
-  //   if (err) console.log(err);
-  //   if (person) {
-  //     console.log('person', person);
-  //     res.json({
-  //       status: 200, 
-  //       username: person.username,
-  //     })
-  //   } else{
-  //     res.json({status:404, 'message': 'Did not found user with that password'});
+    console.log({username: req.params.appraiserName});
+    User.findOne({username: req.params.appraiserName}, function (err, person) {
+    if (err) console.log(err);
+    if (!person) res.json({status:404, 'message': 'Did not found user with that password'});
+  })
+  .populate('appraisees')
+  .exec(function (err, user) {
+    if (err) console.log(err);
+    res.json({status:200, appraiser: user});
+  })
+  // 
+  // 
+  // res.json({
+  //   "status": 200,
+  //   "user": {
+  //     name: 'Jammy',
+  //     profilePicture: 'http://www.actuanews.fr/photo/art/grande/6102770-9111496.jpg?v=1386069669',
+  //     leaderboard: [
+  //       {
+  //         'id': 1,
+  //         'picture': 'http://cdn-media.ellentv.com/2014/11/06/jim-carrey-episode-480x360.jpg',
+  //         'name': 'Jim Carrey',
+  //         'esteem': 432,
+  //         'description': 'lacteur le plus nul de la terre',
+  //         'lastChange': '26/01/1996'
+  //       },
+  //       {
+  //         'id':2,
+  //         'picture': 'https://38.media.tumblr.com/avatar_97cf3b9b5a51_128.png',
+  //         'name': 'Leonardo Caprio',
+  //         'esteem': 123,
+  //         'description': 'Acteur oscarise au bout de 6 nomination',
+  //         'lastChange': '26/01/1996'
+  //       }
+  //     ]
   //   }
-  // })
-  res.json({
-    "status": 200,
-    "user": {
-      name: 'Jammy',
-      profilePicture: 'http://www.actuanews.fr/photo/art/grande/6102770-9111496.jpg?v=1386069669',
-      leaderboard: [
-        {
-          'id': 1,
-          'picture': 'http://cdn-media.ellentv.com/2014/11/06/jim-carrey-episode-480x360.jpg',
-          'name': 'Jim Carrey',
-          'esteem': 432,
-          'description': 'lacteur le plus nul de la terre',
-          'lastChange': '26/01/1996'
-        },
-        {
-          'id':2,
-          'picture': 'https://38.media.tumblr.com/avatar_97cf3b9b5a51_128.png',
-          'name': 'Leonardo Caprio',
-          'esteem': 123,
-          'description': 'Acteur oscarise au bout de 6 nomination',
-          'lastChange': '26/01/1996'
-        }
-      ]
-    }
-  });
+  // });
+
+
 });
 
 
