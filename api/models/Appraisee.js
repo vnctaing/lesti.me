@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const appraiseeSchema = new Schema({ 
     appraiseeName: String,
-    _appraiser: { type: Schema.Types.ObjectId, ref: 'User' },
+    _appraiser: { type: Schema.Types.ObjectId, ref: 'Appraiser' },
     esteem: Number,
     description: String,
     appraiser: String,

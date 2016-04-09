@@ -2,23 +2,23 @@ import SHA256 from "js-sha256";
 import { push } from 'react-router-redux'
 
 
-export const USER_PROFILE_NOT_FOUND = 'USER_PROFILE_NOT_FOUND';
-export function userProfileNotFound (){
+export const APPRAISER_PROFILE_NOT_FOUND = 'APPRAISER_PROFILE_NOT_FOUND';
+export function appraiserProfileNotFound (){
   return function(dispatch){
     dispatch(push('/foo'));
     return {
-        type: RECEIVED_USER_PROFILE,
-        user: json.user
+        type: RECEIVED_APPRAISER_PROFILE,
+        appraiser: json.appraiser
     };     
   }
 }
 
 
-export const RECEIVED_USER_PROFILE = 'RECEIVED_USER_PROFILE';
-export function receivedUserProfile (json) {
+export const RECEIVED_APPRAISER_PROFILE = 'RECEIVED_APPRAISER_PROFILE';
+export function receivedAppraiserProfile (json) {
     return {
-        type: RECEIVED_USER_PROFILE,
-        user: json.user
+        type: RECEIVED_APPRAISER_PROFILE,
+        appraiser: json.appraiser
     }
 }
 
@@ -26,10 +26,10 @@ export function receivedUserProfile (json) {
  * Action creator fired just before fetching data for a user profile
  * @type {Function}
  */
-export const REQUESTING_USER_PROFILE = 'REQUESTING_USER_PROFILE';
-export function requestingUserProfile () {
+export const REQUESTING_APPRAISER_PROFILE = 'REQUESTING_APPRAISER_PROFILE';
+export function requestingAppraiserProfile () {
   return {
-    type: REQUESTING_USER_PROFILE,
+    type: REQUESTING_APPRAISER_PROFILE,
   }
 }
 
@@ -42,15 +42,15 @@ export function requestingUserProfile () {
  */
 export function fetchUserProfile(appraiser) {
   return function (dispatch) {
-    dispatch(requestingUserProfile());
-    return fetch(`http://localhost:3000/appraiser/${appraiser}`)
-              .then(response => response.json())
-              .then(json => {
-                json.status === 404 
-                  ? dispatch(push('/appraiser_not_found'))
-                  : dispatch(receivedUserProfile(json))                  
-              })                
-              .catch(e => console.log('error', e));
+    dispatch(requestingAppraiserProfile());
+    fetch(`http://localhost:3000/appraiser/${appraiser}`)
+      .then(response => response.json())
+      .then(json => {
+        json.status === 404 
+          ? dispatch(push('/appraiser_not_found'))
+          : dispatch(receivedAppraiserProfile(json));
+      })                
+      .catch(e => console.log('error', e));
   }
 }
 
@@ -110,14 +110,14 @@ export function failedSignUp(){
 export function signingUp(formData){
   return function(dispatch){
     dispatch(requestingSignUp());
-    return fetch(`http://localhost:3000/user`,{
+    fetch(`http://localhost:3000/appraiser`,{
         method: 'post',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          'username': formData.username,
+          'name': formData.username,
           'password': SHA256(formData.password),
           'email': formData.email
         })
@@ -140,14 +140,14 @@ export const REQUESTING_SIGN_IN = 'REQUESTING_SIGN_IN';
 export function signingIn(formData){
   return function(dispatch){
     dispatch(requestingSignUp());
-    return fetch(`http://localhost:3000/login`,{
+    fetch(`http://localhost:3000/login`,{
         method: 'post',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          'username': formData.username,
+          'name': formData.username,
           'password': SHA256(formData.password),
         })
       })
@@ -155,7 +155,7 @@ export function signingIn(formData){
     .then(json => {
       if(json.status === 200)  {
         dispatch(successfullySignIn());
-        dispatch(push(`de/${json.username}`));
+        dispatch(push(`de/${json.appraiser.name}`));
       }else{
         dispatch(failedSignIn());
       }

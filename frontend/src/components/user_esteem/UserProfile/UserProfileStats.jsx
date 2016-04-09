@@ -3,16 +3,16 @@
  * @param  {[array]} leaderboard [A list of the appraisees]
  */
 const UserProfileStats = (props) => {
-    const {leaderboard} = props;
-    const {user} = props;
-    const ratings = leaderboard.map((a)=>a.esteem)
+    const {appraisees} = props;
+    const {appraiser} = props;
+    const ratings = appraisees.map((a)=>a.esteem)
                                 .reduce((oldval,newval)=> oldval + newval, 0);
-    const averageEsteem = ratings / leaderboard.length;
+    const averageEsteem = ratings / appraisees.length;
     
     return (
         <div>
-            <p>{user.name}'s profile</p>
-            <p>Personne dans lestime : {leaderboard.length}</p>
+            <p>{appraiser.name}'s profile</p>
+            <p>Personne dans lestime : {appraisees.length}</p>
             <p>Estime Moyenne : {averageEsteem}</p>
             <p>Dernier changement : {props.lastChange}</p>
         </div>

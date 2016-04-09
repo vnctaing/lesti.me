@@ -1,15 +1,15 @@
-// import {RECEIVED_USER_PROFILE} from '../actions/action.js'
 import * as actions from '../actions/action.js';
 
 const initialState = {
-  "user": {
+  "appraiser": {
+    name: '',
     profilePicture: '',
     stats:{
       esteemCount: null,
       averageEsteem: null,
       lastChange: null
     },
-    leaderboard: []
+    appraisees: []
   },
   'sign_page':{
     'ui':{
@@ -21,11 +21,11 @@ const initialState = {
 
 function esteemApp(state = initialState, action) {
   switch (action.type) {
-    case actions.RECEIVED_USER_PROFILE:
+    case actions.RECEIVED_APPRAISER_PROFILE:
       return Object.assign(
         {},
         state,
-        { user: action.user }
+        { appraiser: action.appraiser }
     )
     case actions.FAILED_SIGN_IN:
       return Object.assign(
