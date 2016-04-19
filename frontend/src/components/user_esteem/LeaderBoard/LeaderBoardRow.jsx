@@ -6,10 +6,11 @@ const LeaderBoardRow = (props) => {
     };
 
     return (
-        <div>
-            <div className="container-flex--hcenter container-flex--space-between leaderboard__row">
-                <img style={centeredPicture} className="round-img__container"/>
+        <div className="leaderboard_row">
+            <div className="container-flex--hcenter container-flex--space-between">
+                {/*<img style={centeredPicture} className="img-rounded img-responsive"/> */}
                 <div className="pimage"></div>
+                <p>{props.appraisee.appraiseeName}</p>
                 <p>{props.appraisee.description}</p>
                 <div className="profile__text">
                     <p>{props.appraisee.name}</p>

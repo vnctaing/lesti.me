@@ -9,7 +9,7 @@ let SignupForm = (props) => {
                     <label className="label" htmlFor="">Nom d'utilisateur :</label><input type="text" {...username}/>
                     <label className="label" htmlFor="">Mot de passe :</label><input type="password" {...password}/>
                     <label className="label" htmlFor="">Email :</label><input type="text" {...email}/>
-                    <button className="btn btn--green" onClick={handleSubmit}>S'inscrire</button>
+                    <button className="btn btn-default btn--green" onClick={handleSubmit}>S'inscrire</button>
                 </div>
             </form>
         </div>

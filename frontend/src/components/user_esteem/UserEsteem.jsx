@@ -32,7 +32,9 @@ const UserEsteem = (props) => {
     return (
         <div>
             <UserProfile addAppraiseeURL={addAppraiseeURL} appraiser={appraiser} />
-            <LeaderBoard  appraisees={appraiser.appraisees}/>
+            <div className="container">
+                <LeaderBoard  appraisees={appraiser.appraisees}/>
+            </div>
         </div>
     )
 };

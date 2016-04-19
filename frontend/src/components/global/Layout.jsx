@@ -10,7 +10,7 @@ export default class Layout extends React.Component {
       <div className="content--offset" id="content">
         {this.props.children}
       </div>
-      <Footer/>
+      {/*<Footer/>*/}
     </div>);
 
   }

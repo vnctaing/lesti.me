@@ -10,7 +10,7 @@ const LeaderBoard = (props) => {
     const { appraisees } = props;
     const LeaderBoardContent = appraisees.map((a) => <LeaderBoardRow appraisee={a} key={a.id} /> )
     return (
-        <div className="container">
+        <div>
             <div className="leaderboard">
                 {LeaderBoardContent}
             </div>
