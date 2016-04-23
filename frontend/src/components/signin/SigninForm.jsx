@@ -8,13 +8,17 @@ let SigninForm = (props) => {
     return (
         <div className="panel">
             <form action="" className="sign-up__form">
-                <div className="container-flex--vcenter container-flex--hcenter">
-                <span className="error">{errorSign}</span>
-                <label className="label">Nom d'utilisateur :</label>
-                <input type="text" {...username}/>
-                <label className="label">Mot de passe :</label>
-                <input type="text" {...password}/>
-                <button className="btn btn--green" onClick={handleSubmit}>Se connecter</button>
+                <div className="">
+                    <span className="error">{errorSign}</span>
+                    <div className="form-group">
+                        <label className="label">Nom d'utilisateur :</label>
+                        <input className="form-control" type="text" {...username}/>
+                    </div>
+                    <div className="form-group">
+                        <label className="label">Mot de passe :</label>
+                        <input className="form-control" type="text" {...password}/>
+                    </div>
+                    <button className="btn btn-default btn--green" onClick={handleSubmit}>Se connecter</button>
                 </div>
             </form>
         </div>

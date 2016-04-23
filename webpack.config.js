@@ -22,6 +22,11 @@ module.exports = {
                 }
             },
             {
+              test: /\.css$/,
+              loader: "style!css?sourceMap"
+            },
+
+            {
               test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
               loader: "url?limit=10000&mimetype=application/font-woff"
             }, {
