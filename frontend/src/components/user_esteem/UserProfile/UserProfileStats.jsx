@@ -11,8 +11,8 @@ const UserProfileStats = (props) => {
     
     return (
         <div>
-            <p>{appraiser.name}'s profile</p>
-            <p>Personne dans lestime : {appraisees.length}</p>
+            <p>L'estime de {appraiser.name}</p>
+            <p>Personnes dans son estime : {appraisees.length}</p>
             <p>Estime Moyenne : {averageEsteem}</p>
             <p>Dernier changement : {props.lastChange}</p>
         </div>

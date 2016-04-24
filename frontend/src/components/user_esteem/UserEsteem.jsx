@@ -33,7 +33,11 @@ const UserEsteem = (props) => {
         <div>
             <UserProfile addAppraiseeURL={addAppraiseeURL} appraiser={appraiser} />
             <div className="container">
-                <LeaderBoard  appraisees={appraiser.appraisees}/>
+                <div className="row">
+                    <div className="col-md-6">
+                        <LeaderBoard appraisees={appraiser.appraisees}/>
+                    </div>
+                </div>
             </div>
         </div>
     )
