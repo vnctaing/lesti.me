@@ -173,8 +173,39 @@ export function successfullySignIn(){
 
 
 export const FAILED_SIGN_IN = 'FAILED_SIGN_IN';
-export function failedSignIn (){
+export function failedSignIn() {
   return{
     type: FAILED_SIGN_IN
+  }
+}
+
+export const OPEN_APPRAISEE_UPDATE_MODAL = 'OPEN_APPRAISEE_UPDATE_MODAL';
+export function openAppraiseeUpdateModal() {
+  return {
+    type: OPEN_APPRAISEE_UPDATE_MODAL
+  }
+}
+
+export const CLOSE_APPRAISEE_UPDATE_MODAL = 'CLOSE_APPRAISEE_UPDATE_MODAL';
+export function closeAppraiseeUpdateModal() {
+  return {
+    type: CLOSE_APPRAISEE_UPDATE_MODAL
+  }
+}
+
+export const UPDATING_APPRAISEE_ESTEEM = 'UPDATING_APPRAISEE_ESTEEM';
+export function updatingAppraiseeEsteem(hey) {
+  const appraisee = 'fuck';
+  return function (dispatch){
+    fetch(`http://localhost:3000/appraisee/${appraisee}`,{
+        method: 'put',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'foo': 'bar'
+        })
+    })
   }
 }

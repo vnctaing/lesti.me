@@ -1,7 +1,7 @@
 import * as actions from '../actions/action.js';
 
 const initialState = {
-  "appraiser": {
+  'appraiser': {
     name: '',
     profilePicture: '',
     stats:{
@@ -14,6 +14,11 @@ const initialState = {
   'sign_page':{
     'ui':{
       'failed_sign_in': false
+    }
+  },
+  'user_esteem': {
+    'ui': {
+      'show_update_appraisee_esteem_modal': false
     }
   }
 }
@@ -47,6 +52,30 @@ function esteemApp(state = initialState, action) {
         'sign_page':{
           'ui': {
             'failed_sign_in': false
+          }
+        }
+      }
+    )
+    case actions.OPEN_APPRAISEE_UPDATE_MODAL:
+    return Object.assign(
+      {},
+      state,
+      {
+        'user_esteem': {
+          'ui': {
+            'show_update_appraisee_esteem_modal': true
+          }
+        }
+      }
+    )
+    case actions.CLOSE_APPRAISEE_UPDATE_MODAL:
+    return Object.assign(
+      {},
+      state,
+      {
+        'user_esteem': {
+          'ui': {
+            'show_update_appraisee_esteem_modal': false
           }
         }
       }

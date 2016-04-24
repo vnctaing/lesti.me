@@ -223,7 +223,7 @@ body {
 }
 
 .profile{
-    background: #7BE6A2;
+    background: @blue;
     color: #fff;
     padding-top: 40px;
     padding-bottom: 20px;
@@ -234,8 +234,6 @@ body {
         height: 150px;
     }
 }
-
-
 
 .leaderboard{
     margin-top: 20px;
@@ -264,6 +262,7 @@ body {
     color: #fff;
     background: #a3a3a3;
     padding: 10px;
+    cursor: pointer;
 }
 
 .leaderboard_row{
@@ -274,7 +273,7 @@ body {
 }
 
 .leaderboard_name{
-    color: @green;
+    color: @blue;
     font-size: 22px;
 }
 
@@ -296,12 +295,20 @@ body {
 }
 
 .leaderboard__icon{
-    color: @green;
+    color: @blue;
     margin-right: 5px;
 }
 
 .leaderboard__icon--right{
     margin-left: 5px
+}
+
+.leaderboard__cta--red{
+    background: @red;
+}
+
+.leaderboard__cta--green{
+    background: @green;
 }
 
 .round-img__container img{
@@ -313,6 +320,7 @@ body {
 .signupForm{
     font-size: 18px;
 }
+
 
 
 

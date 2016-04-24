@@ -16,10 +16,6 @@ function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(actionCreators, dispatch) }
 }
 
-
-
-
-
 /**
  * UserEsteem - Component connected to the Redux Store
  * Container of the Leaderboard and the UserProfile, used on the `/de/[username]`
@@ -27,7 +23,7 @@ function mapDispatchToProps(dispatch) {
  * {[Object]} esteemApp
  */
 const UserEsteem = (props) => {
-    const { appraiser } = props.esteemApp;
+    const { appraiser, user_esteem } = props.esteemApp;
     const addAppraiseeURL = `/de/${props.params.appraiser}/add`;
     return (
         <div>
@@ -35,7 +31,7 @@ const UserEsteem = (props) => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                        <LeaderBoard appraisees={appraiser.appraisees}/>
+                        <LeaderBoard appraisees={appraiser.appraisees} actions={props.actions} user_esteem={user_esteem}/>
                     </div>
                 </div>
             </div>
