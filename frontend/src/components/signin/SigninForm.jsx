@@ -2,8 +2,7 @@ import { reduxForm } from 'redux-form';
 
 let SigninForm = (props) => {
     const { fields: {username, password}, handleSubmit } = props;
-    console.log(props)
-    const {failed_sign_in }= props.signIn.ui
+    const { failed_sign_in }= props.signIn.ui
     const errorSign = failed_sign_in ? 'Identifiants incorrects.' : '';
     return (
         <div className="panel">

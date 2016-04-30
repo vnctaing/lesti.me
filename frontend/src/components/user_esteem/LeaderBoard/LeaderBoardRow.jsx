@@ -1,22 +1,39 @@
-import CounterFontAwesome from './CounterFontAwesome.jsx';
-// import {Modal} from "react-bootstrap/lib/ModalHeader";
+import LabelIllustrated from './LabelIllustrated.jsx';
 import UpdateAppraiseeEsteemModal from './UpdateAppraiseeEsteemModal.jsx';
+import LeaderBoardComments from './LeaderBoardComments.jsx';
+import {initialize} from 'redux-form';
+
+
 const LeaderBoardRow = (props) => {
     const centeredPicture = {
       backgroundImage: `url(${props.appraisee.picture})`,
       backgroundPosition: 'center center',
       backgroundSize: 'cover',
     };
-    function handleClick(){
+    const { openAppraiseeUpdateModal, closeAppraiseeUpdateModal} = props.actions;
+    const { initialize } = props;
+
+    function handleClick() {
         openAppraiseeUpdateModal();
     }
-    const { openAppraiseeUpdateModal } = props.actions;
-    return (
-        <div>
-            <div className="leaderboard_row">
-                <div>
-                    {/*<img style={centeredPicture} className="img-rounded img-responsive"/> */}
+    function handleSubmit(e) {
+        closeAppraiseeUpdateModal();
+    }
 
+    function handleCommentSubmit (a){
+        initialize('comment',{}, ['author', 'content']);
+    }
+
+    function displayPanel() {
+        if(props.panel === 'comments'){
+            return ( 
+                <LeaderBoardComments handleCommentSubmit={handleCommentSubmit}
+                                     appraisee={props.appraisee}
+                                     onSubmit={handleCommentSubmit.bind(this)}
+                /> );
+        } else {
+            return (
+                <div>
                     <p className="leaderboard_name inline">{props.appraisee.appraiseeName}</p>
                     <p className="inline">{props.appraisee.name}, </p>
                     <div className="inline">
@@ -26,9 +43,9 @@ const LeaderBoardRow = (props) => {
                     <i className="fa fa-pencil leaderboard__icon--right"></i>
                     <p className="leaderboard__description">{props.appraisee.description}</p>
                     <div>
-                        <CounterFontAwesome icon="fa-thumbs-o-up" count="0"/>
-                        <CounterFontAwesome icon="fa-thumbs-o-down" count="0"/>
-                        <CounterFontAwesome icon="fa-commenting-o" count="0"/>
+                        <LabelIllustrated icon="fa-thumbs-o-up" label="0"/>
+                        <LabelIllustrated icon="fa-thumbs-o-down" label="0"/>
+                        <LabelIllustrated icon="fa-commenting-o" label="0"/>
                     </div>
                     <hr/>
                     <div className="leaderboard__ctaContainer">
@@ -39,9 +56,19 @@ const LeaderBoardRow = (props) => {
                             <i className="fa fa-arrow-down inline"></i>
                         </div>
                     </div>
+                    <UpdateAppraiseeEsteemModal user_esteem={props.user_esteem} 
+                                                appraiser_name={props.appraiser_name} 
+                                                actions={props.actions} />
                 </div>
+            );
+        }
+    }
+
+    return (
+        <div>
+            <div className="leaderboard_row">
+                {displayPanel()}
             </div>
-            <UpdateAppraiseeEsteemModal user_esteem={props.user_esteem} actions={props.actions}/>
         </div>
     )
 }

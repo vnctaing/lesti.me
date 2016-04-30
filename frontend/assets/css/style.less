@@ -17,6 +17,10 @@ body{
     position: relative;
 }
 
+.textarea--nonresizable{
+    resize: none
+}
+
 .inline{
     display: inline;
 }
@@ -138,8 +142,19 @@ body{
 }
 
 .btn--green{
-    color: #7BE6A2;
+    color: @green;
     border: 3px solid #7BE6A2;
+}
+
+.btn--greenplain{
+    background: @green;
+    color: #fff;
+    border:3px solid @green;
+    &:hover{
+        background: #fff;
+        color: @green;
+        border:3px solid @green;
+    }
 }
 
 .btn--green:hover{
@@ -230,9 +245,15 @@ body {
 }
 
 .profile_picture{
-    @media (min-width: 600px) {
-        height: 150px;
+    @media (min-width: 350px) {
+        min-height: 150px;
+        min-width: 150px;
     }
+    min-height: 100px;
+    min-width: 100px;
+    border: 5px solid #fff;
+
+ 
 }
 
 .leaderboard{
@@ -309,6 +330,11 @@ body {
 
 .leaderboard__cta--green{
     background: @green;
+}
+
+.leaderboard__comment{
+    font-weight: 300;
+    font-size: 12px
 }
 
 .round-img__container img{

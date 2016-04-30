@@ -9,6 +9,7 @@ const esteemVariationSchema = new Schema({
     cause: String,
     variation: Number,
     createdAt: { type: Date, default: Date.now },
+    comments: [type:Schema.Types.ObjectId, ref:'Comments']
     appraisees: { type: Schema.Types.ObjectId, ref: 'Appraisee' },
     appraiser: { type: Schema.Types.ObjectId, ref: 'Appraiser' }
 });

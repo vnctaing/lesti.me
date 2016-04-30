@@ -6,9 +6,17 @@ import LeaderBoardRow from './LeaderBoardRow.jsx';
  * {[array]} leaderboard array
  */
 const LeaderBoard = (props) => {
-    const { appraisees, actions } = props;
-    const LeaderBoardContent = appraisees
-    								.map((a) => <LeaderBoardRow appraisee={a} key={a.id} actions={actions} user_esteem={props.user_esteem}/> )
+    const { appraiser, actions, initialize } = props;
+    const { appraisees } = appraiser;
+    const LeaderBoardContent = appraisees.map((a) => {
+        return <LeaderBoardRow appraisee={a} 
+                        appraiser_name={appraiser.name}
+                        key={a._id}
+                        panel='comments'
+                        actions={actions} 
+                        initialize={initialize}
+                        user_esteem={props.user_esteem}/>
+    })
     return (
         <div>
             <div className="leaderboard">

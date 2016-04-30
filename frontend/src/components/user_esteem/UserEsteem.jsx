@@ -1,5 +1,6 @@
 import UserProfile from './UserProfile/UserProfile.jsx';
 import LeaderBoard from './LeaderBoard/LeaderBoard.jsx';
+import {initialize} from 'redux-form';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/action.js';
 import { bindActionCreators } from 'redux';
@@ -12,8 +13,13 @@ function mapStateToProps(state){
     }
 }
 
+console.log('initialize', initialize);
+
 function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(actionCreators, dispatch) }
+    return { 
+        actions: bindActionCreators(actionCreators, dispatch),
+        initialize: bindActionCreators(initialize, dispatch)
+    }
 }
 
 /**
@@ -31,7 +37,11 @@ const UserEsteem = (props) => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                        <LeaderBoard appraisees={appraiser.appraisees} actions={props.actions} user_esteem={user_esteem}/>
+                        <LeaderBoard appraiser={appraiser}
+                                     actions={props.actions} 
+                                     initialize={props.initialize}
+                                     user_esteem={user_esteem}
+                                     />
                     </div>
                 </div>
             </div>
