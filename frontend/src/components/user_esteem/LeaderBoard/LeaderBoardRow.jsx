@@ -23,7 +23,8 @@ const LeaderBoardRow = (props) => {
 
     function handleCommentSubmit (data){
         initialize(`comment`,{}, ['author', 'content']);
-        postingComment(data);
+        const req = Object.assign({}, data, {_appraisee : props.appraisee._id})
+        postingComment(req);
     }
 
     function displayPanel() {

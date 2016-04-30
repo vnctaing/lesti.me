@@ -116,13 +116,17 @@ app.post('/comment', (req,res) => {
     _appraisee: req.body._appraisee
   })
 
-  commentToAdd.save((err,commentToAdd) => {
-    if(err) return console.error(err)
-    console.log('Successfully Added : ');
-    console.log(commentToAdd);
-    res.json({
-      status: 200,
-      comment: commentToAdd
+  commentToAdd
+    .save((err,commentToAdd) => {
+      if(err) return console.error(err)
+      console.log('Successfully Added : ');
+      console.log(commentToAdd);
+      Appraisee.update(
+        { _id: req.body._appraisee},
+        { 
+          $push: {  "_comments": commentToAdd._id }
+        },
+        { upsert:true }
+      ).exec();
     })
-  });
 })
