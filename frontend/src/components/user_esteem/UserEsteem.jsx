@@ -3,6 +3,7 @@ import LeaderBoard from './LeaderBoard/LeaderBoard.jsx';
 import {initialize} from 'redux-form';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/action.js';
+import * as commentActions from '../../actions/commentActions.js';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 
@@ -18,6 +19,7 @@ console.log('initialize', initialize);
 function mapDispatchToProps(dispatch) {
     return { 
         actions: bindActionCreators(actionCreators, dispatch),
+        commentActions: bindActionCreators(commentActions,dispatch),
         initialize: bindActionCreators(initialize, dispatch)
     }
 }
@@ -39,6 +41,7 @@ const UserEsteem = (props) => {
                     <div className="col-md-6">
                         <LeaderBoard appraiser={appraiser}
                                      actions={props.actions} 
+                                     commentActions={props.commentActions}
                                      initialize={props.initialize}
                                      user_esteem={user_esteem}
                                      />

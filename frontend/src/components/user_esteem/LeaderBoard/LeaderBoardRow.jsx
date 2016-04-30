@@ -11,6 +11,7 @@ const LeaderBoardRow = (props) => {
       backgroundSize: 'cover',
     };
     const { openAppraiseeUpdateModal, closeAppraiseeUpdateModal} = props.actions;
+    const { postingComment } = props.commentActions;
     const { initialize } = props;
 
     function handleClick() {
@@ -20,8 +21,9 @@ const LeaderBoardRow = (props) => {
         closeAppraiseeUpdateModal();
     }
 
-    function handleCommentSubmit (a){
-        initialize('comment',{}, ['author', 'content']);
+    function handleCommentSubmit (data){
+        initialize(`comment`,{}, ['author', 'content']);
+        postingComment(data);
     }
 
     function displayPanel() {

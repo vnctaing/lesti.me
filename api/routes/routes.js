@@ -10,6 +10,7 @@ const livereload = require('express-livereload');
 const mongoose = require('mongoose');
 const Appraisee = require('../models/Appraisee');
 const Appraiser = require('../models/Appraiser');
+const Comment = require('../models/Comment');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -107,3 +108,21 @@ app.put('/appraisee/:appraiseeId', (req,res) => {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
+
+app.post('/comment', (req,res) => {
+  const commentToAdd = new Comment({
+    author: req.body.author,
+    content: req.body.content,
+    _appraisee: req.body._appraisee
+  })
+
+  commentToAdd.save((err,commentToAdd) => {
+    if(err) return console.error(err)
+    console.log('Successfully Added : ');
+    console.log(commentToAdd);
+    res.json({
+      status: 200,
+      comment: commentToAdd
+    })
+  });
+})

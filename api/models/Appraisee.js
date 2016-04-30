@@ -9,6 +9,7 @@ const appraiseeSchema = new Schema({
     esteem: Number,
     description: String,
     appraiser: String,
+    _comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

@@ -57,7 +57,7 @@ let LeaderBoardComments = (props) => {
 }
 
 LeaderBoardComments = reduxForm({
-  form: 'comment',
+  form: `comment`,
   fields: ['author', 'content'], // a list of all your fields in your form
 })(LeaderBoardComments)
 
