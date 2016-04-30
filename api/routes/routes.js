@@ -130,3 +130,7 @@ app.post('/comment', (req,res) => {
       ).exec();
     })
 })
+
+// app.get('/comments/appraisee/:appraiseeId', (req,res) => {
+  
+// })
