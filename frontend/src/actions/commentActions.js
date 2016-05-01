@@ -1,4 +1,4 @@
-const ADDING_COMMENT = 'ADDING_COMMENT';
+export const ADDING_COMMENT = 'ADDING_COMMENT';
 export function addingComment() {
   return {
     type: ADDING_COMMENT
@@ -23,5 +23,13 @@ export function postingComment(formData) {
     .then(response=> response.json())
     .then(json=> console.log('json', json))
     .catch(e=> console.log('error',e));
+  }
+}
+
+
+export const GETTING_COMMENTS = 'GETTING_COMMENTS'; 
+export function gettingComments(){
+  return{
+    type: GETTING_COMMENTS
   }
 }

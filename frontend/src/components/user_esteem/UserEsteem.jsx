@@ -14,8 +14,6 @@ function mapStateToProps(state){
     }
 }
 
-console.log('initialize', initialize);
-
 function mapDispatchToProps(dispatch) {
     return { 
         actions: bindActionCreators(actionCreators, dispatch),
@@ -31,7 +29,7 @@ function mapDispatchToProps(dispatch) {
  * {[Object]} esteemApp
  */
 const UserEsteem = (props) => {
-    const { appraiser, user_esteem } = props.esteemApp;
+    const { appraiser, user_esteem } = props.esteemApp.profile;
     const addAppraiseeURL = `/de/${props.params.appraiser}/add`;
     return (
         <div>

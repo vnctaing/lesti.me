@@ -9,11 +9,7 @@ import { browserHistory } from 'react-router'
 import { routerMiddleware, push } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form';
 
-
-
-
 const loggerMiddleware = createLogger()
-
 
 //** To activate de Devtools, use `createStore(reducer,enhancer)`
 // const enhancer = compose(
