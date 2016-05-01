@@ -6,12 +6,15 @@ const ModalBody = require('react-bootstrap/lib/ModalBody');
 
 let UpdateAppraiseeEsteemModal = (props) => {
 
-  const { fields: {esteem, reason}, handleSubmit, appraiser_name } = props;
+  const { fields: {esteem, reason}, handleSubmit, appraiser_name, appraisee } = props;
   const { updatingAppraiseeEsteem, closeAppraiseeUpdateModal } = props.actions;
-  const { show_update_appraisee_esteem_modal } = props.user_esteem.ui;
+  const { show_update_appraisee_esteem_modal } = props.ui;
+  function hideModal(){
+    closeAppraiseeUpdateModal(appraisee._id)
+  } 
 
   return (
-    <Modal show={show_update_appraisee_esteem_modal} onHide={closeAppraiseeUpdateModal}>
+    <Modal show={show_update_appraisee_esteem_modal[appraisee._id]} onHide={hideModal}>
       <Modal.Header closeButton>
         <Modal.Title>Faire descendre {appraiser_name} dans mon estime</Modal.Title>
       </Modal.Header>

@@ -34,18 +34,18 @@ const UserEsteem = (props) => {
     return (
         <div>
             <UserProfile profile={profile} ui={ui} />
-            {/*<div className="container">
+            <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                        <LeaderBoard appraiser={appraiser}
+                        <LeaderBoard profile={profile}
                                      actions={props.actions} 
                                      commentActions={props.commentActions}
                                      initialize={props.initialize}
-                                     user_esteem={user_esteem}
+                                     ui={ui}
                                      />
                     </div>
                 </div>
-            </div>*/}
+            </div>
         </div>
     )
 };

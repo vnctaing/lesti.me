@@ -180,16 +180,18 @@ export function failedSignIn() {
 }
 
 export const OPEN_APPRAISEE_UPDATE_MODAL = 'OPEN_APPRAISEE_UPDATE_MODAL';
-export function openAppraiseeUpdateModal() {
+export function openAppraiseeUpdateModal(appraiseeId) {
   return {
-    type: OPEN_APPRAISEE_UPDATE_MODAL
+    type: OPEN_APPRAISEE_UPDATE_MODAL,
+    appraiseeId
   }
 }
 
 export const CLOSE_APPRAISEE_UPDATE_MODAL = 'CLOSE_APPRAISEE_UPDATE_MODAL';
-export function closeAppraiseeUpdateModal() {
+export function closeAppraiseeUpdateModal(appraiseeId) {
   return {
-    type: CLOSE_APPRAISEE_UPDATE_MODAL
+    type: CLOSE_APPRAISEE_UPDATE_MODAL,
+    appraiseeId
   }
 }
 

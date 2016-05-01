@@ -12,13 +12,12 @@ const LeaderBoardRow = (props) => {
     };
     const { openAppraiseeUpdateModal, closeAppraiseeUpdateModal} = props.actions;
     const { postingComment } = props.commentActions;
-    const { initialize } = props;
-
+    const { initialize,ui, appraisee} = props;
     function handleClick() {
-        openAppraiseeUpdateModal();
+        openAppraiseeUpdateModal(appraisee._id);
     }
     function handleSubmit(e) {
-        closeAppraiseeUpdateModal();
+        closeAppraiseeUpdateModal(appraisee._id);
     }
 
     function handleCommentSubmit (data){
@@ -34,7 +33,7 @@ const LeaderBoardRow = (props) => {
                                      appraisee={props.appraisee}
                                      onSubmit={handleCommentSubmit.bind(this)}
                 /> );
-        } else {
+        } else if(props.panel === 'estimation') {
             return (
                 <div>
                     <p className="leaderboard_name inline">{props.appraisee.appraiseeName}</p>
@@ -59,7 +58,8 @@ const LeaderBoardRow = (props) => {
                             <i className="fa fa-arrow-down inline"></i>
                         </div>
                     </div>
-                    <UpdateAppraiseeEsteemModal user_esteem={props.user_esteem} 
+                    <UpdateAppraiseeEsteemModal ui={ui}
+                                                appraisee={appraisee}
                                                 appraiser_name={props.appraiser_name} 
                                                 actions={props.actions} />
                 </div>
