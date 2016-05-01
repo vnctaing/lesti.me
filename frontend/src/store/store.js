@@ -14,15 +14,6 @@ import { reducer as formReducer } from 'redux-form';
 
 const loggerMiddleware = createLogger()
 
-
-//** To activate de Devtools, use `createStore(reducer,enhancer)`
-// const enhancer = compose(
-//   applyMiddleware(
-//     thunkMiddleware, // lets us dispatch() functions
-//     loggerMiddleware // neat middleware that logs actions
-//   ),
-//   DevTools.instrument()
-// )
 const reactRouterMiddleware = routerMiddleware(browserHistory);
 
 const store = createStore(

@@ -10,11 +10,9 @@ import { Link } from 'react-router'
 
 function mapStateToProps(state){
     return {
-        esteemApp: state.esteemApp
+        esteemApp: state.esteemApp.profile
     }
 }
-
-console.log('initialize', initialize);
 
 function mapDispatchToProps(dispatch) {
     return { 
