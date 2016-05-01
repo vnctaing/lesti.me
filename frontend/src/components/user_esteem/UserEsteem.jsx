@@ -10,7 +10,7 @@ import { Link } from 'react-router'
 
 function mapStateToProps(state){
     return {
-        esteemApp: state.esteemApp.profile
+        profile: state.esteemApp.profile
     }
 }
 
@@ -29,7 +29,7 @@ function mapDispatchToProps(dispatch) {
  * {[Object]} esteemApp
  */
 const UserEsteem = (props) => {
-    const { appraiser, user_esteem } = props.esteemApp;
+    const { appraiser, user_esteem } = props.profile;
     const addAppraiseeURL = `/de/${props.params.appraiser}/add`;
     return (
         <div>
