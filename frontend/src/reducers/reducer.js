@@ -4,11 +4,6 @@ const initialState = {
   'appraiser': {
     name: '',
     profilePicture: '',
-    stats:{
-      esteemCount: null,
-      averageEsteem: null,
-      lastChange: null
-    },
     appraisees: []
   },
   'sign_page':{
