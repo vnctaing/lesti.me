@@ -27,7 +27,7 @@ db.once('open', function() {
 
 
 app.get('/appraiser/:appraiserName', (req, res) => {
-  Appraiser.findOne({name: req.params.appraiserName}, function (err, person) {
+  Appraiser.findOne({name: req.params.appraiserName}, {password: 0, email: 0},function (err, person) {
     if (err) console.log(err);
   })
   .populate('appraisees')
