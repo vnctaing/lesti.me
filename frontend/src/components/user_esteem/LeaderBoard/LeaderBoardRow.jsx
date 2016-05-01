@@ -27,13 +27,13 @@ const LeaderBoardRow = (props) => {
     }
 
     function displayPanel() {
-        if(props.panel === 'comments'){
+        if(props.ui.appraiseePanel[appraisee._id] === 'comments'){
             return ( 
                 <LeaderBoardComments handleCommentSubmit={handleCommentSubmit}
                                      appraisee={props.appraisee}
                                      onSubmit={handleCommentSubmit.bind(this)}
                 /> );
-        } else if(props.panel === 'estimation') {
+        } else if(props.ui.appraiseePanel[appraisee._id] === 'estimation') {
             return (
                 <div>
                     <p className="leaderboard_name inline">{props.appraisee.appraiseeName}</p>
@@ -54,7 +54,7 @@ const LeaderBoardRow = (props) => {
                         <div className="leaderboard__cta inline leaderboard__cta--green" onClick={handleClick}>
                             <i className="fa fa-arrow-up inline"></i>
                         </div>
-                        <div className="leaderboard__cta inline leaderboard__cta--red">
+                        <div className="leaderboard__cta inline leaderboard__cta--red" onClick={handleClick}>
                             <i className="fa fa-arrow-down inline"></i>
                         </div>
                     </div>

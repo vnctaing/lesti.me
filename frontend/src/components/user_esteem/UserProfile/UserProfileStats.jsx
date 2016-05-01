@@ -10,7 +10,6 @@ const UserProfileStats = (props) => {
     const averageEsteem = Math.round((ratings / appraisees.length) * 100) / 100
 
     function displayUserProfileStats(){
-        console.log(props);
         if (props.profile.ui.isFetchingProfile) {
             return (
                 <div>   

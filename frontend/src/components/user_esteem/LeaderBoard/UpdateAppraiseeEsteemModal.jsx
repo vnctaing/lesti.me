@@ -9,6 +9,7 @@ let UpdateAppraiseeEsteemModal = (props) => {
   const { fields: {esteem, reason}, handleSubmit, appraiser_name, appraisee } = props;
   const { updatingAppraiseeEsteem, closeAppraiseeUpdateModal } = props.actions;
   const { show_update_appraisee_esteem_modal } = props.ui;
+  console.log('props.ui', props.ui);
   function hideModal(){
     closeAppraiseeUpdateModal(appraisee._id)
   } 
