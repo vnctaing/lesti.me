@@ -29,12 +29,12 @@ function mapDispatchToProps(dispatch) {
  * {[Object]} esteemApp
  */
 const UserEsteem = (props) => {
-    const { appraiser, user_esteem } = props.profile;
-    const addAppraiseeURL = `/de/${props.params.appraiser}/add`;
+    const {profile} = props;
+    const {ui} = profile;
     return (
         <div>
-            <UserProfile addAppraiseeURL={addAppraiseeURL} appraiser={appraiser} />
-            <div className="container">
+            <UserProfile profile={profile} ui={ui} />
+            {/*<div className="container">
                 <div className="row">
                     <div className="col-md-6">
                         <LeaderBoard appraiser={appraiser}
@@ -45,7 +45,7 @@ const UserEsteem = (props) => {
                                      />
                     </div>
                 </div>
-            </div>
+            </div>*/}
         </div>
     )
 };
