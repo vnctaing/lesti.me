@@ -5,7 +5,7 @@ import esteemApp from '../reducers/reducer.js'
 import { fetchUserProfile } from '../actions/action.js'
 import { routerReducer } from 'react-router-redux'
 import { browserHistory } from 'react-router'
-// import DevTools from '../components/global/Devtools.jsx'
+import DevTools from '../components/global/Devtools.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form';
 
@@ -16,16 +16,28 @@ const loggerMiddleware = createLogger()
 
 const reactRouterMiddleware = routerMiddleware(browserHistory);
 
+const enhancer = compose(
+  applyMiddleware(
+    thunkMiddleware, // lets us dispatch() functions
+    loggerMiddleware, // neat middleware that logs actions
+    reactRouterMiddleware
+  ),
+  DevTools.instrument()
+)
+
+
 const store = createStore(
   combineReducers({
     esteemApp,
     routing: routerReducer,
     form: formReducer
   }),
-  applyMiddleware(
-    thunkMiddleware, // lets us dispatch() functions
-    loggerMiddleware, // neat middleware that logs actions
-    reactRouterMiddleware
-  )
+  // => comment `enhancer` to disable the devtools and uncomment `applyMiddleware`
+  // applyMiddleware(
+  //   thunkMiddleware, // lets us dispatch() functions
+  //   loggerMiddleware, // neat middleware that logs actions
+  //   reactRouterMiddleware
+  // ),
+  enhancer
 );
 export default store;

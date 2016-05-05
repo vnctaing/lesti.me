@@ -25,3 +25,19 @@ export function postingComment(formData) {
     .catch(e=> console.log('error',e));
   }
 }
+
+export const REQUESTING_COMMENTS = 'REQUESTING_COMMENTS'
+export function requestingComments(appraiseeId) {
+  return {
+    type: REQUESTING_COMMENTS,
+    appraiseeId
+  }
+}
+export const RECEIVED_COMMENTS = 'RECEIVED_COMMENTS'
+export function receivedComments(appraiseeId) {
+  return {
+    type: RECEIVED_COMMENTS,
+    appraiseeId
+  }
+}
+

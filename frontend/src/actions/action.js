@@ -211,3 +211,22 @@ export function updatingAppraiseeEsteem(hey) {
     })
   }
 }
+
+export const SHOW_COMMENT_SECTION = 'SHOW_COMMENT_SECTION'
+export function showCommentSection(appraiseeId) {
+  return {
+    type: SHOW_COMMENT_SECTION,
+    appraiseeId
+  }
+}
+
+export const SHOW_ESTIMATION_SECTION = 'SHOW_ESTIMATION_SECTION'
+export function showEstimationSection(appraiseeId) {
+  return {
+    type: SHOW_ESTIMATION_SECTION,
+    appraiseeId
+  }
+}
+
+
+

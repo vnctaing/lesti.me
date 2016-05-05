@@ -1,6 +1,8 @@
 import {Link, IndexLink} from 'react-router';
 import Footer from './Footer.jsx'
 import Navbar from './Navbar.jsx'
+import DevTools from './DevTools.jsx';
+
 
 export default class Layout extends React.Component {
   render(){
@@ -10,6 +12,7 @@ export default class Layout extends React.Component {
       <div className="content--offset" id="content">
         {this.props.children}
       </div>
+      <DevTools />
       {/*<Footer/>*/}
     </div>);
 

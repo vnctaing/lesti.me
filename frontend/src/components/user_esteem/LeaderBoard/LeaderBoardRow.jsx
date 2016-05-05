@@ -10,7 +10,11 @@ const LeaderBoardRow = (props) => {
       backgroundPosition: 'center center',
       backgroundSize: 'cover',
     };
-    const { openAppraiseeUpdateModal, closeAppraiseeUpdateModal} = props.actions;
+    const { openAppraiseeUpdateModal, 
+            closeAppraiseeUpdateModal,
+            showCommentSection,
+            showEstimationSection
+        } = props.actions;
     const { postingComment } = props.commentActions;
     const { initialize,ui, appraisee} = props;
     function handleClick() {
@@ -26,7 +30,11 @@ const LeaderBoardRow = (props) => {
         postingComment(req);
     }
 
-    function displayPanel() {
+    function displayCommentPanel(){
+        showCommentSection(appraisee._id);
+    }
+
+    function renderRow() {
         if(props.ui.appraiseePanel[appraisee._id] === 'comments'){
             return ( 
                 <LeaderBoardComments handleCommentSubmit={handleCommentSubmit}
@@ -44,7 +52,7 @@ const LeaderBoardRow = (props) => {
 
                     <i className="fa fa-pencil leaderboard__icon--right"></i>
                     <p className="leaderboard__description">{props.appraisee.description}</p>
-                    <div>
+                    <div onClick={displayCommentPanel}>
                         <LabelIllustrated icon="fa-thumbs-o-up" label="0"/>
                         <LabelIllustrated icon="fa-thumbs-o-down" label="0"/>
                         <LabelIllustrated icon="fa-commenting-o" label="0"/>
@@ -70,7 +78,7 @@ const LeaderBoardRow = (props) => {
     return (
         <div>
             <div className="leaderboard_row">
-                {displayPanel()}
+                {renderRow()}
             </div>
         </div>
     )
