@@ -43,6 +43,7 @@
     "express": "^4.13.4",
     "file-loader": "^0.8.5",
     "font-awesome": "^4.5.0",
+    "immutable": "^3.8.1",
     "jquery": "^2.2.3",
     "lodash": "^4.5.0",
     "mongoose": "^4.4.8",

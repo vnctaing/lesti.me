@@ -6,11 +6,18 @@ import { bindActionCreators } from 'redux';
 let LeaderBoardComments = (props) => {
 	const { fields: {author, content}, handleSubmit } = props;
 
+	const { showEstimationSection } = props.actions;
+	function handleBackClick() {
+		showEstimationSection(props.appraisee._id)
+	}
+
 	return (
 		<form action="">
 			<div>
 			    <div className="container-flex--space-between container-flex--inline">
-			        <i className="fa fa-chevron-left"></i>
+			    	<div className="lst-cursor" onClick={handleBackClick}>
+				    	<i className="fa fa-chevron-left"></i>
+			    	</div>
 			        <div>
 			            <LabelIllustrated icon="fa-thumbs-o-up" label="0"/>
 			            <LabelIllustrated icon="fa-thumbs-o-down" label="0"/>

@@ -13,8 +13,7 @@ const LeaderBoardRow = (props) => {
     const { openAppraiseeUpdateModal, 
             closeAppraiseeUpdateModal,
             showCommentSection,
-            showEstimationSection
-        } = props.actions;
+            } = props.actions;
     const { postingComment } = props.commentActions;
     const { initialize,ui, appraisee} = props;
     function handleClick() {
@@ -39,12 +38,13 @@ const LeaderBoardRow = (props) => {
             return ( 
                 <LeaderBoardComments handleCommentSubmit={handleCommentSubmit}
                                      appraisee={props.appraisee}
+                                     actions={props.actions}
                                      onSubmit={handleCommentSubmit.bind(this)}
                 /> );
         } else if(props.ui.appraiseePanel[appraisee._id] === 'estimation') {
             return (
                 <div>
-                    <p className="leaderboard_name inline">{props.appraisee.appraiseeName}</p>
+                    <p className="leaderboard_name inline" onClick={displayCommentPanel}>{props.appraisee.appraiseeName}</p>
                     <p className="inline">{props.appraisee.name}, </p>
                     <div className="inline">
                         <p className="leaderboard__esteem inline text-right">{props.appraisee.esteem} pts <span>dans l'estime de Vincent</span></p>
@@ -52,7 +52,7 @@ const LeaderBoardRow = (props) => {
 
                     <i className="fa fa-pencil leaderboard__icon--right"></i>
                     <p className="leaderboard__description">{props.appraisee.description}</p>
-                    <div onClick={displayCommentPanel}>
+                    <div className="leaderboard__socialContainer" onClick={displayCommentPanel}>
                         <LabelIllustrated icon="fa-thumbs-o-up" label="0"/>
                         <LabelIllustrated icon="fa-thumbs-o-down" label="0"/>
                         <LabelIllustrated icon="fa-commenting-o" label="0"/>

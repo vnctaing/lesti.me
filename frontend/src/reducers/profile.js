@@ -1,82 +1,63 @@
 import * as actions from '../actions/action.js';
-
+import { fromJS, set, Map } from 'immutable';
+import _ from 'lodash';
 const initialState = {
 	name: '',
 	profilePicture: '',
 	appraisees: [],
   'ui': {
     'show_update_appraisee_esteem_modal': {},
+    'isFetchingProfile': false,
     'appraiseePanel': {},
-    'isFetchingProfile': false
   }
 }
 
+
+/**
+ * Helper to create an immutable Map
+ * @param  {[array]} arr          [description]
+ * @param  {anything} initialValue [description]
+ * @return {Immutable Map}  {arr[0] : initialValue, arr[1] : initialValue}
+ */
+function initMapFromArray(arr, initialValue) {
+  const obj = {};      
+  _.each(arr.map((a) => a._id),
+    (id) => { obj[id] = initialValue })
+  return fromJS(obj)
+}
+
+
 export default function profile(state=initialState, action) {
-  const newUIState = {
-    'ui': {
-      'show_update_appraisee_esteem_modal': {},
-      'appraiseePanel': {},
-      'isFetchingProfile': false
-    }
-  };
+  const iState = fromJS(state);
+
+
 
 	switch(action.type) {
     case actions.REQUESTING_APPRAISER_PROFILE:
-      newUIState.ui.isFetchingProfile = true
-      return Object.assign(
-        {},
-        state,
-        newUIState
-      )
+      return iState.setIn(['ui','isFetchingProfile'], true)
+                   .toJS();
     case actions.RECEIVED_APPRAISER_PROFILE:
-      const appraiseesIds = action.appraiser.appraisees.map((a) => a._id);
-      const appraiseePanel = {};
-      _.each(appraiseesIds, (ai) => appraiseePanel[ai] = 'estimation');      
-      const ui = Object.assign({},state.ui,
-        {appraiseePanel : appraiseePanel},
-        {isFetchingProfile : false}
-      );
-      return Object.assign(
-        {},
-        state,
-        action.appraiser,
-        {ui}
-      );
+      return iState.mergeDeep(action.appraiser)
+                   .setIn(['ui', 'show_update_appraisee_esteem_modal'], 
+                            initMapFromArray(action.appraiser.appraisees, false))
+                   .setIn(['ui', 'appraiseePanel'], 
+                            initMapFromArray(action.appraiser.appraisees, 'estimation'))
+                   .setIn(['ui','isFetchingProfile'], false)
+                   .toJS();
     case actions.OPEN_APPRAISEE_UPDATE_MODAL:
-    newUIState.ui.show_update_appraisee_esteem_modal[action.appraiseeId] = true;
-    return Object.assign(
-      {},
-      state,
-      newUIState
-    )
+      return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], true)
+                   .toJS();
     case actions.CLOSE_APPRAISEE_UPDATE_MODAL:
-    return Object.assign(
-      {},
-      state,
-      state.ui.show_update_appraisee_esteem_modal[action.appraiseeId] = false
-    )
+      return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)
+                   .toJS();
     case actions.SHOW_COMMENT_SECTION:
-      
-      const copyAppraiseePanel = Object.assign({},state.ui.appraiseePanel)
-      console.log(state)
-      copyAppraiseePanel[action.appraiseeId] = 'comments'
-      console.log(state);
-      return Object.assign({}, 
-         state,
-         {'ui': copyAppraiseePanel})
+      return iState.setIn(['ui','appraiseePanel', action.appraiseeId], 'comments')
+                   .toJS();
     case actions.SHOW_ESTIMATION_SECTION:
-
-      return Object.assign({}, state,
-        state.ui.appraiseePanel
-        )
-    case actions.REQUESTING_COMMENTS:
-      return Object.assign({}, state,
-        state
-        )
-    case actions.RECEIVED_COMMENTS:          
-      return Object.assign({}, state,
-        state
-        )
+      return iState.setIn(['ui','appraiseePanel', action.appraiseeId], 'estimation')
+                   .toJS();
+    // case actions.REQUESTING_COMMENTS:
+    // case actions.RECEIVED_COMMENTS:          
     default:
       return state
 	}
