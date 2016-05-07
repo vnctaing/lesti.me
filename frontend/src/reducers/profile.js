@@ -1,5 +1,5 @@
 import * as actions from '../actions/action.js';
-import { fromJS, set, Map } from 'immutable';
+import { fromJS } from 'immutable';
 import _ from 'lodash';
 const initialState = {
   name: '',
@@ -48,7 +48,7 @@ export default function profile(state = initialState, action) {
     case actions.CLOSE_APPRAISEE_UPDATE_MODAL:
       return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)
                    .toJS();
-    case actions.SHOW_COMMENT_SECTION:
+    case actions.RECEIVED_APPRAISEE_COMMENTS:
       return iState.setIn(['ui', 'appraiseePanel', action.appraiseeId], 'comments')
                    .toJS();
     case actions.SHOW_ESTIMATION_SECTION:

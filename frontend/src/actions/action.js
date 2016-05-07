@@ -210,11 +210,26 @@ export function closeAppraiseeUpdateModal(appraiseeId) {
 //   }
 // }
 
+export const REQUESTING_APPRAISEE_COMMENTS = 'REQUESTING_APPRAISEE_COMMENTS';
+export function requestingAppraiseeComments() {
+  return {
+    type: REQUESTING_APPRAISEE_COMMENTS,
+  };
+}
+
 export const SHOW_COMMENT_SECTION = 'SHOW_COMMENT_SECTION';
 export function showCommentSection(appraiseeId) {
+  return (dispatch) => {
+    dispatch(requestingAppraiseeComments());
+    fetch(`http://localhost:3000/comments/${appraiseeId}`)
+      .then((resp) => console.log(resp));
+  };
+}
+
+export const RECEIVED_APPRAISEE_COMMENTS = 'RECEIVED_APPRAISEE_COMMENTS';
+export function receivedAppraiseeComments() {
   return {
-    type: SHOW_COMMENT_SECTION,
-    appraiseeId,
+    type: RECEIVED_APPRAISEE_COMMENTS,
   };
 }
 

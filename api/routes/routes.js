@@ -135,5 +135,9 @@ app.post('/comment', (req, res) => {
     });
 });
 
+app.get('/comments/:appraiseeId', (req, res) => {
+  console.log('fetching this for you nigga');
+});
+
 // app.get('/comments/appraisee/:appraiseeId', (req,res) => {
 // })

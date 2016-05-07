@@ -8,6 +8,9 @@
     },
     "extends": "airbnb",
     "rules": {
-        "semi": 2
+        "semi": 2,
+        "no-underscore-dangle": 0,
+        "react/react-in-jsx-scope": 0,
+        "react/prop-types": 0,
     }
 }
