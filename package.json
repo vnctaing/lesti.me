@@ -45,6 +45,7 @@
     "font-awesome": "^4.5.0",
     "immutable": "^3.8.1",
     "jquery": "^2.2.3",
+    "js-sha256": "^0.3.0",
     "lodash": "^4.5.0",
     "mongoose": "^4.4.8",
     "path": "^0.12.7",
