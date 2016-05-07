@@ -37,11 +37,11 @@ export default function profile(state=initialState, action) {
       return iState.setIn(['ui','isFetchingProfile'], true)
                    .toJS();
     case actions.RECEIVED_APPRAISER_PROFILE:
-      return iState.mergeDeep(action.appraiser)
+      return iState.mergeDeep(action.profile)
                    .setIn(['ui', 'show_update_appraisee_esteem_modal'], 
-                            initMapFromArray(action.appraiser.appraisees, false))
+                            initMapFromArray(action.profile.appraisees, false))
                    .setIn(['ui', 'appraiseePanel'], 
-                            initMapFromArray(action.appraiser.appraisees, 'estimation'))
+                            initMapFromArray(action.profile.appraisees, 'estimation'))
                    .setIn(['ui','isFetchingProfile'], false)
                    .toJS();
     case actions.OPEN_APPRAISEE_UPDATE_MODAL:

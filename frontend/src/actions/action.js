@@ -1,6 +1,7 @@
 import SHA256 from "js-sha256";
 import { push } from 'react-router-redux'
-
+import { normalize } from 'normalizr'
+import appraiserSchema  from '../schema/schemas.js'
 
 export const APPRAISER_PROFILE_NOT_FOUND = 'APPRAISER_PROFILE_NOT_FOUND';
 export function appraiserProfileNotFound (){
@@ -15,10 +16,10 @@ export function appraiserProfileNotFound (){
 
 
 export const RECEIVED_APPRAISER_PROFILE = 'RECEIVED_APPRAISER_PROFILE';
-export function receivedAppraiserProfile (json) {
+export function receivedAppraiserProfile (profile) {
     return {
         type: RECEIVED_APPRAISER_PROFILE,
-        appraiser: json.appraiser
+        profile
     }
 }
 
@@ -44,11 +45,11 @@ export function fetchUserProfile(appraiser) {
   return function (dispatch) {
     dispatch(requestingAppraiserProfile());
     fetch(`http://localhost:3000/appraiser/${appraiser}`)
-      .then(response => response.json())
-      .then(json => {
-        json.status === 404 
-          ? dispatch(push('/appraiser_not_found'))
-          : dispatch(receivedAppraiserProfile(json));
+      .then((response) => response.json())
+      .then((json) => {
+        json.status === 200 
+          ? dispatch(receivedAppraiserProfile(json.appraiser))
+          : dispatch(push('/appraiser_not_found'))
       })                
       .catch(e => console.log('error', e));
   }

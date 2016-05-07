@@ -1,6 +1,5 @@
 import * as actions from '../actions/action.js';
 
-
 const initialState = {
   'sign_page': {
     'ui': {

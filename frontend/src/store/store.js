@@ -9,9 +9,6 @@ import DevTools from '../components/global/Devtools.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form';
 
-
-
-
 const loggerMiddleware = createLogger()
 
 const reactRouterMiddleware = routerMiddleware(browserHistory);
