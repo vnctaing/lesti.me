@@ -1,15 +1,13 @@
-import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-import esteemApp from '../reducers/reducer.js'
-import { fetchUserProfile } from '../actions/action.js'
-import { routerReducer } from 'react-router-redux'
-import { browserHistory } from 'react-router'
-import DevTools from '../components/global/Devtools.jsx'
-import { routerMiddleware, push } from 'react-router-redux'
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import esteemApp from '../reducers/reducer.js';
+import { browserHistory } from 'react-router';
+import DevTools from '../components/global/Devtools.jsx';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 
-const loggerMiddleware = createLogger()
+const loggerMiddleware = createLogger();
 
 const reactRouterMiddleware = routerMiddleware(browserHistory);
 
@@ -20,14 +18,14 @@ const enhancer = compose(
     reactRouterMiddleware
   ),
   DevTools.instrument()
-)
+);
 
 
 const store = createStore(
   combineReducers({
     esteemApp,
     routing: routerReducer,
-    form: formReducer
+    form: formReducer,
   }),
   // => comment `enhancer` to disable the devtools and uncomment `applyMiddleware`
   // applyMiddleware(
@@ -37,4 +35,5 @@ const store = createStore(
   // ),
   enhancer
 );
+
 export default store;
