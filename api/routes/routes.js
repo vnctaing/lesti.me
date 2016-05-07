@@ -1,6 +1,3 @@
-
-'use strict';
-
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -17,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-//Connect mongoose to mongodb server
+// Connect mongoose to mongodb server
 mongoose.connect('mongodb://localhost:27017');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -35,7 +32,7 @@ app.get('/appraiser/:appraiserName', (req, res) => {
     }
   )
   .populate('appraisees')
-  .exec(function (err, appraiser) {
+  .exec((err, appraiser) => {
     appraiser
      ? res.json({ status: 200, appraiser })
      : res.json({ status: 400, message: 'Did not find appraiser with these creds'})
@@ -51,7 +48,7 @@ app.post('/appraiser', (req, res) => {
   });
 
   appraiserToAdd.save((err, appraiserToAdd) => {
-    if(err) return console.error(err);
+    if (err) return console.error(err);
     console.log('Successfully Added : ');
     console.log(appraiserToAdd);
     res.json({
@@ -101,7 +98,7 @@ app.post('/appraisee', (req, res) => {
           appraisees: newAppraisee._id,
         },
       },
-      { upsert:true }
+      { upsert: true }
     )
     .exec();
   });
@@ -111,32 +108,32 @@ app.put('/appraisee/:appraiseeId', (req, res) => {
   console.log('updating');
 });
 
-app.listen(3000, function () {
+app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
 });
 
-app.post('/comment', (req,res) => {
+app.post('/comment', (req, res) => {
   const commentToAdd = new Comment({
     author: req.body.author,
     content: req.body.content,
-    _appraisee: req.body._appraisee
-  })
+    _appraisee: req.body._appraisee,
+  });
 
   commentToAdd
-    .save((err,commentToAdd) => {
-      if(err) return console.error(err)
+    .save((err, commentToAdd) => {
+      if (err) return console.error(err);
       console.log('Successfully Added : ');
       console.log(commentToAdd);
       Appraisee.update(
-        { _id: req.body._appraisee},
-        { 
-          $push: {  "_comments": commentToAdd._id }
+        { _id: req.body._appraisee },
+        {
+          $push: { _comments: commentToAdd._id },
         },
-        { upsert:true }
-      ).exec();
-    })
-})
+        { upsert: true }
+      )
+    .exec();
+    });
+});
 
 // app.get('/comments/appraisee/:appraiseeId', (req,res) => {
-  
 // })
