@@ -12,5 +12,7 @@
         "no-underscore-dangle": 0,
         "react/react-in-jsx-scope": 0,
         "react/prop-types": 0,
+        "strict": 0,
+        "no-unused-vars": 1
     }
 }

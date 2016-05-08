@@ -1,13 +1,19 @@
 export const ADDING_COMMENT = 'ADDING_COMMENT';
-export function addingComment() {
+export function addingComment(appraiseeId, comment) {
   return {
     type: ADDING_COMMENT,
+    comment,
+    appraiseeId,
   };
 }
 
 export function postingComment(formData) {
   return (dispatch) => {
-    dispatch(addingComment());
+    dispatch(addingComment(formData._appraisee, {
+      author: formData.author,
+      content: formData.content,
+      _appraisee: formData._appraisee,
+    }));
     return fetch('http://localhost:3000/comment', {
       method: 'post',
       headers: {

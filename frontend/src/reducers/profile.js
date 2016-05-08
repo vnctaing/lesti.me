@@ -1,14 +1,18 @@
 import * as actions from '../actions/action.js';
+import * as commentActions from '../actions/commentActions.js';
+
 import { fromJS } from 'immutable';
 import _ from 'lodash';
 const initialState = {
   name: '',
   profilePicture: '',
   appraisees: [],
+  comments: {},
   ui: {
     show_update_appraisee_esteem_modal: {},
     isFetchingProfile: false,
     appraiseePanel: {},
+    loadingComments: {},
   },
 };
 
@@ -36,10 +40,14 @@ export default function profile(state = initialState, action) {
                    .toJS();
     case actions.RECEIVED_APPRAISER_PROFILE:
       return iState.mergeDeep(action.profile)
+                   .setIn(['comments'],
+                            initMapFromArray(action.profile.appraisees, []))
                    .setIn(['ui', 'show_update_appraisee_esteem_modal'],
                             initMapFromArray(action.profile.appraisees, false))
                    .setIn(['ui', 'appraiseePanel'],
                             initMapFromArray(action.profile.appraisees, 'estimation'))
+                   .setIn(['ui', 'loadingComments'],
+                            initMapFromArray(action.profile.appraisees, false))
                    .setIn(['ui', 'isFetchingProfile'], false)
                    .toJS();
     case actions.OPEN_APPRAISEE_UPDATE_MODAL:
@@ -48,8 +56,19 @@ export default function profile(state = initialState, action) {
     case actions.CLOSE_APPRAISEE_UPDATE_MODAL:
       return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)
                    .toJS();
+    case actions.REQUESTING_APPRAISEE_COMMENTS:
+      return iState.setIn(['ui', 'loadingComments', action.appraiseeId], true)
+                   .toJS();
+    case commentActions.ADDING_COMMENT:
+      console.log('heeeyyy i am fired');
+      return iState.updateIn(['comments', action.appraiseeId],
+                      list => list.push(fromJS(action.comment)))
+                   .toJS();
     case actions.RECEIVED_APPRAISEE_COMMENTS:
-      return iState.setIn(['ui', 'appraiseePanel', action.appraiseeId], 'comments')
+      return iState
+                   .setIn(['comments', action.appraiseeId], action.comments)
+                   .setIn(['ui', 'loadingComments', action.appraiseeId], false)
+                   .setIn(['ui', 'appraiseePanel', action.appraiseeId], 'comments')
                    .toJS();
     case actions.SHOW_ESTIMATION_SECTION:
       return iState.setIn(['ui', 'appraiseePanel', action.appraiseeId], 'estimation')

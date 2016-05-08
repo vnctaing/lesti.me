@@ -14,6 +14,7 @@ const LeaderBoard = (props) => {
                     profile.appraisees.map((a) => {
                         return <LeaderBoardRow  appraisee={a} 
                                                 key={a._id}
+                                                comments={profile.comments[a._id]}
                                                 appraiserName={profile.name}
                                                 commentActions={commentActions}
                                                 actions={actions} 

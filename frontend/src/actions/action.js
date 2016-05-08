@@ -211,25 +211,40 @@ export function closeAppraiseeUpdateModal(appraiseeId) {
 // }
 
 export const REQUESTING_APPRAISEE_COMMENTS = 'REQUESTING_APPRAISEE_COMMENTS';
-export function requestingAppraiseeComments() {
+export function requestingAppraiseeComments(appraiseeId) {
   return {
     type: REQUESTING_APPRAISEE_COMMENTS,
+    appraiseeId,
+  };
+}
+
+export const RECEIVED_APPRAISEE_COMMENTS = 'RECEIVED_APPRAISEE_COMMENTS';
+export function receivedAppraiseeComments(appraiseeId, comments) {
+  return {
+    type: RECEIVED_APPRAISEE_COMMENTS,
+    appraiseeId,
+    comments,
+  };
+}
+
+export const FAILED_TO_REQUEST_APPRAISEE_COMMENTS = 'FAILED_TO_REQUEST_APPRAISEE_COMMENTS';
+export function failedToRequestAppraiseeComments() {
+  return {
+    type: FAILED_TO_REQUEST_APPRAISEE_COMMENTS,
   };
 }
 
 export const SHOW_COMMENT_SECTION = 'SHOW_COMMENT_SECTION';
 export function showCommentSection(appraiseeId) {
   return (dispatch) => {
-    dispatch(requestingAppraiseeComments());
+    dispatch(requestingAppraiseeComments(appraiseeId));
     fetch(`http://localhost:3000/comments/${appraiseeId}`)
-      .then((resp) => console.log(resp));
-  };
-}
-
-export const RECEIVED_APPRAISEE_COMMENTS = 'RECEIVED_APPRAISEE_COMMENTS';
-export function receivedAppraiseeComments() {
-  return {
-    type: RECEIVED_APPRAISEE_COMMENTS,
+      .then((resp) => resp.json())
+      .then((json) => {
+        json.status === 200
+          ? dispatch(receivedAppraiseeComments(appraiseeId, json.comments))
+          : dispatch(failedToRequestAppraiseeComments());
+      });
   };
 }
 

@@ -31,6 +31,7 @@ const LeaderBoardRow = (props) => {
           handleCommentSubmit={handleCommentSubmit}
           appraisee={props.appraisee}
           actions={props.actions}
+          comments={props.comments}
           onSubmit={handleCommentSubmit.bind(this)}
         />);
     } else if (props.ui.appraiseePanel[appraisee._id] === 'estimation') {

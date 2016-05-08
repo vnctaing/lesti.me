@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -136,7 +138,13 @@ app.post('/comment', (req, res) => {
 });
 
 app.get('/comments/:appraiseeId', (req, res) => {
-  console.log('fetching this for you nigga');
+  Comment
+    .find({ _appraisee: req.params.appraiseeId })
+    // .limit(5)
+    .exec((err, comments) => res.json({
+      status: 200,
+      comments,
+    }));
 });
 
 // app.get('/comments/appraisee/:appraiseeId', (req,res) => {
