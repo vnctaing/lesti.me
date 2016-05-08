@@ -12,11 +12,12 @@ class Signin extends React.Component {
   }
 
   render() {
-    return(
-    <div className="container">
-      <h2 className="title title--boffset">Se connecter</h2>
-      <SignInForm signIn={this.props.esteemApp.sign_page} onSubmit={this.handleSubmit.bind(this)} />
-    </div>);
+    return (
+      <div className="container">
+        <h2 className="title title--boffset">Se connecter</h2>
+        <SignInForm signIn={this.props.esteemApp.sign_page} onSubmit={this.handleSubmit.bind(this)} />
+      </div>
+    );
   }
 }
 
