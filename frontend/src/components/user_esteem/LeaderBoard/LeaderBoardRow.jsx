@@ -1,16 +1,16 @@
 import LabelIllustrated from './LabelIllustrated.jsx';
 import UpdateAppraiseeEsteemModal from './UpdateAppraiseeEsteemModal.jsx';
 import LeaderBoardComments from './LeaderBoardComments.jsx';
-
+import UpdateEsteemCta from './UpdateEsteemCta.jsx';
 
 const LeaderBoardRow = (props) => {
   const { openAppraiseeUpdateModal,
       showCommentSection,
       } = props.actions;
   const { postingComment } = props.commentActions;
-  const { initialize, ui, appraisee } = props;
+  const { initialize, ui, appraisee, isLoggedIn } = props;
 
-  function handleClick() {
+  function onUpdateEsteemClick() {
     openAppraiseeUpdateModal(appraisee._id);
   }
 
@@ -46,8 +46,7 @@ const LeaderBoardRow = (props) => {
               {props.appraisee.esteem} pts <span>dans l'estime de Vincent</span>
             </p>
           </div>
-
-          <i className="fa fa-pencil leaderboard__icon--right"></i>
+          {isLoggedIn ? <i className="fa fa-pencil leaderboard__icon--right"></i> : '' }
           <p className="leaderboard__description">{props.appraisee.description}</p>
           <div className="leaderboard__socialContainer" onClick={displayCommentPanel}>
             <LabelIllustrated icon="fa-thumbs-o-up" label="0" />
@@ -55,14 +54,7 @@ const LeaderBoardRow = (props) => {
             <LabelIllustrated icon="fa-commenting-o" label="0" />
           </div>
           <hr />
-          <div className="leaderboard__ctaContainer">
-            <div className="leaderboard__cta inline leaderboard__cta--green" onClick={handleClick}>
-              <i className="fa fa-arrow-up inline"></i>
-            </div>
-            <div className="leaderboard__cta inline leaderboard__cta--red" onClick={handleClick}>
-              <i className="fa fa-arrow-down inline"></i>
-            </div>
-          </div>
+          <UpdateEsteemCta onUpdateEsteemClick={onUpdateEsteemClick} />
           <UpdateAppraiseeEsteemModal
             ui={ui}
             appraisee={appraisee}

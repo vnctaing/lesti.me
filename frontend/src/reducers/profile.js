@@ -60,7 +60,6 @@ export default function profile(state = initialState, action) {
       return iState.setIn(['ui', 'loadingComments', action.appraiseeId], true)
                    .toJS();
     case commentActions.ADDING_COMMENT:
-      console.log('heeeyyy i am fired');
       return iState.updateIn(['comments', action.appraiseeId],
                       list => list.push(fromJS(action.comment)))
                    .toJS();

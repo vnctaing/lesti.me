@@ -104,10 +104,17 @@ export function failedSignUp() {
   };
 }
 
+const REQUESTING_SIGN_IN = 'REQUESTING_SIGN_IN';
+export function requestingSignIn() {
+  return {
+    type: REQUESTING_SIGN_IN,
+  };
+}
+
 
 export function signingUp(formData) {
   return (dispatch) => {
-    dispatch(requestingSignUp());
+    dispatch(requestingSignIn());
     fetch('http://localhost:3000/appraiser', {
       method: 'post',
       headers: {
@@ -135,9 +142,10 @@ export function signingUp(formData) {
 
 
 export const SUCCESSFULLY_SIGN_IN = 'SUCCESSFULLY_SIGN_IN';
-export function successfullySignIn() {
+export function successfullySignIn(loggedInUser) {
   return {
     type: SUCCESSFULLY_SIGN_IN,
+    loggedInUser,
   };
 }
 
@@ -148,8 +156,6 @@ export function failedSignIn() {
   };
 }
 
-
-export const REQUESTING_SIGN_IN = 'REQUESTING_SIGN_IN';
 export function signingIn(formData) {
   return (dispatch) => {
     dispatch(requestingSignUp());
@@ -167,7 +173,7 @@ export function signingIn(formData) {
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
-        dispatch(successfullySignIn());
+        dispatch(successfullySignIn(json.appraiser));
         dispatch(push(`de/${json.appraiser.name}`));
       } else {
         dispatch(failedSignIn());
@@ -193,22 +199,22 @@ export function closeAppraiseeUpdateModal(appraiseeId) {
   };
 }
 
-// export const UPDATING_APPRAISEE_ESTEEM = 'UPDATING_APPRAISEE_ESTEEM';
-// export function updatingAppraiseeEsteem(hey) {
-//   const appraisee = 'fuck';
-//   return function (dispatch){
-//     fetch(`http://localhost:3000/appraisee/${appraisee}`,{
-//         method: 'put',
-//         headers: {
-//           'Accept': 'application/json',
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//           'foo': 'bar'
-//         })
-//     })
-//   }
-// }
+export const UPDATING_APPRAISEE_ESTEEM = 'UPDATING_APPRAISEE_ESTEEM';
+export function updatingAppraiseeEsteem(hey) {
+  const appraisee = 'fuck';
+  return function (dispatch){
+    fetch(`http://localhost:3000/appraisee/${appraisee}`,{
+        method: 'put',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'foo': 'bar'
+        })
+    })
+  }
+}
 
 export const REQUESTING_APPRAISEE_COMMENTS = 'REQUESTING_APPRAISEE_COMMENTS';
 export function requestingAppraiseeComments(appraiseeId) {

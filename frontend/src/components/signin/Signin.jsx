@@ -15,14 +15,13 @@ class Signin extends React.Component {
     return (
       <div className="container">
         <h2 className="title title--boffset">Se connecter</h2>
-        <SignInForm signIn={this.props.esteemApp.signInPage} onSubmit={this.handleSubmit.bind(this)} />
+        <SignInForm signIn={this.props.esteemApp.signIn} onSubmit={this.handleSubmit.bind(this)} />
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     esteemApp: state.esteemApp,
   };

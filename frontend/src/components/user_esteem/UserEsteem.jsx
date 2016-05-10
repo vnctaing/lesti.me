@@ -10,7 +10,8 @@ import { Link } from 'react-router'
 
 function mapStateToProps(state){
     return {
-        profile: state.esteemApp.profile
+        profile: state.esteemApp.profile,
+        signIn: state.esteemApp.signIn,
     }
 }
 
@@ -31,9 +32,10 @@ function mapDispatchToProps(dispatch) {
 const UserEsteem = (props) => {
     const {profile} = props;
     const {ui} = profile;
+    const { isLoggedIn } = props.signIn;
     return (
         <div>
-            <UserProfile profile={profile} ui={ui} />
+            <UserProfile profile={profile} ui={ui} isLoggedIn={isLoggedIn} />
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
@@ -42,6 +44,7 @@ const UserEsteem = (props) => {
                                      commentActions={props.commentActions}
                                      initialize={props.initialize}
                                      ui={ui}
+                                     isLoggedIn={isLoggedIn}
                                      />
                     </div>
                 </div>

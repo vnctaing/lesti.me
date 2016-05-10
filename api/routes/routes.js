@@ -61,7 +61,7 @@ app.post('/appraiser', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  Appraiser.findOne(req.body, (err, appraiser) => {
+  Appraiser.findOne(req.body, { password: 0, email: 0 }, (err, appraiser) => {
     if (err) console.log(err);
   })
   .exec((err, appraiser) => {

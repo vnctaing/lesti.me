@@ -6,7 +6,7 @@ import LeaderBoardRow from './LeaderBoardRow.jsx';
  * {[array]} leaderboard array
  */
 const LeaderBoard = (props) => {
-    const {profile,commentActions,actions,initialize,ui} = props
+    const {profile,commentActions,actions,initialize,ui, isLoggedIn} = props
     return (
         <div>
             <div className="leaderboard">
@@ -14,6 +14,7 @@ const LeaderBoard = (props) => {
                     profile.appraisees.map((a) => {
                         return <LeaderBoardRow  appraisee={a} 
                                                 key={a._id}
+                                                isLoggedIn={isLoggedIn}
                                                 comments={profile.comments[a._id]}
                                                 appraiserName={profile.name}
                                                 commentActions={commentActions}
