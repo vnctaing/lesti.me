@@ -5,17 +5,25 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
 
 let LeaderBoardComments = (props) => {
-  const { fields: { author, content }, handleSubmit, comments } = props;
+  const { fields: { author, content }, comments, initialize } = props;
 
   const { showEstimationSection } = props.actions;
   function handleBackClick() {
     showEstimationSection(props.appraisee._id);
   }
 
+  const { postingComment } = props.commentActions;
+
+  function handleCommentSubmit(data) {
+    initialize('comment', {}, ['author', 'content']);
+    const req = Object.assign({}, data, { _appraisee: props.appraisee._id });
+    postingComment(req);
+  }
+
   const commentsNode = comments.map((c) =>
     <div key={c._id}>
       <div className="float-right">
-        <LabelIllustrated icon="fa-clock-o" label={moment(c.createdAt).fromNow()}/>
+        <LabelIllustrated icon="fa-clock-o" label={moment(c.createdAt).fromNow()} />
       </div>
       <p>{c.author}</p>
       <p className="leaderboard__comment">{c.content}</p>
@@ -32,38 +40,42 @@ let LeaderBoardComments = (props) => {
             <i className="fa fa-chevron-left"></i>
           </div>
           <div>
-            <LabelIllustrated icon="fa-thumbs-o-up" label="0"/>
-            <LabelIllustrated icon="fa-thumbs-o-down" label="0"/>
-            <LabelIllustrated icon="fa-commenting-o" label="0"/>
+            <LabelIllustrated icon="fa-thumbs-o-up" label="0" />
+            <LabelIllustrated icon="fa-thumbs-o-down" label="0" />
+            <LabelIllustrated icon="fa-commenting-o" label="0" />
           </div>
         </div>
-        <hr/>
-        { commentsNode }
+        <hr />
+        {commentsNode}
         <div className="form-group">
           <div className="row">
             <div className="col-xs-6">
-              <input className="form-control input-sm" type="text" {...author} placeholder="Auteur"/>
+              <input
+                {...author}
+                type="text"
+                className="form-control input-sm"
+                placeholder="Auteur"
+              />
             </div>
           </div>
         </div>
         <div className="form-group">
-          <input className="form-control input-sm" type="text" {...content} placeholder="Écrire un commentaire..."/>
+          <input
+            {...content}
+            className="form-control input-sm"
+            type="text"
+            placeholder="Écrire un commentaire..."
+          />
         </div>
-        {/*<textarea className="form-control textarea--nonresizable" 
-              value={content.value || ''}
-              placeholder="Écrire un commentaire" 
-              {...content}>
-        </textarea>*/}
-        <button className="btn btn-default btn--greenplain" onClick={handleSubmit}>Publier</button>
+        <button className="btn btn-default btn--greenplain" onClick={handleCommentSubmit}>Publier</button>
       </div>
     </form>
-  )
-
-}
+  );
+};
 
 LeaderBoardComments = reduxForm({
-  form: `comment`,
+  form: 'comment',
   fields: ['author', 'content'], // a list of all your fields in your form
-})(LeaderBoardComments)
+})(LeaderBoardComments);
 
 export default LeaderBoardComments;
