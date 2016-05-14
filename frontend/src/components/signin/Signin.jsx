@@ -7,8 +7,8 @@ import { bindActionCreators } from 'redux';
 class Signin extends React.Component {
   handleSubmit(data) {
     const req = Object.assign({}, data);
-    this.props.dispatch(actionCreators.signingIn(req));
-    this.props.dispatch(initialize('signin', {}, ['username', 'password', 'email']));
+    this.props.actions.signingIn(req);
+    initialize('signin', {}, ['username', 'password', 'email']);
   }
 
   render() {
@@ -31,4 +31,4 @@ function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(actionCreators, dispatch) };
 }
 
-export default connect(mapStateToProps)(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

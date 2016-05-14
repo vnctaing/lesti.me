@@ -13,7 +13,6 @@ import Home from '../components/global/Home.jsx';
 import * as actionCreators from '../actions/action.js';
 
 
-
 const history = syncHistoryWithStore(browserHistory, store);
 
 
@@ -30,7 +29,7 @@ function fetchUserProfile(store) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path="/" component={Layout}>
         <IndexRoute component={Home}/>
         <Route path="de/:appraiser" component={UserEsteem} onEnter={fetchUserProfile(store)}>
