@@ -202,8 +202,8 @@ export function closeAppraiseeUpdateModal(appraiseeId) {
 export const UPDATING_APPRAISEE_ESTEEM = 'UPDATING_APPRAISEE_ESTEEM';
 export function updatingAppraiseeEsteem(hey) {
   const appraisee = 'fuck';
-  return function (dispatch){
-    fetch(`http://localhost:3000/appraisee/${appraisee}`,{
+  return function (dispatch) {
+    fetch(`http://localhost:3000/appraisee/${appraisee}`, {
         method: 'put',
         headers: {
           'Accept': 'application/json',
