@@ -36,7 +36,10 @@ const LeaderBoardEstimation = (props) => {
         <LabelIllustrated icon="fa-commenting-o" label="0" />
       </div>
       <hr />
-      <UpdateEsteemCta onUpdateEsteemClick={onUpdateEsteemClick} />
+      <UpdateEsteemCta
+        onUpdateEsteemClick={onUpdateEsteemClick}
+        isLoggedIn={isLoggedIn}
+      />
       <UpdateAppraiseeEsteemModal
         ui={ui}
         appraisee={appraisee}

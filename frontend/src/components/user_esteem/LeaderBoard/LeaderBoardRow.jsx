@@ -2,25 +2,25 @@ import LeaderBoardComments from './LeaderBoardComments.jsx';
 import LeaderBoardEstimation from './LeaderBoardEstimation.jsx';
 
 const LeaderBoardRow = (props) => {
-  const { appraisee } = props;
+  const { appraisee, isLoggedIn, actions, commentActions, comments, ui } = props;
 
   function renderRow() {
     if (props.ui.appraiseePanel[appraisee._id] === 'comments') {
       return (
         <LeaderBoardComments
-          appraisee={props.appraisee}
-          actions={props.actions}
-          commentActions={props.commentActions}
-          comments={props.comments}
+          appraisee={appraisee}
+          actions={actions}
+          commentActions={commentActions}
+          comments={comments}
         />);
     } else if (props.ui.appraiseePanel[appraisee._id] === 'estimation') {
       return (
         <LeaderBoardEstimation
-          appraisee={props.appraisee}
-          actions={props.actions}
-          ui={props.ui}
-        />
-      );
+          appraisee={appraisee}
+          actions={actions}
+          ui={ui}
+          isLoggedIn={isLoggedIn}
+      />);
     }
   }
 
