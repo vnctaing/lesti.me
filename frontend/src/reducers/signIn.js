@@ -2,9 +2,8 @@ import * as actions from '../actions/action.js';
 import { fromJS } from 'immutable';
 
 const initialState = {
-  loggedInUser: {},
   isLoggedIn: false,
-  sessionToken: {},
+  verifiedSessionToken: {},
   ui: {
     failedSignIn: false,
   },
@@ -27,11 +26,11 @@ export default function signIn(state = initialState, action) {
       );
     case actions.SUCCESSFULLY_SIGN_IN:
       return iState.set('isLoggedIn', true)
-                   .set('sessionToken', action.token)
+                   .set('verifiedSessionToken', action.token)
                    .setIn(['ui', 'failedSignIn'], false)
                    .toJS();
     case actions.SUCCESSFULLY_AUTHENTICATED_USER:
-      return iState.set('sessionToken', action.token)
+      return iState.set('verifiedSessionToken', action.token)
                    .toJS();
     default:
       return state;
