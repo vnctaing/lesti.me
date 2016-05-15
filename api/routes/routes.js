@@ -40,7 +40,22 @@ app.get('/appraiser/:appraiserName', (req, res) => {
   .exec((err, appraiser) => {
     appraiser
      ? res.json({ status: 200, appraiser })
-     : res.json({ status: 400, message: 'Did not find appraiser with these creds'})
+     : res.json({ status: 400, message: 'Did not find appraiser with these creds'});
+  });
+});
+
+app.post('/auth/token', (req, res) => {
+  const token = JSON.parse(req.body.token);
+  const appraiserIdProvided = Object.keys(token)[0];
+  Appraiser.findOne({ _id: appraiserIdProvided }, (err, appraiser) => {
+    let status;
+    if (err) console.log(err);
+    if (appraiser) {
+      appraiser.sessionToken === token[appraiserIdProvided]
+        ? status = 200
+        : status = 400;
+    }
+    res.json({ status });
   });
 });
 

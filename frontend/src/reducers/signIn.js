@@ -4,6 +4,7 @@ import { fromJS } from 'immutable';
 const initialState = {
   loggedInUser: {},
   isLoggedIn: false,
+  sessionToken: {},
   ui: {
     failedSignIn: false,
   },
@@ -26,8 +27,11 @@ export default function signIn(state = initialState, action) {
       );
     case actions.SUCCESSFULLY_SIGN_IN:
       return iState.set('isLoggedIn', true)
-                   .setIn(['loggedInUser'], action.loggedInUser)
-                   .setIn(['ui', 'failedSignIn'], true)
+                   .set('sessionToken', action.token)
+                   .setIn(['ui', 'failedSignIn'], false)
+                   .toJS();
+    case actions.SUCCESSFULLY_AUTHENTICATED_USER:
+      return iState.set('sessionToken', action.token)
                    .toJS();
     default:
       return state;

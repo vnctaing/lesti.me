@@ -27,17 +27,22 @@ function fetchUserProfile(store) {
   };
 }
 
+function checkAuth(store) {
+  return (nextState, replace) => {
+    store.dispatch(actionCreators.checkUserAuth());
+  };
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={Layout}>
-        <IndexRoute component={Home}/>
-        <Route path="de/:appraiser" component={UserEsteem} onEnter={fetchUserProfile(store)}>
-        </Route>
-        <Route path="de/:appraiser/add" component={AddAppraisee}></Route>
-        <Route path="signup" component={Signup}></Route>
-        <Route path="signin" component={Signin}></Route>
-        <Route path="/appraiser_not_found" component={ErrorPage}></Route>
+      <Route path="/" component={Layout} onEnter={checkAuth(store)}>
+        <IndexRoute component={Home} />
+        <Route path="de/:appraiser" component={UserEsteem} onEnter={fetchUserProfile(store)} />
+        <Route path="de/:appraiser/add" component={AddAppraisee} />
+        <Route path="signup" component={Signup} />
+        <Route path="signin" component={Signin} />
+        <Route path="/appraiser_not_found" component={ErrorPage} />
       </Route>
     </Router>
   </Provider>,
