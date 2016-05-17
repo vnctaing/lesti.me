@@ -188,6 +188,21 @@ export function signingIn(formData) {
   };
 }
 
+
+export const DISCONNECTING_USER = 'DISCONNECTING_USER';
+export function disconnectingUser() {
+  return {
+    type: DISCONNECTING_USER,
+  };
+}
+
+export function disconnectUser() {
+  return (dispatch) => {
+    dispatch(disconnectingUser());
+    localStorage.removeItem('sessionToken');
+  };
+}
+
 export const OPEN_APPRAISEE_UPDATE_MODAL = 'OPEN_APPRAISEE_UPDATE_MODAL';
 export function openAppraiseeUpdateModal(appraiseeId) {
   return {

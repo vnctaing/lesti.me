@@ -32,6 +32,9 @@ export default function signIn(state = initialState, action) {
     case actions.SUCCESSFULLY_AUTHENTICATED_USER:
       return iState.set('verifiedSessionToken', action.token)
                    .toJS();
+    case actions.DISCONNECTING_USER:
+      return iState.set('verifiedSessionToken', {})
+                   .toJS();
     default:
       return state;
   }

@@ -45,7 +45,7 @@ app.get('/appraiser/:appraiserName', (req, res) => {
 });
 
 app.post('/auth/token', (req, res) => {
-  const token = JSON.parse(req.body.token);
+  const token = req.body.token ? JSON.parse(req.body.token) : '';
   const appraiserIdProvided = Object.keys(token)[0];
   Appraiser.findOne({ _id: appraiserIdProvided }, (err, appraiser) => {
     let status;
