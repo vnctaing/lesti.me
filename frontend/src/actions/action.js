@@ -75,6 +75,7 @@ export function postingNewAppraisee(formData) {
         description: formData.description,
         list: formData.list,
         appraiser: formData.appraiser,
+        sessionToken: formData.sessionToken,
       }),
     })
     .then((response) => response.json())

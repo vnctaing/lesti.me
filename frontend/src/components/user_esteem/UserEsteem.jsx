@@ -32,23 +32,23 @@ function mapDispatchToProps(dispatch) {
 const UserEsteem = (props) => {
   const { profile } = props;
   const { ui } = profile;
-  const { isLoggedIn } = props.signIn;
 
   const isItsPage = Object.keys(props.signIn.verifiedSessionToken)[0] === profile._id;
 
   return (
     <div>
-      <UserProfile profile={profile} ui={ui} isLoggedIn={isLoggedIn} />
+      <UserProfile profile={profile} ui={ui} session={props.signIn} />
       <div className="container">
         <div className="row">
           <div className="col-md-6">
-            <LeaderBoard profile={profile}
-                   actions={props.actions} 
-                   commentActions={props.commentActions}
-                   initialize={props.initialize}
-                   ui={ui}
-                   isLoggedIn={isItsPage}
-             />
+            <LeaderBoard
+              profile={profile}
+              actions={props.actions}
+              commentActions={props.commentActions}
+              initialize={props.initialize}
+              ui={ui}
+              isItsPage={isItsPage}
+            />
           </div>
         </div>
       </div>

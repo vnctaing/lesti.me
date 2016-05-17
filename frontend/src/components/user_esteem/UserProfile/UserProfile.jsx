@@ -9,8 +9,7 @@ import { Link } from 'react-router';
  * @param  {[Object]} props
  */
 const UserProfile = (props) => {
-  const { profile, isLoggedIn } = props;
-
+  const { profile, session } = props;
   return (
     <div className="profile">
       <div className="container">
@@ -24,7 +23,7 @@ const UserProfile = (props) => {
           </div>
           <div className="col-xs-8 text-right">
             <UserProfileStats profile={profile} />
-            {isLoggedIn
+            {Object.keys(session.verifiedSessionToken).length
               ? <Link to={`de/${profile.name}/add`}>
                 <button className="btn btn-redplain">
                   <i className="fa fa-plus"></i>

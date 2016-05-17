@@ -1,12 +1,12 @@
 const UpdateEsteemCta = (props) => {
-  const { isLoggedIn } = props;
+  const { isItsPage } = props;
 
   function _onClick() {
     props.onUpdateEsteemClick();
   }
 
   function reEstimateOrThumbs() {
-    if (isLoggedIn) {
+    if (isItsPage) {
       return (
         <div className="leaderboard__ctaContainer">
           <div className="leaderboard__cta inline leaderboard__cta--green" onClick={_onClick}>
