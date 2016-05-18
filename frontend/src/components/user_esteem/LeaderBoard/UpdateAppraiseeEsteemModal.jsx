@@ -2,6 +2,7 @@ import { reduxForm } from 'redux-form';
 const ModalHeader = require('react-bootstrap/lib/ModalHeader');
 const Modal = require('react-bootstrap/lib/Modal');
 const ModalBody = require('react-bootstrap/lib/ModalBody');
+const ModalFooter = require('react-bootstrap/lib/ModalFooter');
 
 
 let UpdateAppraiseeEsteemModal = (props) => {
@@ -18,35 +19,31 @@ let UpdateAppraiseeEsteemModal = (props) => {
 
   return (
     <Modal show={show_update_appraisee_esteem_modal[appraisee._id]} onHide={hideModal}>
-      <Modal.Header closeButton>
-        <Modal.Title>Faire descendre {appraiser_name} dans mon estime</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+      <Modal.Header>
         <div>
-          <form action="">
+          <form action="" className="updateEsteem__form">
             <div className="form-group">
               <label htmlFor="">Diminuer :</label>
-              <input className="form-control" type="number" {...esteem} />
+              <input
+                className="form-control updateEsteem__variationInput"
+                type="number"
+                {...esteem}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="">Motif :</label>
-              <textarea
-                className="form-control"
-                type="text"
-                value={reason.value || ''}
-                {...reason}
-              />
+              <input className="form-control" type="text" {...reason} />
             </div>
-            <button
-              type="button"
-              className="btn btn-default"
-              onClick={_onClick}
-            >
-            Diminuer
-            </button>
           </form>
         </div>
-      </Modal.Body>
+      </Modal.Header>
+      <Modal.Footer>
+        <div className="updateEsteem__ctaContainer">
+          <button type="button" className="btn btn-redplain" onClick={_onClick}>
+            Diminuer
+          </button>
+        </div>
+      </Modal.Footer>
     </Modal>
   );
 };

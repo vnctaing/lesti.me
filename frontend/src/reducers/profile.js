@@ -12,7 +12,7 @@ const initialState = {
     show_update_appraisee_esteem_modal: {},
     isFetchingProfile: false,
     appraiseePanel: {},
-    loadingComments: {},
+    loadingComments: {}
   },
 };
 

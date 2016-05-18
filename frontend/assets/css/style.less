@@ -83,7 +83,7 @@ body{
     color: @green;
 }
 .home__icon--red{
-    color: #F76868;
+    color: @red;
 }
 
 .home__form-headline{
@@ -127,21 +127,27 @@ body{
 }
 
 .btn--red{
-    color: #F76868;
-    border: 3px solid #F76868;
+    color: @red;
+    border: 3px solid @red;
 }
 
 .btn-redplain{
-    background: #F76868;
+    background: @red;
     color: #fff;
-    border:none;
+    border: 3px solid @red;
+}
+
+.btn-redplain:hover{
+    background: darken(@red, 10%);
+    color: #fff;
+    border: 3px solid darken(@red, 10%);
 }
 
 .float-right{
     float:right
 }
 .btn--red:hover{
-    background:#F76868;
+    background:@red;
     color: #fff 
 }
 
@@ -168,7 +174,7 @@ body{
 }
 
 .error{
-    color: #F76868;
+    color: @red;
 }
 
 
@@ -345,6 +351,21 @@ body {
     font-weight: 300;
     font-size: 12px
 }
+
+.updateEsteem__form{
+    margin: 0 auto;
+    max-width: 250px;
+}
+
+.updateEsteem__ctaContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.updateEsteem__variationInput{
+    width: 100px;
+}
+
 
 .round-img__container img{
     display: block;
