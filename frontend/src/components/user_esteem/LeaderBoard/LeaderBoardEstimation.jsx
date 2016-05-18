@@ -7,7 +7,7 @@ const LeaderBoardEstimation = (props) => {
     openAppraiseeUpdateModal,
     showCommentSection,
   } = props.actions;
-  const { ui, appraisee, isLoggedIn } = props;
+  const { ui, appraisee, isItsPage } = props;
 
   function displayCommentPanel() {
     showCommentSection(props.appraisee._id);
@@ -28,7 +28,7 @@ const LeaderBoardEstimation = (props) => {
           {appraisee.esteem} pts <span>dans l'estime de Vincent</span>
         </p>
       </div>
-      {isLoggedIn ? <i className="fa fa-pencil leaderboard__icon--right"></i> : ''}
+      {isItsPage ? <i className="fa fa-pencil leaderboard__icon--right"></i> : ''}
       <p className="leaderboard__description">{appraisee.description}</p>
       <div className="leaderboard__socialContainer" onClick={displayCommentPanel}>
         <LabelIllustrated icon="fa-thumbs-o-up" label="0" />
@@ -38,7 +38,7 @@ const LeaderBoardEstimation = (props) => {
       <hr />
       <UpdateEsteemCta
         onUpdateEsteemClick={onUpdateEsteemClick}
-        isLoggedIn={isLoggedIn}
+        isItsPage={isItsPage}
       />
       <UpdateAppraiseeEsteemModal
         ui={ui}

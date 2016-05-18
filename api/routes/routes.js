@@ -5,11 +5,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const crypto = require('crypto');
+
 // Mongoose Models Imports
 const mongoose = require('mongoose');
 const Appraisee = require('../models/Appraisee');
 const Appraiser = require('../models/Appraiser');
 const Comment = require('../models/Comment');
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -37,7 +40,22 @@ app.get('/appraiser/:appraiserName', (req, res) => {
   .exec((err, appraiser) => {
     appraiser
      ? res.json({ status: 200, appraiser })
-     : res.json({ status: 400, message: 'Did not find appraiser with these creds'})
+     : res.json({ status: 400, message: 'Did not find appraiser with these creds'});
+  });
+});
+
+app.post('/auth/token', (req, res) => {
+  const token = req.body.token ? JSON.parse(req.body.token) : '';
+  const appraiserIdProvided = Object.keys(token)[0];
+  Appraiser.findOne({ _id: appraiserIdProvided }, (err, appraiser) => {
+    let status;
+    if (err) console.log(err);
+    if (appraiser) {
+      appraiser.sessionToken === token[appraiserIdProvided]
+        ? status = 200
+        : status = 400;
+    }
+    res.json({ status });
   });
 });
 
@@ -47,6 +65,7 @@ app.post('/appraiser', (req, res) => {
     name: req.body.name,
     password: req.body.password,
     email: req.body.email,
+    sessionToken: crypto.randomBytes(64).toString('hex')
   });
 
   appraiserToAdd.save((err, appraiserToAdd) => {
@@ -67,7 +86,7 @@ app.post('/login', (req, res) => {
   .exec((err, appraiser) => {
     appraiser
      ? res.json({ status: 200, appraiser })
-     : res.json({ status: 400, message: 'Did not find appraiser with these creds'})
+     : res.json({ status: 400, message: 'Did not find appraiser with these creds' });
   });
 });
 

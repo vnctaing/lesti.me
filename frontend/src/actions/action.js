@@ -75,6 +75,7 @@ export function postingNewAppraisee(formData) {
         description: formData.description,
         list: formData.list,
         appraiser: formData.appraiser,
+        sessionToken: formData.sessionToken,
       }),
     })
     .then((response) => response.json())
@@ -142,10 +143,10 @@ export function signingUp(formData) {
 
 
 export const SUCCESSFULLY_SIGN_IN = 'SUCCESSFULLY_SIGN_IN';
-export function successfullySignIn(loggedInUser) {
+export function successfullySignIn(token) {
   return {
     type: SUCCESSFULLY_SIGN_IN,
-    loggedInUser,
+    token,
   };
 }
 
@@ -173,13 +174,32 @@ export function signingIn(formData) {
     .then(response => response.json())
     .then(json => {
       if (json.status === 200) {
-        dispatch(successfullySignIn(json.appraiser));
-        dispatch(push(`de/${json.appraiser.name}`));
+        const { appraiser } = json;
+        const token = {};
+        token[appraiser._id] = appraiser.sessionToken;
+        localStorage.setItem('sessionToken', JSON.stringify(token));
+        dispatch(successfullySignIn(token));
+        dispatch(push(`de/${appraiser.name}`));
       } else {
         dispatch(failedSignIn());
       }
     })
     .catch(e => console.log('error', e));
+  };
+}
+
+
+export const DISCONNECTING_USER = 'DISCONNECTING_USER';
+export function disconnectingUser() {
+  return {
+    type: DISCONNECTING_USER,
+  };
+}
+
+export function disconnectUser() {
+  return (dispatch) => {
+    dispatch(disconnectingUser());
+    localStorage.removeItem('sessionToken');
   };
 }
 
@@ -251,6 +271,44 @@ export function showCommentSection(appraiseeId) {
           ? dispatch(receivedAppraiseeComments(appraiseeId, json.comments))
           : dispatch(failedToRequestAppraiseeComments());
       });
+  };
+}
+
+
+export const SUCCESSFULLY_AUTHENTICATED_USER = 'SUCCESSFULLY_AUTHENTICATED_USER';
+export function successfullyAuthenticatedUser(token) {
+  return {
+    type: SUCCESSFULLY_AUTHENTICATED_USER,
+    token
+  };
+}
+
+export const FAILED_AUTHENTICATED_USER = 'FAILED_AUTHENTICATED_USER';
+export function failedAuthenticatedUser() {
+  return {
+    type: FAILED_AUTHENTICATED_USER,
+  };
+}
+
+export function checkUserAuth() {
+  return (dispatch) => {
+    const token = localStorage.getItem('sessionToken');
+    fetch('http://localhost:3000/auth/token', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        token,
+      }),
+    })
+    .then((resp) => resp.json())
+    .then((json) => {
+      json.status === 200
+        ? dispatch(successfullyAuthenticatedUser(JSON.parse(token)))
+        : dispatch(failedAuthenticatedUser());
+    });
   };
 }
 
