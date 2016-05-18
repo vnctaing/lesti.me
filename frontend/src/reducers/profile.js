@@ -12,7 +12,7 @@ const initialState = {
     show_update_appraisee_esteem_modal: {},
     isFetchingProfile: false,
     appraiseePanel: {},
-    loadingComments: {}
+    loadingComments: {},
   },
 };
 
@@ -51,7 +51,8 @@ export default function profile(state = initialState, action) {
                    .setIn(['ui', 'isFetchingProfile'], false)
                    .toJS();
     case actions.OPEN_APPRAISEE_UPDATE_MODAL:
-      return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], true)
+      return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId],
+                            action.purposeReestimation)
                    .toJS();
     case actions.CLOSE_APPRAISEE_UPDATE_MODAL:
       return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)

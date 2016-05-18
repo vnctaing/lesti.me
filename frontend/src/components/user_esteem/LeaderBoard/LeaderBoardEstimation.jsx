@@ -13,8 +13,8 @@ const LeaderBoardEstimation = (props) => {
     showCommentSection(props.appraisee._id);
   }
 
-  function onUpdateEsteemClick() {
-    openAppraiseeUpdateModal(props.appraisee._id);
+  function onUpdateEsteemClick(purposeReestimation) {
+    openAppraiseeUpdateModal(props.appraisee._id, purposeReestimation);
   }
 
   return (

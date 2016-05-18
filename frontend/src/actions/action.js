@@ -203,11 +203,17 @@ export function disconnectUser() {
   };
 }
 
+
+/**
+ * Open the increasing or the decreasing modal
+ * @purposeReestimation {String} 'increasing' || 'decreasing'
+ */
 export const OPEN_APPRAISEE_UPDATE_MODAL = 'OPEN_APPRAISEE_UPDATE_MODAL';
-export function openAppraiseeUpdateModal(appraiseeId) {
+export function openAppraiseeUpdateModal(appraiseeId, purposeReestimation) {
   return {
     type: OPEN_APPRAISEE_UPDATE_MODAL,
     appraiseeId,
+    purposeReestimation,
   };
 }
 

@@ -1,12 +1,12 @@
 const UpdateEsteemCta = (props) => {
   const { isItsPage } = props;
 
-  function reEstimatingDown() {
-    props.onUpdateEsteemClick();
+  function reEstimatinUp() {
+    props.onUpdateEsteemClick('increasing');
   }
 
-  function reEstimatinUp() {
-    console.log('reestimatingup')
+  function reEstimatingDown() {
+    props.onUpdateEsteemClick('decreasing');
   }
 
   function approve() {

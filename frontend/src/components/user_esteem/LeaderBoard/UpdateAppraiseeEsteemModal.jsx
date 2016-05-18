@@ -9,6 +9,8 @@ let UpdateAppraiseeEsteemModal = (props) => {
   const { fields: { esteem, reason }, handleSubmit, appraiser_name, appraisee } = props;
   const { updatingAppraiseeEsteem, closeAppraiseeUpdateModal } = props.actions;
   const { show_update_appraisee_esteem_modal } = props.ui;
+  const isIncreasingEsteem = show_update_appraisee_esteem_modal[appraisee._id] === 'increasing';
+
   function hideModal() {
     closeAppraiseeUpdateModal(appraisee._id);
   }
@@ -18,12 +20,12 @@ let UpdateAppraiseeEsteemModal = (props) => {
   }
 
   return (
-    <Modal show={show_update_appraisee_esteem_modal[appraisee._id]} onHide={hideModal}>
+    <Modal show={Boolean(show_update_appraisee_esteem_modal[appraisee._id])} onHide={hideModal}>
       <Modal.Header>
         <div>
           <form action="" className="updateEsteem__form">
             <div className="form-group">
-              <label htmlFor="">Diminuer :</label>
+              <label htmlFor="">{isIncreasingEsteem ? 'Augmenter' : 'Diminuer'} :</label>
               <input
                 className="form-control updateEsteem__variationInput"
                 type="number"
@@ -40,7 +42,7 @@ let UpdateAppraiseeEsteemModal = (props) => {
       <Modal.Footer>
         <div className="updateEsteem__ctaContainer">
           <button type="button" className="btn btn-redplain" onClick={_onClick}>
-            Diminuer
+            {isIncreasingEsteem ? 'Augmenter' : 'Diminuer'}
           </button>
         </div>
       </Modal.Footer>
