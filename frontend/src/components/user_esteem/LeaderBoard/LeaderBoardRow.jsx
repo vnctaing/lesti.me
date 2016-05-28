@@ -3,8 +3,7 @@ import LeaderBoardEstimation from './LeaderBoardEstimation.jsx';
 // import LeaderboardEdit from './LeaderboardEdit.jsx';
 
 const LeaderBoardRow = (props) => {
-  const { appraisee, isItsPage, actions, commentActions, comments, ui } = props;
-
+  const { appraisee, isItsPage, actions, commentActions, comments, ui, initialize } = props;
   function renderRow() {
     if (props.ui.appraiseePanel[appraisee._id] === 'comments') {
       return (
@@ -14,7 +13,7 @@ const LeaderBoardRow = (props) => {
           commentActions={commentActions}
           comments={comments}
         />);
-    } 
+    }
     // else if (props.ui.appraiseePanel[appraisee._id] === 'edit') {
     //   return (
     //     <LeaderboardEdit
@@ -29,6 +28,7 @@ const LeaderBoardRow = (props) => {
         actions={actions}
         ui={ui}
         isItsPage={isItsPage}
+        initialize={initialize}
       />
     );
   }

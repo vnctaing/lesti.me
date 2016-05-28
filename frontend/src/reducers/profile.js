@@ -54,6 +54,7 @@ export default function profile(state = initialState, action) {
       return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId],
                             action.purposeReestimation)
                    .toJS();
+    case actions.UPDATING_APPRAISEE_ESTEEM:
     case actions.CLOSE_APPRAISEE_UPDATE_MODAL:
       return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)
                    .toJS();

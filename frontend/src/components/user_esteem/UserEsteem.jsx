@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actionCreators, dispatch),
     commentActions: bindActionCreators(commentActions, dispatch),
-    initialize: bindActionCreators(initialize, dispatch),
+    initialize: bindActionCreators(initialize, dispatch), // NOT WORKING <<
   };
 }
 
@@ -32,9 +32,7 @@ function mapDispatchToProps(dispatch) {
 const UserEsteem = (props) => {
   const { profile } = props;
   const { ui } = profile;
-
   const isItsPage = Object.keys(props.signIn.verifiedSessionToken)[0] === profile._id;
-
   return (
     <div>
       <UserProfile profile={profile} ui={ui} session={props.signIn} />

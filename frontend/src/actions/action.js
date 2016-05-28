@@ -226,20 +226,30 @@ export function closeAppraiseeUpdateModal(appraiseeId) {
 }
 
 export const UPDATING_APPRAISEE_ESTEEM = 'UPDATING_APPRAISEE_ESTEEM';
-export function updatingAppraiseeEsteem(hey) {
-  const appraisee = 'fuck';
-  return function (dispatch) {
-    fetch(`http://localhost:3000/appraisee/${appraisee}`, {
-        method: 'put',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          'foo': 'bar'
-        })
-    })
-  }
+export function updatingAppraiseeEsteem(formData, appraiseeId) {
+  return {
+    type: UPDATING_APPRAISEE_ESTEEM,
+    appraiseeId,
+    formData
+  };
+}
+
+export function updateAppraiseeEsteem(formData, appraiseeId) {
+  return function(dispatch) {
+    dispatch(updatingAppraiseeEsteem(formData, appraiseeId));
+    fetch(`http://localhost:3000/appraisee/${appraiseeId}`, {
+      method: 'put',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        esteemVariation: formData.esteemVariation,
+        reason: formData.reason,
+        appraiseeId,
+      }),
+    });
+  };
 }
 
 export const REQUESTING_APPRAISEE_COMMENTS = 'REQUESTING_APPRAISEE_COMMENTS';

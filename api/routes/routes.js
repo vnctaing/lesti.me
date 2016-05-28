@@ -126,7 +126,7 @@ app.post('/appraisee', (req, res) => {
 });
 
 app.put('/appraisee/:appraiseeId', (req, res) => {
-  console.log('updating');
+  console.log('updating', req.body);
 });
 
 app.listen(3000, () => {
