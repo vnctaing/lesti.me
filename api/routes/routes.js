@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
 const Appraisee = require('../models/Appraisee');
 const Appraiser = require('../models/Appraiser');
 const Comment = require('../models/Comment');
+const Feed = require('../models/Feed');
 
 
 app.use(cors());
@@ -134,7 +135,17 @@ app.put('/appraisee/:appraiseeId', (req, res) => {
         const delta = doc.esteem + req.body.esteemVariation;
         doc.esteem = delta;
         doc.save();
+        return doc;
+      })
+    .then((appraisee) => {
+      const feedToAdd = new Feed({
+        _appraisee: req.params.appraiseeId,
+        _appraiser: appraisee._appraiser,
+        reason: req.body.reason,
+        esteemVariation: req.body.esteemVariation,
       });
+      feedToAdd.save();
+    });
 });
 
 app.listen(3000, () => {
