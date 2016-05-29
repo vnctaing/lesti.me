@@ -4,7 +4,6 @@ import Navbar from './Navbar.jsx';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/action.js';
 import { bindActionCreators } from 'redux';
-import DevTools from './DevTools.jsx';
 
 function mapStateToProps(state) {
   return {
@@ -25,7 +24,6 @@ const Layout = (props) => {
       <div className="content--offset" id="content">
         {props.children}
       </div>
-      <DevTools />
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import UserProfile from './UserProfile/UserProfile.jsx';
 import LeaderBoard from './LeaderBoard/LeaderBoard.jsx';
+import Panel from '../containers/Panel.jsx';
+import ActivityFeed from '../ActivityFeed/ActivityFeed.jsx';
 import { initialize } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/action.js';
@@ -47,6 +49,11 @@ const UserEsteem = (props) => {
               ui={ui}
               isItsPage={isItsPage}
             />
+          </div>
+          <div className="col-md-6">
+            <Panel>
+              <ActivityFeed />
+            </Panel>
           </div>
         </div>
       </div>

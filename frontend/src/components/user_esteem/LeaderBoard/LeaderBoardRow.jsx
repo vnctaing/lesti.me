@@ -35,7 +35,7 @@ const LeaderBoardRow = (props) => {
 
   return (
     <div>
-      <div className="leaderboard_row">
+      <div className="lst-panel">
         {renderRow()}
       </div>
     </div>

@@ -9,7 +9,6 @@ const LeaderBoard = (props) => {
   const { profile, commentActions, actions, initialize, ui, isItsPage } = props;
   return (
     <div>
-      <div className="leaderboard">
         {
           profile.appraisees.map((a) => {
             return (
@@ -28,7 +27,6 @@ const LeaderBoard = (props) => {
               );
           })
         }
-      </div>
     </div>
   );
 };
