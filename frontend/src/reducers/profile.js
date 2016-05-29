@@ -65,7 +65,7 @@ export default function profile(state = initialState, action) {
                       ['appraisees'],
                       (list) => list.update(
                         list.findIndex((a) => a.get('_id') === action.appraiseeId),
-                        (a) => a.set('esteem', 42)
+                        (a) => a.set('esteem', a.get('esteem') + action.esteemVariation)
                       )
                     )
                    .setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)

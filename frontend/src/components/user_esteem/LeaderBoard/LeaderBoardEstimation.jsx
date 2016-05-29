@@ -20,8 +20,12 @@ const LeaderBoardEstimation = (props) => {
   }
 
   function handleSubmit(formData) {
-    updateAppraiseeEsteem(formData, appraisee._id);
-    //initialize('update_appraisee_esteem', {}, ['esteemVariation', 'reason']));
+    let r = formData;
+    if (ui.show_update_appraisee_esteem_modal[appraisee._id] === 'decreasing') {
+      r.esteemVariation = formData.esteemVariation * -1;
+    }
+    updateAppraiseeEsteem(r, appraisee._id);
+    // initialize('update_appraisee_esteem', {}, ['esteemVariation', 'reason']));
   }
 
   return (
