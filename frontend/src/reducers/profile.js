@@ -55,6 +55,21 @@ export default function profile(state = initialState, action) {
                             action.purposeReestimation)
                    .toJS();
     case actions.UPDATING_APPRAISEE_ESTEEM:
+      // const lol = iState.get('appraisees')
+      //     .findIndex((a) => a.get('_id') === action.appraiseeId)
+      //     .toJS();
+      // console.log(lol);
+
+      return iState
+                   .updateIn(
+                      ['appraisees'],
+                      (list) => list.update(
+                        list.findIndex((a) => a.get('_id') === action.appraiseeId),
+                        (a) => a.set('esteem', 42)
+                      )
+                    )
+                   .setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)
+                   .toJS();
     case actions.CLOSE_APPRAISEE_UPDATE_MODAL:
       return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)
                    .toJS();

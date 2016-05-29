@@ -230,12 +230,13 @@ export function updatingAppraiseeEsteem(formData, appraiseeId) {
   return {
     type: UPDATING_APPRAISEE_ESTEEM,
     appraiseeId,
-    formData
+    esteemVariation: parseInt(formData.esteemVariation, 10),
+    reason: formData.reason,
   };
 }
 
 export function updateAppraiseeEsteem(formData, appraiseeId) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch(updatingAppraiseeEsteem(formData, appraiseeId));
     fetch(`http://localhost:3000/appraisee/${appraiseeId}`, {
       method: 'put',
@@ -244,7 +245,7 @@ export function updateAppraiseeEsteem(formData, appraiseeId) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        esteemVariation: formData.esteemVariation,
+        esteemVariation: parseInt(formData.esteemVariation, 10),
         reason: formData.reason,
         appraiseeId,
       }),

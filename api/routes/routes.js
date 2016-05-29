@@ -126,7 +126,15 @@ app.post('/appraisee', (req, res) => {
 });
 
 app.put('/appraisee/:appraiseeId', (req, res) => {
-  console.log('updating', req.body);
+  Appraisee
+    .findOne({ '_id' : req.body.appraiseeId },
+      (err, doc) => {
+        if (err) console.log(err);
+        if (!doc) console.log('did not found appraisee to update');
+        const delta = doc.esteem + req.body.esteemVariation;
+        doc.esteem = delta;
+        doc.save();
+      });
 });
 
 app.listen(3000, () => {
