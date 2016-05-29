@@ -3,7 +3,6 @@ import createLogger from 'redux-logger';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import esteemApp from '../reducers/reducer.js';
 import { browserHistory } from 'react-router';
-import DevTools from '../components/global/Devtools.jsx';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 
@@ -17,8 +16,9 @@ const enhancer = compose(
     thunkMiddleware, // lets us dispatch() functions
     loggerMiddleware, // neat middleware that logs actions
     reactRouterMiddleware
-  ),
-  DevTools.instrument()
+  )
+  // ,
+  // DevTools.instrument()
 );
 
 // const store = ();
