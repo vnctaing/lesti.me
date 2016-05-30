@@ -37,7 +37,15 @@ app.get('/appraiser/:appraiserName', (req, res) => {
       if (err) console.log(err);
     }
   )
-  .populate('appraisees feeds')
+  .populate('appraisees')
+  .populate({ 
+     path: 'feeds',
+     populate: {
+       path: '_appraisee',
+       select: 'appraiseeName',
+       model: 'Appraisee'
+     } 
+  })
   .exec((err, appraiser) => {
     appraiser
      ? res.json({ status: 200, appraiser })

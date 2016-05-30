@@ -4,6 +4,7 @@ const Feed = (props) => {
   const { feed } = props;
   return (
     <div>
+      <p>{feed._appraisee.appraiseeName}</p>
       <p>{moment(feed.createdAt).fromNow()}</p>
       <p>A perdu : {feed.esteemVariation}</p>
       <p>Motif : {feed.reason}</p>
