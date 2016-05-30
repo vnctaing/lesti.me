@@ -3,13 +3,13 @@ import Feed from './Feed.jsx';
 
 
 const ActivityFeed = (props) => {
-  const arr = [1, 2, 3, 4];
+  const { feeds } = props.profile;
   return (
     <div>
-      {arr.map((a) => {
+      {feeds.map((f, i) => {
         return (
-          <TableRow key={a}>
-            <Feed />
+          <TableRow key={i}>
+            <Feed feed={f} />
           </TableRow>
         );
       })}

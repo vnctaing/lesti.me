@@ -37,7 +37,7 @@ app.get('/appraiser/:appraiserName', (req, res) => {
       if (err) console.log(err);
     }
   )
-  .populate('appraisees')
+  .populate('appraisees feeds')
   .exec((err, appraiser) => {
     appraiser
      ? res.json({ status: 200, appraiser })
@@ -71,8 +71,6 @@ app.post('/appraiser', (req, res) => {
 
   appraiserToAdd.save((err, appraiserToAdd) => {
     if (err) return console.error(err);
-    console.log('Successfully Added : ');
-    console.log(appraiserToAdd);
     res.json({
       status: 200,
       appraiserName: appraiserToAdd.name,
@@ -145,6 +143,20 @@ app.put('/appraisee/:appraiseeId', (req, res) => {
         esteemVariation: req.body.esteemVariation,
       });
       feedToAdd.save();
+      return feedToAdd;
+    })
+    .then((f) => {
+      // Terrible Pyramid of Doom...
+      Appraiser
+        .findOne({_id: f._appraiser},
+        (err, doc) => {
+          if (err) console.error(err);
+          if (doc) return doc;
+        })
+        .then((appraiser) => {
+          appraiser.feeds.push(f._id);
+          appraiser.save();
+        });
     });
 });
 

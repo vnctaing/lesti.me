@@ -8,6 +8,7 @@ const initialState = {
   profilePicture: '',
   appraisees: [],
   comments: {},
+  feeds: [],
   ui: {
     show_update_appraisee_esteem_modal: {},
     isFetchingProfile: false,

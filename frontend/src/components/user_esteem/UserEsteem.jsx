@@ -52,7 +52,9 @@ const UserEsteem = (props) => {
           </div>
           <div className="col-md-6">
             <Panel>
-              <ActivityFeed />
+              <ActivityFeed
+                profile={profile}
+              />
             </Panel>
           </div>
         </div>
