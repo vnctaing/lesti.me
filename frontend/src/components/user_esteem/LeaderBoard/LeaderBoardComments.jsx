@@ -1,4 +1,4 @@
-import LabelIllustrated from './LabelIllustrated.jsx';
+import LabelIllustrated from '../../icons/LabelIllustrated.jsx';
 import { reduxForm } from 'redux-form';
 import * as actionCreators from '../../../actions/action.js';
 import { bindActionCreators } from 'redux';

@@ -37,14 +37,17 @@ app.get('/appraiser/:appraiserName', (req, res) => {
       if (err) console.log(err);
     }
   )
-  .populate('appraisees')
-  .populate({ 
-     path: 'feeds',
-     populate: {
-       path: '_appraisee',
-       select: 'appraiseeName',
-       model: 'Appraisee'
-     } 
+  .populate({
+    path: 'appraisees', options: { sort: { esteem: 'desc' } },
+  })
+  .populate({
+    path: 'feeds',
+    populate: {
+      path: '_appraisee',
+      select: 'appraiseeName',
+      model: 'Appraisee',
+    },
+    options: { sort: { createdAt: 'desc' } },
   })
   .exec((err, appraiser) => {
     appraiser

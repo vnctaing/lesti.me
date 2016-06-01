@@ -1,4 +1,4 @@
-import LabelIllustrated from './LabelIllustrated.jsx';
+import LabelIllustrated from '../../icons/LabelIllustrated.jsx';
 import UpdateAppraiseeEsteemModal from './UpdateAppraiseeEsteemModal.jsx';
 import UpdateEsteemCta from './UpdateEsteemCta.jsx';
 import { initialize } from 'redux-form';
