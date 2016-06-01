@@ -153,7 +153,11 @@ app.put('/appraisee/:appraiseeId', (req, res) => {
         reason: req.body.reason,
         esteemVariation: req.body.esteemVariation,
       });
-      feedToAdd.save();
+      feedToAdd.save((err) => {
+        Feed.populate(feedToAdd, { path: '_appraisee _appraiser' }, (err, feed) => {
+          if (err) console.log(err);
+        });
+      });
       return feedToAdd;
     })
     .then((f) => {
@@ -167,6 +171,7 @@ app.put('/appraisee/:appraiseeId', (req, res) => {
         .then((appraiser) => {
           appraiser.feeds.push(f._id);
           appraiser.save();
+          res.json({ feed: f, status: 200 });
         });
     });
 });

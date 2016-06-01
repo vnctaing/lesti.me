@@ -235,8 +235,16 @@ export function updatingAppraiseeEsteem(formData, appraiseeId) {
   };
 }
 
+export const SUCCESSFULLY_UPDATED_APPRAISEE_ESTEEM = 'SUCCESSFULLY_UPDATED_APPRAISEE_ESTEEM';
+export function succesfullyUpdatedAppraiseeEsteem(feed) {
+  return {
+    type: SUCCESSFULLY_UPDATED_APPRAISEE_ESTEEM,
+    feed,
+  };
+}
+
 export function updateAppraiseeEsteem(formData, appraiseeId) {
-  return function (dispatch) {
+  return (dispatch) => {
     dispatch(updatingAppraiseeEsteem(formData, appraiseeId));
     fetch(`http://localhost:3000/appraisee/${appraiseeId}`, {
       method: 'put',
@@ -249,7 +257,10 @@ export function updateAppraiseeEsteem(formData, appraiseeId) {
         reason: formData.reason,
         appraiseeId,
       }),
-    });
+    })
+    .then((r) => r.json())
+    .then((resp) => { dispatch(succesfullyUpdatedAppraiseeEsteem(resp.feed)); })
+    .catch((e) => console.log(e));
   };
 }
 
