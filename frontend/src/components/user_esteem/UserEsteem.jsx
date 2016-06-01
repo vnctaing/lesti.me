@@ -1,5 +1,7 @@
 import UserProfile from './UserProfile/UserProfile.jsx';
 import LeaderBoard from './LeaderBoard/LeaderBoard.jsx';
+import Panel from '../containers/Panel.jsx';
+import ActivityFeed from '../ActivityFeed/ActivityFeed.jsx';
 import { initialize } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/action.js';
@@ -19,7 +21,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actionCreators, dispatch),
     commentActions: bindActionCreators(commentActions, dispatch),
-    initialize: bindActionCreators(initialize, dispatch),
+    initialize: bindActionCreators(initialize, dispatch), // NOT WORKING <<
   };
 }
 
@@ -32,9 +34,7 @@ function mapDispatchToProps(dispatch) {
 const UserEsteem = (props) => {
   const { profile } = props;
   const { ui } = profile;
-
   const isItsPage = Object.keys(props.signIn.verifiedSessionToken)[0] === profile._id;
-
   return (
     <div>
       <UserProfile profile={profile} ui={ui} session={props.signIn} />
@@ -49,6 +49,13 @@ const UserEsteem = (props) => {
               ui={ui}
               isItsPage={isItsPage}
             />
+          </div>
+          <div className="col-md-6">
+            <Panel>
+              <ActivityFeed
+                profile={profile}
+              />
+            </Panel>
           </div>
         </div>
       </div>

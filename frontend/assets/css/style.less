@@ -14,6 +14,13 @@
     cursor: pointer;
 }
 
+.lst-panel{
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    margin: 10px 0px;
+}
+
 body{
     background: #f0eef9;
     font-family: 'Nunito', sans-serif;
@@ -83,7 +90,7 @@ body{
     color: @green;
 }
 .home__icon--red{
-    color: #F76868;
+    color: @red;
 }
 
 .home__form-headline{
@@ -127,21 +134,39 @@ body{
 }
 
 .btn--red{
-    color: #F76868;
-    border: 3px solid #F76868;
+    color: @red;
+    border: 3px solid @red;
 }
 
 .btn-redplain{
-    background: #F76868;
+    background: @red;
     color: #fff;
-    border:none;
+    border: 3px solid @red;
+}
+
+.btn-redplain:hover{
+    background: darken(@red, 10%);
+    color: #fff;
+    border: 3px solid darken(@red, 10%);
+}
+
+.btn-greenplain{
+    background: @green;
+    color: #fff;
+    border: 3px solid @green;
+}
+
+.btn-greenplain:hover{
+    background: @green;
+    color: #fff;
+    border: 3px solid @green;
 }
 
 .float-right{
     float:right
 }
 .btn--red:hover{
-    background:#F76868;
+    background:@red;
     color: #fff 
 }
 
@@ -168,7 +193,7 @@ body{
 }
 
 .error{
-    color: #F76868;
+    color: @red;
 }
 
 
@@ -236,16 +261,17 @@ body {
     margin-bottom: 5px;
 }
 
-.panel{
+.panel {
     background: #fff;
     padding: 10px
 }
 
-.profile{
+.profile {
     background: @blue;
     color: #fff;
     padding-top: 40px;
     padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .profile_picture{
@@ -288,13 +314,6 @@ body {
     background: #a3a3a3;
     padding: 10px;
     cursor: pointer;
-}
-
-.leaderboard_row{
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    margin: 10px 0px;
 }
 
 .leaderboard_name{
@@ -346,6 +365,20 @@ body {
     font-size: 12px
 }
 
+.updateEsteem__form{
+    margin: 0 auto;
+    max-width: 250px;
+}
+
+.updateEsteem__ctaContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.updateEsteem__variationInput{
+    width: 100px;
+}
+
 .round-img__container img{
     display: block;
     min-width: 100%;
@@ -356,8 +389,34 @@ body {
     font-size: 18px;
 }
 
+.tableRow {
+    border-bottom: 1px solid #eee;
+    &:last-child{
+        border: none;
+    }
+}
 
+.feed__createdAt{
+    color: @light-grey;
+    margin-left: 10px;
+    float: right;
+    font-size: 12px;
+}
 
+.feed__content{
+    margin-bottom: 0px;
+}
 
+.feed_reason {
+    font-weight: 300;
+    margin-bottom: 0px;
+}
 
+.feed {
+    padding: 2px 0;
+}
 
+.feed__text--highlight {
+    font-weight: 800;
+    color: @blue;
+}

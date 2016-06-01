@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
 const Appraisee = require('../models/Appraisee');
 const Appraiser = require('../models/Appraiser');
 const Comment = require('../models/Comment');
+const Feed = require('../models/Feed');
 
 
 app.use(cors());
@@ -36,7 +37,18 @@ app.get('/appraiser/:appraiserName', (req, res) => {
       if (err) console.log(err);
     }
   )
-  .populate('appraisees')
+  .populate({
+    path: 'appraisees', options: { sort: { esteem: 'desc' } },
+  })
+  .populate({
+    path: 'feeds',
+    populate: {
+      path: '_appraisee',
+      select: 'appraiseeName',
+      model: 'Appraisee',
+    },
+    options: { sort: { createdAt: 'desc' } },
+  })
   .exec((err, appraiser) => {
     appraiser
      ? res.json({ status: 200, appraiser })
@@ -70,8 +82,6 @@ app.post('/appraiser', (req, res) => {
 
   appraiserToAdd.save((err, appraiserToAdd) => {
     if (err) return console.error(err);
-    console.log('Successfully Added : ');
-    console.log(appraiserToAdd);
     res.json({
       status: 200,
       appraiserName: appraiserToAdd.name,
@@ -126,7 +136,44 @@ app.post('/appraisee', (req, res) => {
 });
 
 app.put('/appraisee/:appraiseeId', (req, res) => {
-  console.log('updating');
+  Appraisee
+    .findOne({ '_id' : req.body.appraiseeId },
+      (err, doc) => {
+        if (err) console.log(err);
+        if (!doc) console.log('did not found appraisee to update');
+        const delta = doc.esteem + req.body.esteemVariation;
+        doc.esteem = delta;
+        doc.save();
+        return doc;
+      })
+    .then((appraisee) => {
+      const feedToAdd = new Feed({
+        _appraisee: req.params.appraiseeId,
+        _appraiser: appraisee._appraiser,
+        reason: req.body.reason,
+        esteemVariation: req.body.esteemVariation,
+      });
+      feedToAdd.save((err) => {
+        Feed.populate(feedToAdd, { path: '_appraisee _appraiser' }, (err, feed) => {
+          if (err) console.log(err);
+        });
+      });
+      return feedToAdd;
+    })
+    .then((f) => {
+      // Terrible Pyramid of Doom...
+      Appraiser
+        .findOne({_id: f._appraiser},
+        (err, doc) => {
+          if (err) console.error(err);
+          if (doc) return doc;
+        })
+        .then((appraiser) => {
+          appraiser.feeds.push(f._id);
+          appraiser.save();
+          res.json({ feed: f, status: 200 });
+        });
+    });
 });
 
 app.listen(3000, () => {

@@ -1,20 +1,31 @@
-import LabelIllustrated from './LabelIllustrated.jsx';
+import LabelIllustrated from '../../icons/LabelIllustrated.jsx';
 import UpdateAppraiseeEsteemModal from './UpdateAppraiseeEsteemModal.jsx';
 import UpdateEsteemCta from './UpdateEsteemCta.jsx';
+import { initialize } from 'redux-form';
 
 const LeaderBoardEstimation = (props) => {
   const {
     openAppraiseeUpdateModal,
     showCommentSection,
+    updateAppraiseeEsteem,
   } = props.actions;
   const { ui, appraisee, isItsPage } = props;
 
   function displayCommentPanel() {
-    showCommentSection(props.appraisee._id);
+    showCommentSection(appraisee._id);
   }
 
-  function onUpdateEsteemClick() {
-    openAppraiseeUpdateModal(props.appraisee._id);
+  function onUpdateEsteemClick(purposeReestimation) {
+    openAppraiseeUpdateModal(appraisee._id, purposeReestimation);
+  }
+
+  function handleSubmit(formData) {
+    let r = formData;
+    if (ui.show_update_appraisee_esteem_modal[appraisee._id] === 'decreasing') {
+      r.esteemVariation = formData.esteemVariation * -1;
+    }
+    updateAppraiseeEsteem(r, appraisee._id);
+    // initialize('update_appraisee_esteem', {}, ['esteemVariation', 'reason']));
   }
 
   return (
@@ -43,8 +54,9 @@ const LeaderBoardEstimation = (props) => {
       <UpdateAppraiseeEsteemModal
         ui={ui}
         appraisee={appraisee}
-        appraiser_name={props.appraiser_name}
         actions={props.actions}
+        initialize={initialize}
+        onSubmit={handleSubmit}
       />
     </div>
   );

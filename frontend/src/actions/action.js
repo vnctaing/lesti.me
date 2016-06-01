@@ -203,11 +203,17 @@ export function disconnectUser() {
   };
 }
 
+
+/**
+ * Open the increasing or the decreasing modal
+ * @purposeReestimation {String} 'increasing' || 'decreasing'
+ */
 export const OPEN_APPRAISEE_UPDATE_MODAL = 'OPEN_APPRAISEE_UPDATE_MODAL';
-export function openAppraiseeUpdateModal(appraiseeId) {
+export function openAppraiseeUpdateModal(appraiseeId, purposeReestimation) {
   return {
     type: OPEN_APPRAISEE_UPDATE_MODAL,
     appraiseeId,
+    purposeReestimation,
   };
 }
 
@@ -220,20 +226,42 @@ export function closeAppraiseeUpdateModal(appraiseeId) {
 }
 
 export const UPDATING_APPRAISEE_ESTEEM = 'UPDATING_APPRAISEE_ESTEEM';
-export function updatingAppraiseeEsteem(hey) {
-  const appraisee = 'fuck';
-  return function (dispatch) {
-    fetch(`http://localhost:3000/appraisee/${appraisee}`, {
-        method: 'put',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          'foo': 'bar'
-        })
+export function updatingAppraiseeEsteem(formData, appraiseeId) {
+  return {
+    type: UPDATING_APPRAISEE_ESTEEM,
+    appraiseeId,
+    esteemVariation: parseInt(formData.esteemVariation, 10),
+    reason: formData.reason,
+  };
+}
+
+export const SUCCESSFULLY_UPDATED_APPRAISEE_ESTEEM = 'SUCCESSFULLY_UPDATED_APPRAISEE_ESTEEM';
+export function succesfullyUpdatedAppraiseeEsteem(feed) {
+  return {
+    type: SUCCESSFULLY_UPDATED_APPRAISEE_ESTEEM,
+    feed,
+  };
+}
+
+export function updateAppraiseeEsteem(formData, appraiseeId) {
+  return (dispatch) => {
+    dispatch(updatingAppraiseeEsteem(formData, appraiseeId));
+    fetch(`http://localhost:3000/appraisee/${appraiseeId}`, {
+      method: 'put',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        esteemVariation: parseInt(formData.esteemVariation, 10),
+        reason: formData.reason,
+        appraiseeId,
+      }),
     })
-  }
+    .then((r) => r.json())
+    .then((resp) => { dispatch(succesfullyUpdatedAppraiseeEsteem(resp.feed)); })
+    .catch((e) => console.log(e));
+  };
 }
 
 export const REQUESTING_APPRAISEE_COMMENTS = 'REQUESTING_APPRAISEE_COMMENTS';

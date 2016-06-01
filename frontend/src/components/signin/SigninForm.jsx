@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 let SigninForm = (props) => {
   const { fields: { username, password }, handleSubmit } = props;
   const { failedSignIn } = props.signIn.ui;
+
   return (
     <div className="panel">
       <form action="" className="sign-up__form">

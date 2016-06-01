@@ -8,6 +8,7 @@ const initialState = {
   profilePicture: '',
   appraisees: [],
   comments: {},
+  feeds: [],
   ui: {
     show_update_appraisee_esteem_modal: {},
     isFetchingProfile: false,
@@ -51,7 +52,21 @@ export default function profile(state = initialState, action) {
                    .setIn(['ui', 'isFetchingProfile'], false)
                    .toJS();
     case actions.OPEN_APPRAISEE_UPDATE_MODAL:
-      return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], true)
+      return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId],
+                            action.purposeReestimation)
+                   .toJS();
+    case actions.UPDATING_APPRAISEE_ESTEEM:
+      return iState.updateIn(
+                      ['appraisees'],
+                      (list) => list.update(
+                        list.findIndex((a) => a.get('_id') === action.appraiseeId),
+                        (a) => a.set('esteem', a.get('esteem') + action.esteemVariation)
+                      )
+                    )
+                   .setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)
+                   .toJS();
+    case actions.SUCCESSFULLY_UPDATED_APPRAISEE_ESTEEM:
+      return iState.updateIn(['feeds'], (list) => list.unshift(action.feed))
                    .toJS();
     case actions.CLOSE_APPRAISEE_UPDATE_MODAL:
       return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId], false)
