@@ -213,5 +213,19 @@ app.get('/comments/:appraiseeId', (req, res) => {
     }));
 });
 
+app.post('/approvals/:appraiseeId', (req, res) => {
+  Appraisee
+    .findOne({ _id: req.params.appraiseeId },
+      (err, doc) => {
+        if (err) console.log(err);
+        if (!doc) console.log('did not found appraisee to update');
+        console.log('doc', doc);
+        doc.approvals = doc.approvals + 1;
+        doc.save();
+        return doc;
+      })
+    .then((appraisee) => res.json({ status: 200, appraisee }));
+});
+
 // app.get('/comments/appraisee/:appraiseeId', (req,res) => {
 // })

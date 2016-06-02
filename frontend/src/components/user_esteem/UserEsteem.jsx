@@ -6,6 +6,7 @@ import { initialize } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/action.js';
 import * as commentActions from '../../actions/commentActions.js';
+import * as approvalsActions from '../../actions/approvalsActions.js';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
@@ -21,6 +22,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actionCreators, dispatch),
     commentActions: bindActionCreators(commentActions, dispatch),
+    approvalsActions: bindActionCreators(approvalsActions, dispatch),
     initialize: bindActionCreators(initialize, dispatch), // NOT WORKING <<
   };
 }
@@ -45,6 +47,7 @@ const UserEsteem = (props) => {
               profile={profile}
               actions={props.actions}
               commentActions={props.commentActions}
+              approvalsActions={props.approvalsActions}
               initialize={props.initialize}
               ui={ui}
               isItsPage={isItsPage}

@@ -3,7 +3,15 @@ import LeaderBoardEstimation from './LeaderBoardEstimation.jsx';
 // import LeaderboardEdit from './LeaderboardEdit.jsx';
 
 const LeaderBoardRow = (props) => {
-  const { appraisee, isItsPage, actions, commentActions, comments, ui, initialize } = props;
+  const {
+   appraisee,
+   isItsPage,
+   actions,
+   commentActions,
+   comments,
+   ui,
+   initialize,
+ } = props;
   function renderRow() {
     if (props.ui.appraiseePanel[appraisee._id] === 'comments') {
       return (
@@ -26,6 +34,7 @@ const LeaderBoardRow = (props) => {
       <LeaderBoardEstimation
         appraisee={appraisee}
         actions={actions}
+        approvalsActions={props.approvalsActions}
         ui={ui}
         isItsPage={isItsPage}
         initialize={initialize}

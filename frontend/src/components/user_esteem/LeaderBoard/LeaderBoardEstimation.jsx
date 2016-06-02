@@ -42,12 +42,14 @@ const LeaderBoardEstimation = (props) => {
       {isItsPage ? <i className="fa fa-pencil leaderboard__icon--right"></i> : ''}
       <p className="leaderboard__description">{appraisee.description}</p>
       <div className="leaderboard__socialContainer" onClick={displayCommentPanel}>
-        <LabelIllustrated icon="fa-thumbs-o-up" label="0" />
+        <LabelIllustrated icon="fa-thumbs-o-up" label={appraisee.approvals} />
         <LabelIllustrated icon="fa-thumbs-o-down" label="0" />
         <LabelIllustrated icon="fa-commenting-o" label="0" />
       </div>
       <hr />
       <UpdateEsteemCta
+        appraisee={appraisee}
+        approvalsActions={props.approvalsActions}
         onUpdateEsteemClick={onUpdateEsteemClick}
         isItsPage={isItsPage}
       />

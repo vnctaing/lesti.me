@@ -1,5 +1,5 @@
 const UpdateEsteemCta = (props) => {
-  const { isItsPage } = props;
+  const { isItsPage, approvalsActions, appraisee } = props;
 
   function reEstimatinUp() {
     props.onUpdateEsteemClick('increasing');
@@ -10,7 +10,8 @@ const UpdateEsteemCta = (props) => {
   }
 
   function approve() {
-    console.log('approving')
+    console.log('appraisee._id', appraisee._id);
+    approvalsActions.requestAppraiseeApproval(appraisee._id);
   }
 
   function disapprove() {
@@ -32,10 +33,10 @@ const UpdateEsteemCta = (props) => {
     }
     return (
       <div className="leaderboard__ctaContainer">
-        <div className="leaderboard__cta inline leaderboard__cta--green" onClick={approve}>
+        <div className="leaderboard__cta inline leaderboad__greyCtaHover--green" onClick={approve}>
           <i className="fa fa-thumbs-up inline"></i>
         </div>
-        <div className="leaderboard__cta inline leaderboard__cta--red" onClick={disapprove}>
+        <div className="leaderboard__cta inline leaderboad__greyCtaHover--red" onClick={disapprove}>
           <i className="fa fa-thumbs-down inline"></i>
         </div>
       </div>
