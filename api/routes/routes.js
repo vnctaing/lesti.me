@@ -208,7 +208,7 @@ app.post('/comment', (req, res) => {
 app.get('/comments/:appraiseeId', (req, res) => {
   Comment
     .find({ _appraisee: req.params.appraiseeId })
-    .sort('-createdAt')
+    .sort('+createdAt')
     .exec((err, comments) => res.json({
       status: 200,
       comments,
