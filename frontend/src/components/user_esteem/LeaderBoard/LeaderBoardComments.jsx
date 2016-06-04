@@ -29,7 +29,6 @@ const LeaderBoardComments = (props) => {
           </div>
           <div>
             <LabelIllustrated icon="fa-thumbs-o-up" label="0" />
-            <LabelIllustrated icon="fa-thumbs-o-down" label="0" />
             <LabelIllustrated icon="fa-commenting-o" label={comments.length} />
           </div>
         </div>
