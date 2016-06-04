@@ -1,5 +1,6 @@
 import * as actions from '../actions/action.js';
 import * as commentActions from '../actions/commentActions.js';
+import * as approvalsActions from '../actions/approvalsActions.js';
 
 import { fromJS } from 'immutable';
 import _ from 'lodash';
@@ -9,11 +10,12 @@ const initialState = {
   appraisees: [],
   comments: {},
   feeds: [],
+  approvedAppraisees: {},
   ui: {
     show_update_appraisee_esteem_modal: {},
     isFetchingProfile: false,
     appraiseePanel: {},
-    loadingComments: {},
+    loadingComments: {}
   },
 };
 
@@ -87,8 +89,30 @@ export default function profile(state = initialState, action) {
     case actions.SHOW_ESTIMATION_SECTION:
       return iState.setIn(['ui', 'appraiseePanel', action.appraiseeId], 'estimation')
                    .toJS();
-    // case actions.REQUESTING_COMMENTS:
-    // case actions.RECEIVED_COMMENTS:
+    case approvalsActions.REQUESTING_APPRAISEE_APPROVAL:
+      return iState.updateIn(
+                      ['appraisees'],
+                      (list) => list.update(
+                          list.findIndex((a) => a.get('_id') === action.appraiseeId),
+                          (a) => a.set('approvals', a.get('approvals') + 1)
+                      )
+                    )
+                    .setIn(['approvedAppraisees', action.appraiseeId], 'approved')
+                    .toJS();
+    case approvalsActions.CANCELING_APPRAISEE_APPROVAL:
+      return iState.updateIn(
+                      ['appraisees'],
+                      (list) => list.update(
+                          list.findIndex((a) => a.get('_id') === action.appraiseeId),
+                          (a) => a.set('approvals', a.get('approvals') - 1)
+                      )
+                    )
+                    .setIn(['approvedAppraisees', action.appraiseeId], null)
+                    .toJS();
+    case approvalsActions.CHECKING_VISITOR_APPROVALS:
+      return iState
+              .setIn(['approvedAppraisees'], action.approvals)
+              .toJS();
     default:
       return state;
   }

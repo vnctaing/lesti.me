@@ -18,7 +18,9 @@ const LeaderBoard = (props) => {
                 isItsPage={isItsPage}
                 comments={profile.comments[a._id]}
                 appraiserName={profile.name}
+                approvedAppraisees={profile.approvedAppraisees}
                 commentActions={commentActions}
+                approvalsActions={props.approvalsActions}
                 actions={actions}
                 initialize={initialize}
                 ui={ui}

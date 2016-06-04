@@ -208,11 +208,28 @@ app.post('/comment', (req, res) => {
 app.get('/comments/:appraiseeId', (req, res) => {
   Comment
     .find({ _appraisee: req.params.appraiseeId })
-    // .limit(5)
+    .sort('-createdAt')
     .exec((err, comments) => res.json({
       status: 200,
       comments,
     }));
+});
+
+app.post('/approvals/:appraiseeId', (req, res) => {
+  Appraisee
+    .findOne({ _id: req.params.appraiseeId },
+      (err, doc) => {
+        if (err) console.log(err);
+        if (!doc) console.log('did not found appraisee to update');
+        if (req.body.opts && req.body.opts.purpose === 'cancelApproval') {
+          doc.approvals = doc.approvals - 1;
+        } else {
+          doc.approvals = doc.approvals + 1;
+        }
+        doc.save();
+        return doc;
+      })
+    .then((appraisee) => res.json({ status: 200, appraisee }));
 });
 
 // app.get('/comments/appraisee/:appraiseeId', (req,res) => {
