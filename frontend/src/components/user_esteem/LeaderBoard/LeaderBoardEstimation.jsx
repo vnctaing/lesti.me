@@ -44,7 +44,7 @@ const LeaderBoardEstimation = (props) => {
       <div className="leaderboard__socialContainer" onClick={displayCommentPanel}>
         <LabelIllustrated icon="fa-thumbs-o-up" label="0" />
         <LabelIllustrated icon="fa-thumbs-o-down" label="0" />
-        <LabelIllustrated icon="fa-commenting-o" label="0" />
+        <LabelIllustrated icon="fa-commenting-o" label={appraisee._comments.length} />
       </div>
       <hr />
       <UpdateEsteemCta

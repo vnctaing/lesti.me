@@ -9,11 +9,6 @@ export function addingComment(appraiseeId, comment) {
 
 export function postingComment(formData) {
   return (dispatch) => {
-    dispatch(addingComment(formData._appraisee, {
-      author: formData.author,
-      content: formData.content,
-      _appraisee: formData._appraisee,
-    }));
     return fetch('http://localhost:3000/comment', {
       method: 'post',
       headers: {
@@ -27,7 +22,9 @@ export function postingComment(formData) {
       }),
     })
     .then((response) => response.json())
-    .then((json) => console.log('json', json))
+    .then((json) => {
+      dispatch(addingComment(formData._appraisee, json.comment));
+    })
     .catch((e) => console.log('error', e));
   };
 }
@@ -39,6 +36,7 @@ export function requestingComments(appraiseeId) {
     appraiseeId,
   };
 }
+
 export const RECEIVED_COMMENTS = 'RECEIVED_COMMENTS';
 export function receivedComments(appraiseeId) {
   return {
