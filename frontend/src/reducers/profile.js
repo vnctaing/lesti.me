@@ -15,6 +15,7 @@ const initialState = {
     isFetchingProfile: false,
     appraiseePanel: {},
     loadingComments: {},
+    approvedAppraisees: {},
   },
 };
 
@@ -96,7 +97,12 @@ export default function profile(state = initialState, action) {
                           (a) => a.set('approvals', a.get('approvals') + 1)
                       )
                     )
+                    .setIn(['ui', 'approvedAppraisees', action.appraiseeId], 'approved')
                     .toJS();
+    case approvalsActions.CHECKING_VISITOR_APPROVALS:
+      return iState
+              .setIn(['ui', 'approvedAppraisees'], action.approvals)
+              .toJS();
     default:
       return state;
   }

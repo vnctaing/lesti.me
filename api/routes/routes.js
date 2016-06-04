@@ -219,7 +219,6 @@ app.post('/approvals/:appraiseeId', (req, res) => {
       (err, doc) => {
         if (err) console.log(err);
         if (!doc) console.log('did not found appraisee to update');
-        console.log('doc', doc);
         doc.approvals = doc.approvals + 1;
         doc.save();
         return doc;

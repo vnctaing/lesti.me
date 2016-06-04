@@ -15,19 +15,42 @@ export function successfullyApprovedAppraisee() {
 
 export function requestAppraiseeApproval(appraiseeId) {
   return (dispatch) => {
-    dispatch(requestingAppraiseeApproval(appraiseeId));
-    fetch(`http://localhost:3000/approvals/${appraiseeId}`, {
-      method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({}),
-    })
-    .then((res) => res.json())
-    .then((json) => {
-      dispatch(successfullyApprovedAppraisee());
-    });
+    const appraiseeApprovals = JSON.parse(localStorage.getItem('approvals')) || {};
+    if (appraiseeApprovals[appraiseeId] !== 'approved') {
+      dispatch(requestingAppraiseeApproval(appraiseeId));
+      fetch(`http://localhost:3000/approvals/${appraiseeId}`, {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+      })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === 200) {
+          appraiseeApprovals[appraiseeId] = 'approved';
+          localStorage.setItem('approvals', JSON.stringify(appraiseeApprovals));
+          dispatch(successfullyApprovedAppraisee());
+        }
+      });
+    }
+    return false;
+  };
+}
+
+export const CHECKING_VISITOR_APPROVALS = 'CHECKING_VISITOR_APPROVALS';
+export function checkingVisitorApprovals(approvals) {
+  return {
+    type: CHECKING_VISITOR_APPROVALS,
+    approvals,
+  };
+}
+
+export function checkVisitorApprovals() {
+  return (dispatch) => {
+    const approvals = JSON.parse(localStorage.getItem('approvals'));
+    dispatch(checkingVisitorApprovals(approvals));
   };
 }
 

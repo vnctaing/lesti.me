@@ -52,6 +52,7 @@ const LeaderBoardEstimation = (props) => {
         approvalsActions={props.approvalsActions}
         onUpdateEsteemClick={onUpdateEsteemClick}
         isItsPage={isItsPage}
+        ui={ui}
       />
       <UpdateAppraiseeEsteemModal
         ui={ui}

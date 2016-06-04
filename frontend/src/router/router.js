@@ -11,6 +11,7 @@ import Signin from '../components/signin/Signin.jsx';
 import ErrorPage from '../components/global/ErrorPage.jsx';
 import Home from '../components/global/Home.jsx';
 import * as actionCreators from '../actions/action.js';
+import * as approvalsActionCreators from '../actions/approvalsActions.js';
 
 
 const history = syncHistoryWithStore(browserHistory, store);
@@ -21,9 +22,10 @@ const history = syncHistoryWithStore(browserHistory, store);
  * triggers 
  * @param  {Object} store : Redux Store
  */
-function fetchUserProfile(store) {
+function onEnterActions(store) {
   return (nextState, replace) => {
     store.dispatch(actionCreators.fetchUserProfile(nextState.params.appraiser));
+    store.dispatch(approvalsActionCreators.checkVisitorApprovals());
   };
 }
 
@@ -38,7 +40,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={Layout} onEnter={checkAuth(store)}>
         <IndexRoute component={Home} />
-        <Route path="de/:appraiser" component={UserEsteem} onEnter={fetchUserProfile(store)} />
+        <Route path="de/:appraiser" component={UserEsteem} onEnter={onEnterActions(store)} />
         <Route path="de/:appraiser/add" component={AddAppraisee} />
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
