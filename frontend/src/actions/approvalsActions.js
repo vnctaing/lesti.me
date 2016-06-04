@@ -13,29 +13,43 @@ export function successfullyApprovedAppraisee() {
   };
 }
 
-export function requestAppraiseeApproval(appraiseeId) {
+export const CANCELING_APPRAISEE_APPROVAL = 'CANCELING_APPRAISEE_APPROVAL';
+export function cancelingAppraiseeApproval(appraiseeId) {
+  return {
+    type: CANCELING_APPRAISEE_APPROVAL,
+    appraiseeId
+  };
+}
+
+export function requestAppraiseeApproval(appraiseeId, opts) {
   return (dispatch) => {
     const appraiseeApprovals = JSON.parse(localStorage.getItem('approvals')) || {};
+
     if (appraiseeApprovals[appraiseeId] !== 'approved') {
       dispatch(requestingAppraiseeApproval(appraiseeId));
-      fetch(`http://localhost:3000/approvals/${appraiseeId}`, {
-        method: 'post',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),
-      })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status === 200) {
-          appraiseeApprovals[appraiseeId] = 'approved';
-          localStorage.setItem('approvals', JSON.stringify(appraiseeApprovals));
-          dispatch(successfullyApprovedAppraisee());
-        }
-      });
+      appraiseeApprovals[appraiseeId] = 'approved';
     }
-    return false;
+
+    if (opts && opts.purpose === 'cancelApproval') {
+      dispatch(cancelingAppraiseeApproval(appraiseeId));
+      delete appraiseeApprovals[appraiseeId];
+    }
+
+    fetch(`http://localhost:3000/approvals/${appraiseeId}`, {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ opts }),
+    })
+    .then((res) => res.json())
+    .then((json) => {
+      if (json.status === 200) {
+        localStorage.setItem('approvals', JSON.stringify(appraiseeApprovals));
+      }
+    })
+    .catch((e) => console.log('ERROR', e));
   };
 }
 

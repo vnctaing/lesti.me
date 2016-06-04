@@ -99,6 +99,16 @@ export default function profile(state = initialState, action) {
                     )
                     .setIn(['ui', 'approvedAppraisees', action.appraiseeId], 'approved')
                     .toJS();
+    case approvalsActions.CANCELING_APPRAISEE_APPROVAL:
+      return iState.updateIn(
+                      ['appraisees'],
+                      (list) => list.update(
+                          list.findIndex((a) => a.get('_id') === action.appraiseeId),
+                          (a) => a.set('approvals', a.get('approvals') - 1)
+                      )
+                    )
+                    .setIn(['ui', 'approvedAppraisees', action.appraiseeId], null)
+                    .toJS();
     case approvalsActions.CHECKING_VISITOR_APPROVALS:
       return iState
               .setIn(['ui', 'approvedAppraisees'], action.approvals)

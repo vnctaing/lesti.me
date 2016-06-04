@@ -10,7 +10,11 @@ const UpdateEsteemCta = (props) => {
   }
 
   function approve() {
-    approvalsActions.requestAppraiseeApproval(appraisee._id);
+    const opts = {};
+    opts.purpose = 'cancelApproval';
+    ui.approvedAppraisees[appraisee._id] === 'approved'
+      ? approvalsActions.requestAppraiseeApproval(appraisee._id, opts)
+      : approvalsActions.requestAppraiseeApproval(appraisee._id);
   }
 
   function disapprove() {
