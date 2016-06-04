@@ -10,12 +10,12 @@ const initialState = {
   appraisees: [],
   comments: {},
   feeds: [],
+  approvedAppraisees: {},
   ui: {
     show_update_appraisee_esteem_modal: {},
     isFetchingProfile: false,
     appraiseePanel: {},
-    loadingComments: {},
-    approvedAppraisees: {},
+    loadingComments: {}
   },
 };
 
@@ -97,7 +97,7 @@ export default function profile(state = initialState, action) {
                           (a) => a.set('approvals', a.get('approvals') + 1)
                       )
                     )
-                    .setIn(['ui', 'approvedAppraisees', action.appraiseeId], 'approved')
+                    .setIn(['approvedAppraisees', action.appraiseeId], 'approved')
                     .toJS();
     case approvalsActions.CANCELING_APPRAISEE_APPROVAL:
       return iState.updateIn(
@@ -107,11 +107,11 @@ export default function profile(state = initialState, action) {
                           (a) => a.set('approvals', a.get('approvals') - 1)
                       )
                     )
-                    .setIn(['ui', 'approvedAppraisees', action.appraiseeId], null)
+                    .setIn(['approvedAppraisees', action.appraiseeId], null)
                     .toJS();
     case approvalsActions.CHECKING_VISITOR_APPROVALS:
       return iState
-              .setIn(['ui', 'approvedAppraisees'], action.approvals)
+              .setIn(['approvedAppraisees'], action.approvals)
               .toJS();
     default:
       return state;

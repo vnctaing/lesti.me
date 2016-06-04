@@ -35,6 +35,7 @@ const LeaderBoardRow = (props) => {
         appraisee={appraisee}
         actions={actions}
         approvalsActions={props.approvalsActions}
+        approvedAppraisees={props.approvedAppraisees}
         ui={ui}
         isItsPage={isItsPage}
         initialize={initialize}

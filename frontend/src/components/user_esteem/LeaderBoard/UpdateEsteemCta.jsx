@@ -1,5 +1,5 @@
 const UpdateEsteemCta = (props) => {
-  const { isItsPage, approvalsActions, appraisee, ui } = props;
+  const { isItsPage, approvalsActions, appraisee, approvedAppraisees } = props;
 
   function reEstimatinUp() {
     props.onUpdateEsteemClick('increasing');
@@ -12,7 +12,7 @@ const UpdateEsteemCta = (props) => {
   function approve() {
     const opts = {};
     opts.purpose = 'cancelApproval';
-    ui.approvedAppraisees[appraisee._id] === 'approved'
+    approvedAppraisees[appraisee._id] === 'approved'
       ? approvalsActions.requestAppraiseeApproval(appraisee._id, opts)
       : approvalsActions.requestAppraiseeApproval(appraisee._id);
   }
@@ -39,7 +39,7 @@ const UpdateEsteemCta = (props) => {
         <div
           className={
           `leaderboard__cta inline
-            ${ui.approvedAppraisees[appraisee._id] === 'approved'
+            ${approvedAppraisees[appraisee._id] === 'approved'
               ? 'leaderboard__cta--green'
               : 'leaderboad__greyCtaHover--green'}`
           }
