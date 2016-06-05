@@ -304,10 +304,11 @@ export function showCommentSection(appraiseeId) {
 
 
 export const SUCCESSFULLY_AUTHENTICATED_USER = 'SUCCESSFULLY_AUTHENTICATED_USER';
-export function successfullyAuthenticatedUser(token) {
+export function successfullyAuthenticatedUser(token, authenticatedUser) {
   return {
     type: SUCCESSFULLY_AUTHENTICATED_USER,
-    token
+    token,
+    authenticatedUser,
   };
 }
 
@@ -334,7 +335,7 @@ export function checkUserAuth() {
     .then((resp) => resp.json())
     .then((json) => {
       json.status === 200
-        ? dispatch(successfullyAuthenticatedUser(JSON.parse(token)))
+        ? dispatch(successfullyAuthenticatedUser(JSON.parse(token), json.appraiser))
         : dispatch(failedAuthenticatedUser());
     });
   };

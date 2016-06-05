@@ -67,7 +67,7 @@ app.post('/auth/token', (req, res) => {
         ? status = 200
         : status = 400;
     }
-    res.json({ status });
+    res.json({ status, appraiser });
   });
 });
 
@@ -77,7 +77,7 @@ app.post('/appraiser', (req, res) => {
     name: req.body.name,
     password: req.body.password,
     email: req.body.email,
-    sessionToken: crypto.randomBytes(64).toString('hex')
+    sessionToken: crypto.randomBytes(64).toString('hex'),
   });
 
   appraiserToAdd.save((err, appraiserToAdd) => {
