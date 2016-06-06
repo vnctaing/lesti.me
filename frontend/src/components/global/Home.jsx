@@ -1,4 +1,5 @@
 import Signup from '../signup/Signup.jsx';
+import BetaAccess from '../BetaAccess/BetaAccess';
 
 const Home = (props) => {
   return (
@@ -6,13 +7,7 @@ const Home = (props) => {
       <div className="home__illustration home">
         <div className="container">
           <div className="row">
-            <div className="col-md-8">
-              <h1 className="home__title">Estimez vos amis</h1>
-            </div>
-            <div className="col-md-4">
-              <h2 className="home__title">S'inscrire</h2>
-              <Signup />
-            </div>
+          <BetaAccess />
           </div>
         </div>
       </div>

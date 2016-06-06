@@ -13,6 +13,7 @@ const Appraisee = require('../models/Appraisee');
 const Appraiser = require('../models/Appraiser');
 const Comment = require('../models/Comment');
 const Feed = require('../models/Feed');
+const BetaToken = require('../models/BetaToken');
 
 
 app.use(cors());
@@ -232,5 +233,34 @@ app.post('/approvals/:appraiseeId', (req, res) => {
     .then((appraisee) => res.json({ status: 200, appraisee }));
 });
 
-// app.get('/comments/appraisee/:appraiseeId', (req,res) => {
-// })
+app.get('/betatoken/:betaToken', (req, res) => {
+  BetaToken
+    .findOne({ betaToken: req.params.betaToken, isConsumed: false },
+      (err, doc) => {
+        if (err) console.log(err);
+        if (!doc) console.log('did not found appraisee to update');
+        if (doc) {
+          doc.isConsumed = true;
+          doc.save();
+        }
+        return doc;
+      })
+    .then((betaToken) => res.json({ status: betaToken ? 200 : 404, betaToken }));
+});
+
+app.post('/betatoken', (req, res) => {
+  const betaTokenToAdd = new BetaToken({
+    betaToken: crypto.randomBytes(16).toString('hex'),
+    isConsumed: false,
+  });
+
+  betaTokenToAdd.save((err, betaTokenToAdd) => {
+    if (err) return console.error(err);
+    res.json({
+      status: 200,
+      betaToken: betaTokenToAdd,
+    });
+  });
+});
+
+
