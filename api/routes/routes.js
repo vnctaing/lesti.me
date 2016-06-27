@@ -233,7 +233,7 @@ app.post('/approvals/:appraiseeId', (req, res) => {
     .then((appraisee) => res.json({ status: 200, appraisee }));
 });
 
-app.get('/betatoken/:betaToken', (req, res) => {
+app.put('/betatoken/:betaToken', (req, res) => {
   BetaToken
     .findOne({ betaToken: req.params.betaToken, isConsumed: false },
       (err, doc) => {
@@ -241,6 +241,20 @@ app.get('/betatoken/:betaToken', (req, res) => {
         if (!doc) console.log('did not found appraisee to update');
         if (doc) {
           doc.isConsumed = true;
+          doc.save();
+        }
+        return doc;
+      })
+    .then((betaToken) => res.json({ status: betaToken ? 200 : 404, betaToken }));
+})
+
+app.get('/betatoken/:betaToken', (req, res) => {
+  BetaToken
+    .findOne({ betaToken: req.params.betaToken, isConsumed: false },
+      (err, doc) => {
+        if (err) console.log(err);
+        if (!doc) console.log('did not found appraisee to update');
+        if (doc) {
           doc.save();
         }
         return doc;

@@ -18,7 +18,7 @@ const BetaAccess = (props) => {
   return (
     <div>
       <p>Entrer son code d'accès beta :</p>
-      <BetaAccessForm onSubmit={handleSubmit.bind(this)} />
+      <BetaAccessForm home={props.home} onSubmit={handleSubmit.bind(this)} />
       <button className="btn btn-default" onClick={createToken}>create token</button>
     </div>
   );

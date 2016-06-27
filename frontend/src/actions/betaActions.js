@@ -6,9 +6,10 @@ export function verifyingBetaAccessToken() {
 }
 
 export const AUTHENTICATED_BETA_TOKEN = 'AUTHENTICATED_BETA_TOKEN';
-export function authenticatedBetaAccess() {
+export function authenticatedBetaAccess(betaToken) {
   return {
     type: AUTHENTICATED_BETA_TOKEN,
+    betaToken,
   };
 }
 
@@ -26,7 +27,7 @@ export function verifyBetaAccessToken(betaToken) {
       .then((r) => r.json())
       .then((json) => {
         json.status === 200
-          ? dispatch(authenticatedBetaAccess())
+          ? dispatch(authenticatedBetaAccess(json.betaToken))
           : dispatch(failedAuthenticatedBetaToken());
       });
   };
@@ -54,3 +55,28 @@ export function createToken() {
     .then((json) => console.log(json));
   };
 }
+
+export const CONSUMING_TOKEN = 'CONSUMING_TOKEN';
+export function consumingToken(betaToken) {
+  return {
+    type: CONSUMING_TOKEN,
+    betaToken,
+  };
+}
+
+export function consumeToken(betaToken) {
+  return (dispatch) => {
+    dispatch(consumingToken(betaToken));
+    fetch(`http://localhost:3000/betatoken/${betaToken}`, {
+      method: 'put',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((r) => r.json())
+    .then((json) => console.log(json));
+  };
+}
+
+

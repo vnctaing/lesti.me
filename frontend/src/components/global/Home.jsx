@@ -1,5 +1,6 @@
 import Signup from '../signup/Signup.jsx';
 import BetaAccess from '../BetaAccess/BetaAccess';
+import { connect } from 'react-redux';
 
 const Home = (props) => {
   return (
@@ -7,7 +8,7 @@ const Home = (props) => {
       <div className="home__illustration home">
         <div className="container">
           <div className="row">
-          <BetaAccess />
+            {props.home.ui.showSignUpForm ? <Signup /> : <BetaAccess home={props.home} />}
           </div>
         </div>
       </div>
@@ -39,9 +40,16 @@ const Home = (props) => {
             </div>
           </div>
         </div>
-      </div>         
+      </div>
     </div>
   );
 };
 
-export default Home;
+function mapStateToProps(state) {
+  return {
+    home: state.esteemApp.home,
+  };
+}
+
+
+export default connect(mapStateToProps, null)(Home);

@@ -6,6 +6,7 @@ let BetaAccessForm = (props) => {
   return (
     <form action="">
       <input type="text" {...betaToken} />
+      <p>{props.home.ui.isBetaTokenInValid ? "Bien essayé...Votre token n'est pas valide." : ''}</p>
       <button className="btn btn-default btn-greenplain" onClick={handleSubmit}>
         Accéder à la beta
       </button>
