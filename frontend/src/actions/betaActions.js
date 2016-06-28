@@ -40,6 +40,14 @@ export function creatingToken() {
   };
 }
 
+export const CREATED_TOKEN = 'CREATED_TOKEN';
+export function createdBetaToken(newBetaToken) {
+  return {
+    type: CREATED_TOKEN,
+    newBetaToken,
+  };
+}
+
 export function createToken() {
   return (dispatch) => {
     dispatch(creatingToken());
@@ -52,7 +60,7 @@ export function createToken() {
       body: '{}',
     })
     .then((r) => r.json())
-    .then((json) => console.log(json));
+    .then((json) => dispatch(createdBetaToken(json.betaToken.betaToken)));
   };
 }
 

@@ -10,6 +10,7 @@ import Signup from '../components/signup/Signup.jsx';
 import Signin from '../components/signin/Signin.jsx';
 import ErrorPage from '../components/global/ErrorPage.jsx';
 import Home from '../components/global/Home.jsx';
+import SecretBetaAccessGenerator from '../components/BetaAccess/SecretBetaAccessGenerator.jsx';
 import * as actionCreators from '../actions/action.js';
 import * as approvalsActionCreators from '../actions/approvalsActions.js';
 
@@ -45,6 +46,7 @@ ReactDOM.render(
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
         <Route path="/appraiser_not_found" component={ErrorPage} />
+        <Route path="/secret/create-token" component={SecretBetaAccessGenerator} />
       </Route>
     </Router>
   </Provider>,

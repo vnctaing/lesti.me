@@ -3,8 +3,6 @@ import * as betaActions from '../../actions/betaActions.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-
-
 const BetaAccess = (props) => {
   function handleSubmit(data) {
     const req = Object.assign({}, data);
@@ -29,6 +27,5 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(betaActions, dispatch),
   };
 }
-
 
 export default connect(null, mapDispatchToProps)(BetaAccess);
