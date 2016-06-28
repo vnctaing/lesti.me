@@ -15,7 +15,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <h2>Créer un compte</h2>
+        <h2>Accéder à la bêta et se créer un compte</h2>
         <SignupForm home={this.props.home} onSubmit={this.handleSubmit.bind(this)} />
       </div>
     );

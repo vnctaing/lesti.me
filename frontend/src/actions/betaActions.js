@@ -60,7 +60,8 @@ export function createToken() {
       body: '{}',
     })
     .then((r) => r.json())
-    .then((json) => dispatch(createdBetaToken(json.betaToken.betaToken)));
+    .then((json) => dispatch(createdBetaToken(json.betaToken.betaToken)))
+    .catch((e) => console.log(e));
   };
 }
 
@@ -83,7 +84,8 @@ export function consumeToken(betaToken) {
       },
     })
     .then((r) => r.json())
-    .then((json) => console.log(json));
+    .then((json) => console.log(json))
+    .catch((e) => console.log(e));
   };
 }
 

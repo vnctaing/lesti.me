@@ -4,12 +4,17 @@ let BetaAccessForm = (props) => {
   const { fields: { betaToken }, handleSubmit } = props;
 
   return (
-    <form action="">
-      <input type="text" {...betaToken} />
-      <p>{props.home.ui.isBetaTokenInValid ? "Bien essayé...Votre token n'est pas valide." : ''}</p>
-      <button className="btn btn-default btn-greenplain" onClick={handleSubmit}>
+    <form action="" className="form-inline">
+      <div className="form-group inline">
+        <input className="form-control betaAccess__input inline" type="text" {...betaToken} />
+      </div>
+      <button className="btn btn-default btn-greenplain betaAccess__cta" onClick={handleSubmit}>
         Accéder à la beta
       </button>
+      <p>{props.home.ui.isBetaTokenInValid
+          ? "Bien essayé...Votre token n'est pas valide."
+          : ''}
+      </p>
     </form>
   );
 };

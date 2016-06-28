@@ -264,7 +264,7 @@ app.get('/betatoken/:betaToken', (req, res) => {
 
 app.post('/betatoken', (req, res) => {
   const betaTokenToAdd = new BetaToken({
-    betaToken: crypto.randomBytes(16).toString('hex'),
+    betaToken: crypto.randomBytes(3).toString('hex'),
     isConsumed: false,
   });
 

@@ -6,11 +6,8 @@ const Home = (props) => {
   return (
     <div>
       <div className="home__illustration home">
-        <div className="container">
-          <div className="row">
-            {props.home.ui.showSignUpForm ? <Signup /> : <BetaAccess home={props.home} />}
-          </div>
-        </div>
+        <h2 className="home__tagline">Vos amis ne sont pas toujours parfaits. Faites-le savoir.</h2>
+        {props.home.ui.showSignUpForm ? <Signup /> : <BetaAccess home={props.home} />}
       </div>
       <div className="home__credentials">
         <div className="container">
