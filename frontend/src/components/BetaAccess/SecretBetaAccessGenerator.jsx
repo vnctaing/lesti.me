@@ -10,7 +10,7 @@ const SecretBetaAccessGenerator = (props) => {
     <div>
       <h1>Générer un token :</h1>
       <button className="btn btn-default" onClick={createToken}>create token</button>
-      <p>Token : {props.betaAccess.newBetaToken ? props.betaAccess.newBetaToken : ''}</p>
+      <p>Token : {props.betaAccess.newBetaToken}</p>
     </div>
   );
 };

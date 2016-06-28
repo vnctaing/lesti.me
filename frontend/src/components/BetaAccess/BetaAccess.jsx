@@ -9,15 +9,10 @@ const BetaAccess = (props) => {
     props.actions.verifyBetaAccessToken(data.betaToken);
   }
 
-  function createToken(){
-    props.actions.createToken();
-  }
-
   return (
     <div>
       <p>Entrer son code d'accès beta :</p>
       <BetaAccessForm home={props.home} onSubmit={handleSubmit.bind(this)} />
-      <button className="btn btn-default" onClick={createToken}>create token</button>
     </div>
   );
 };
