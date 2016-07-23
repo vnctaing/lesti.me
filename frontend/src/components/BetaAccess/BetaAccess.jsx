@@ -1,12 +1,14 @@
 import BetaAccessForm from './BetaAccessForm';
 import * as betaActions from '../../actions/betaActions.js';
+import * as actions from '../../actions/action.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const BetaAccess = (props) => {
   function handleSubmit(data) {
     const req = Object.assign({}, data);
-    props.actions.verifyBetaAccessToken(data.betaToken);
+    props.actions.disconnectUser();
+    props.betaActions.verifyBetaAccessToken(data.betaToken);
   }
 
   return (
@@ -19,7 +21,8 @@ const BetaAccess = (props) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(betaActions, dispatch),
+    betaActions: bindActionCreators(betaActions, dispatch),
+    actions: bindActionCreators(actions, dispatch),
   };
 }
 
