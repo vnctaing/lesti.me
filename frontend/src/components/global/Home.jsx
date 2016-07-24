@@ -1,5 +1,6 @@
 import Signup from '../signup/Signup.jsx';
 import BetaAccess from '../BetaAccess/BetaAccess';
+import Footer from '../global/Footer'
 import { connect } from 'react-redux';
 
 function showBetaAcces(props) {
@@ -50,7 +51,7 @@ const Home = (props) => {
           </div>
         </div>
       </div>
-      <div className="home__feature">
+      <div className="home__feature home__feature--noborder">
         <div className="container">
           <div className="row">
             <div className="col-md-5">
@@ -66,6 +67,7 @@ const Home = (props) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

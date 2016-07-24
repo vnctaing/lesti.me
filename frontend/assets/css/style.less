@@ -39,9 +39,14 @@ body{
 .home__illustration{
     background: url('../img/firstbackground.jpg');
     height: 500px;
+    background-repeat: no-repeat;
     background-size: cover;
-    background-position-y: -200px;
     position: relative;
+
+    @media screen and (min-width: 1170px) {
+        background-position-y: -200px;        
+    }
+    
     &:before {
         content: '';
         position: absolute;
@@ -83,6 +88,10 @@ body{
 .home__feature {
     border-bottom: 3px solid #dcdcdc;
     padding: 20px 0px;
+}
+
+.home__feature--noborder {
+    border: none
 }
 
 .home__featureTitle {
@@ -166,6 +175,10 @@ body{
     width:100%;
     height:60px;
     color: #fff;
+}
+
+.footer__copyright {
+    font-size: 13px;
 }
 
 .content--offset{
@@ -285,11 +298,6 @@ body {
 
 .navbar__cred{
     margin-bottom: 10px;
-}
-
-.navbar__links{
-    margin-left: 20px;
-
 }
 
 .navbar__wrapper{
