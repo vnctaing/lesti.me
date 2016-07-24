@@ -254,9 +254,6 @@ app.get('/betatoken/:betaToken', (req, res) => {
       (err, doc) => {
         if (err) console.log(err);
         if (!doc) console.log('did not found appraisee to update');
-        if (doc) {
-          doc.save();
-        }
         return doc;
       })
     .then((betaToken) => res.json({ status: betaToken ? 200 : 404, betaToken }));
