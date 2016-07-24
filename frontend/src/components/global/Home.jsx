@@ -21,11 +21,14 @@ const Home = (props) => {
       <div className="home__feature">
         <div className="container">
           <div className="row">
-            <div className="col-md-8">
-              <h3>Estimation de vos amis</h3>
-              <p>Vous avez des amis et de l'estime pour eux. Faites savoir leur enfin savoir.</p>
+            <div className="col-md-5">
+              <h3 className="home__featureTitle">Votre estime en ligne</h3>
+              <p className="home_featureDescription">
+                Vous avez des amis et de l'estime pour eux. Faites-leur enfin savoir
+                 pour qui est ce que vous avez de l'estime. À l'aide de lesti.me, tenez à jour un classement de vos amis.
+              </p>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 col-md-offset-3">
               <img src="https://www.meetingbird.com/images/rocket.png" width="300" alt="" />
             </div>
           </div>
@@ -37,9 +40,28 @@ const Home = (props) => {
             <div className="col-md-4">
               <img src="https://www.meetingbird.com/images/rocket.png" width="300" alt="" />
             </div>
-            <div className="col-md-8">
-              <h3>Estimation de vos amis</h3>
-              <p>Vous avez des amis et de l'estime pour eux. Faites savoir leur enfin savoir.</p>
+            <div className="col-md-5 col-md-offset-3">
+              <h3 className="home__featureTitle">Récompensez ou sanctionnez vos proches</h3>
+              <p className="home_featureDescription">
+                Une blague sans succès, un n-ième retard, un cadeau offert... toutes les raisons sont bonnes pour faire
+                 monter ou descendre votre proche dans votre estime. Soyez enfin honnête avec eux.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="home__feature">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-5">
+              <h3 className="home__featureTitle">Évolutions commentées</h3>
+              <p className="home_featureDescription">
+                À travers un fil d'actualité. Suivez en direct l'évolution commentés les
+                 plus récentes de vos proches estimées, ils sont mis à jour instantanément.
+              </p>
+            </div>
+            <div className="col-md-4 col-md-offset-3">
+              <img src="https://www.meetingbird.com/images/rocket.png" width="300" alt="" />
             </div>
           </div>
         </div>
