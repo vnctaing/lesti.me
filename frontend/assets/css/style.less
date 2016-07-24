@@ -62,8 +62,33 @@ body{
     display: inline-block;
     background: #fff;
 }
+
+.home__tagline {
+    margin-bottom: 40px;
+}
+
 .home{
     padding: 30px 0px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.betaAccess__input {
+    display: inline;
+    height: 45px;
+    width: 50%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.betaAccess__cta {
+    height: 45px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .home__title{
@@ -263,7 +288,7 @@ body {
 
 .panel {
     background: #fff;
-    padding: 10px
+    padding: 20px;
 }
 
 .profile {
@@ -401,6 +426,12 @@ body {
 
 .signupForm{
     font-size: 18px;
+    text-align: left;
+}
+
+.signupForm__error {
+    color: @red;
+    font-size: 11px;
 }
 
 .tableRow {

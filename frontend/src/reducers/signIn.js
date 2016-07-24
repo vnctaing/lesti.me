@@ -4,6 +4,7 @@ import { fromJS } from 'immutable';
 const initialState = {
   isLoggedIn: false,
   verifiedSessionToken: {},
+  loggedInUser: {},
   ui: {
     failedSignIn: false,
   },
@@ -31,6 +32,7 @@ export default function signIn(state = initialState, action) {
                    .toJS();
     case actions.SUCCESSFULLY_AUTHENTICATED_USER:
       return iState.set('verifiedSessionToken', action.token)
+                   .set('loggedInUser', action.authenticatedUser)
                    .toJS();
     case actions.DISCONNECTING_USER:
       return iState.set('verifiedSessionToken', {})

@@ -12,12 +12,6 @@ const Navbar = (props) => {
       <nav className="navbar lst-navbar">
         <div className="container">
           <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-            </button>
             <IndexLink to="/"><img src="/assets/img/logo.svg" alt="Logo Lesti"></img></IndexLink>
           </div>
 
@@ -25,7 +19,7 @@ const Navbar = (props) => {
             <ul className="nav navbar-nav navbar-right">
               {
                 Object.keys(session.verifiedSessionToken).length
-                ? <li><p>Hello,</p></li>
+                ? <li><p>Hello, {session.loggedInUser.name}</p></li>
                 : <li><Link to="/signin">Se connecter</Link></li>
               }
               {

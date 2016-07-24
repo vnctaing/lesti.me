@@ -98,10 +98,11 @@ export function successfullySignUp() {
   };
 }
 
-const FAILED_SIGN_UP = 'FAILED_SIGN_UP';
-export function failedSignUp() {
+export const FAILED_SIGN_UP = 'FAILED_SIGN_UP';
+export function failedSignUp(errorMessage) {
   return {
     type: FAILED_SIGN_UP,
+    errorMessage,
   };
 }
 
@@ -115,7 +116,7 @@ export function requestingSignIn() {
 
 export function signingUp(formData) {
   return (dispatch) => {
-    dispatch(requestingSignIn());
+    dispatch(requestingSignUp());
     fetch('http://localhost:3000/appraiser', {
       method: 'post',
       headers: {
@@ -134,7 +135,7 @@ export function signingUp(formData) {
         dispatch(successfullySignUp());
         dispatch(push(`de/${json.appraiserName}`));
       } else {
-        dispatch(failedSignUp());
+        dispatch(failedSignUp(json.errorMessage));
       }
     })
     .catch((e) => console.log('error', e));
@@ -304,10 +305,11 @@ export function showCommentSection(appraiseeId) {
 
 
 export const SUCCESSFULLY_AUTHENTICATED_USER = 'SUCCESSFULLY_AUTHENTICATED_USER';
-export function successfullyAuthenticatedUser(token) {
+export function successfullyAuthenticatedUser(token, authenticatedUser) {
   return {
     type: SUCCESSFULLY_AUTHENTICATED_USER,
-    token
+    token,
+    authenticatedUser,
   };
 }
 
@@ -334,7 +336,7 @@ export function checkUserAuth() {
     .then((resp) => resp.json())
     .then((json) => {
       json.status === 200
-        ? dispatch(successfullyAuthenticatedUser(JSON.parse(token)))
+        ? dispatch(successfullyAuthenticatedUser(JSON.parse(token), json.appraiser))
         : dispatch(failedAuthenticatedUser());
     });
   };

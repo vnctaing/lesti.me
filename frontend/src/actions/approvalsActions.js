@@ -63,7 +63,7 @@ export function checkingVisitorApprovals(approvals) {
 
 export function checkVisitorApprovals() {
   return (dispatch) => {
-    const approvals = JSON.parse(localStorage.getItem('approvals'));
+    const approvals = JSON.parse(localStorage.getItem('approvals')) || {};
     dispatch(checkingVisitorApprovals(approvals));
   };
 }

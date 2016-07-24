@@ -13,6 +13,7 @@ const Appraisee = require('../models/Appraisee');
 const Appraiser = require('../models/Appraiser');
 const Comment = require('../models/Comment');
 const Feed = require('../models/Feed');
+const BetaToken = require('../models/BetaToken');
 
 
 app.use(cors());
@@ -67,26 +68,41 @@ app.post('/auth/token', (req, res) => {
         ? status = 200
         : status = 400;
     }
-    res.json({ status });
+    res.json({ status, appraiser });
   });
 });
 
 
 app.post('/appraiser', (req, res) => {
-  const appraiserToAdd = new Appraiser({
-    name: req.body.name,
-    password: req.body.password,
-    email: req.body.email,
-    sessionToken: crypto.randomBytes(64).toString('hex')
-  });
 
-  appraiserToAdd.save((err, appraiserToAdd) => {
-    if (err) return console.error(err);
-    res.json({
-      status: 200,
-      appraiserName: appraiserToAdd.name,
+  function checkIsNameAlreadyExist() {
+    return Appraiser.find({ name: req.body.name });
+  }
+
+  function checkIsEmailAlreadyTaken() {
+    return Appraiser.find({ email: req.body.email });
+  }
+
+  Promise
+    .all([
+      checkIsEmailAlreadyTaken(),
+      checkIsNameAlreadyExist(),
+    ])
+    .then((warnings) => {
+      if (warnings[0].length) return res.json({ status: 400, errorMessage: 'EMAIL_ALREADY_TAKEN' });
+      if (warnings[1].length) return res.json({ status: 400, errorMessage: 'NAME_ALREADY_TAKEN' });
+      const appraiserToAdd = new Appraiser({
+        name: req.body.name,
+        password: req.body.password,
+        email: req.body.email,
+        sessionToken: crypto.randomBytes(64).toString('hex'),
+      });
+
+      appraiserToAdd.save((err, appraiserToAdd) => {
+        if (err) return console.error(err);
+        res.json({ status: 200, appraiserName: appraiserToAdd.name });
+      });
     });
-  });
 });
 
 app.post('/login', (req, res) => {
@@ -232,5 +248,45 @@ app.post('/approvals/:appraiseeId', (req, res) => {
     .then((appraisee) => res.json({ status: 200, appraisee }));
 });
 
-// app.get('/comments/appraisee/:appraiseeId', (req,res) => {
-// })
+app.put('/betatoken/:betaToken', (req, res) => {
+  BetaToken
+    .findOne({ betaToken: req.params.betaToken, isConsumed: false },
+      (err, doc) => {
+        if (err) console.log(err);
+        if (!doc) console.log('did not found appraisee to update');
+        if (doc) {
+          doc.isConsumed = true;
+          doc.save();
+        }
+        return doc;
+      })
+    .then((betaToken) => res.json({ status: betaToken ? 200 : 404, betaToken }));
+})
+
+app.get('/betatoken/:betaToken', (req, res) => {
+  BetaToken
+    .findOne({ betaToken: req.params.betaToken, isConsumed: false },
+      (err, doc) => {
+        if (err) console.log(err);
+        if (!doc) console.log('did not found appraisee to update');
+        return doc;
+      })
+    .then((betaToken) => res.json({ status: betaToken ? 200 : 404, betaToken }));
+});
+
+app.post('/betatoken', (req, res) => {
+  const betaTokenToAdd = new BetaToken({
+    betaToken: crypto.randomBytes(3).toString('hex'),
+    isConsumed: false,
+  });
+
+  betaTokenToAdd.save((err, betaTokenToAdd) => {
+    if (err) return console.error(err);
+    res.json({
+      status: 200,
+      betaToken: betaTokenToAdd,
+    });
+  });
+});
+
+

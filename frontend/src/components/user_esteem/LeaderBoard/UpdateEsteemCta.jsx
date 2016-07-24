@@ -34,9 +34,10 @@ const UpdateEsteemCta = (props) => {
         <div
           className={
           `leaderboard__cta inline
-            ${approvedAppraisees[appraisee._id] === 'approved'
-              ? 'leaderboard__cta--green'
-              : 'leaderboad__greyCtaHover--green'}`
+          ${approvedAppraisees[appraisee._id] === 'approved'
+            ? 'leaderboard__cta--green'
+            : 'leaderboad__greyCtaHover--green'}
+          `
           }
           onClick={approve}
         >
