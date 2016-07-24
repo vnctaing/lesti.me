@@ -37,9 +37,21 @@ body{
 }
 
 .home__illustration{
-    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    background: url('../img/firstbackground.jpg');
     height: 500px;
     background-size: cover;
+    background-position-y: -200px;
+    position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: linear-gradient(to top left,#0057b7 0,#1abca6 100%);
+        opacity: .6; 
+    }
 }
 
 .home__highlight{
@@ -65,6 +77,12 @@ body{
 
 .home__tagline {
     margin-bottom: 40px;
+    z-index: 100;
+}
+
+.home__feature {
+    border-bottom: 3px solid #dcdcdc;
+    padding: 20px 0px;
 }
 
 .home{
@@ -75,6 +93,10 @@ body{
     align-items: center;
     flex-direction: column;
     text-align: center;
+}
+
+.home__illustrationContent {
+    z-index: 100;
 }
 
 .betaAccess__input {

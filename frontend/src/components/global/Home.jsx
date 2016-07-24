@@ -14,33 +14,32 @@ const Home = (props) => {
     <div>
       <div className="home__illustration home">
         <h2 className="home__tagline">Vos amis ne sont pas toujours parfaits. Faites-le savoir.</h2>
-        {showBetaAcces(props)}
+        <div className="home__illustrationContent">
+          {showBetaAcces(props)}
+        </div>
       </div>
-      <div className="home__credentials">
+      <div className="home__feature">
         <div className="container">
           <div className="row">
-            <div className="col-md-2">
-              <div className="home__icon-container">
-                <i className="fa fa-arrow-up home__icon--green"></i>
-                <i className="fa fa-arrow-down home__icon--red"></i>
-              </div>
+            <div className="col-md-8">
+              <h3>Estimation de vos amis</h3>
+              <p>Vous avez des amis et de l'estime pour eux. Faites savoir leur enfin savoir.</p>
             </div>
-            <div className="col-md-10">
-              <div className="home__highlight home__highlight--right">
-                Faites monter ou descendre vos amis de votre estime.
-              </div>
+            <div className="col-md-4">
+              <img src="https://www.meetingbird.com/images/rocket.png" width="300" alt="" />
             </div>
           </div>
+        </div>
+      </div>
+      <div className="home__feature">
+        <div className="container">
           <div className="row">
-            <div className="col-md-10">
-              <div className="home__highlight">
-                Votre estime est approuvé ou non par les visiteurs.
-              </div>
+            <div className="col-md-4">
+              <img src="https://www.meetingbird.com/images/rocket.png" width="300" alt="" />
             </div>
-            <div className="col-md-2">
-              <div className="home__icon-container">
-                <i className="fa fa-thumbs-up home__icon--green"></i>
-              </div>
+            <div className="col-md-8">
+              <h3>Estimation de vos amis</h3>
+              <p>Vous avez des amis et de l'estime pour eux. Faites savoir leur enfin savoir.</p>
             </div>
           </div>
         </div>
@@ -52,7 +51,7 @@ const Home = (props) => {
 function mapStateToProps(state) {
   return {
     home: state.esteemApp.home,
-    session: state.esteemApp.signIn
+    session: state.esteemApp.signIn,
   };
 }
 
