@@ -1,4 +1,5 @@
 import * as betaActions from '../actions/betaActions.js';
+import * as actions from '../actions/action.js';
 import { fromJS } from 'immutable';
 
 const initialState = {
@@ -20,7 +21,7 @@ export default function home(state = initialState, action) {
       return iState.setIn(['ui', 'isBetaTokenInValid'], true)
                    .toJS();
     case betaActions.AUTHENTICATED_BETA_TOKEN:
-      return iState.set('betaToken', betaActions.betaToken)
+      return iState.set('betaToken', action.betaToken.betaToken)
                    .setIn(['ui', 'showSignUpForm'], true)
                    .setIn(['ui', 'isBetaTokenInValid'], false)
                    .toJS();

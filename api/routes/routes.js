@@ -74,20 +74,35 @@ app.post('/auth/token', (req, res) => {
 
 
 app.post('/appraiser', (req, res) => {
-  const appraiserToAdd = new Appraiser({
-    name: req.body.name,
-    password: req.body.password,
-    email: req.body.email,
-    sessionToken: crypto.randomBytes(64).toString('hex'),
-  });
 
-  appraiserToAdd.save((err, appraiserToAdd) => {
-    if (err) return console.error(err);
-    res.json({
-      status: 200,
-      appraiserName: appraiserToAdd.name,
+  function checkIsNameAlreadyExist() {
+    return Appraiser.find({ name: req.body.name });
+  }
+
+  function checkIsEmailAlreadyTaken() {
+    return Appraiser.find({ email: req.body.email });
+  }
+
+  Promise
+    .all([
+      checkIsEmailAlreadyTaken(),
+      checkIsNameAlreadyExist(),
+    ])
+    .then((warnings) => {
+      if (warnings[0].length) return res.json({ status: 400, errorMessage: 'EMAIL_ALREADY_TAKEN' });
+      if (warnings[1].length) return res.json({ status: 400, errorMessage: 'NAME_ALREADY_TAKEN' });
+      const appraiserToAdd = new Appraiser({
+        name: req.body.name,
+        password: req.body.password,
+        email: req.body.email,
+        sessionToken: crypto.randomBytes(64).toString('hex'),
+      });
+
+      appraiserToAdd.save((err, appraiserToAdd) => {
+        if (err) return console.error(err);
+        res.json({ status: 200, appraiserName: appraiserToAdd.name });
+      });
     });
-  });
 });
 
 app.post('/login', (req, res) => {

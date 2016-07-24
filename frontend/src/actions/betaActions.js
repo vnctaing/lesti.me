@@ -88,5 +88,3 @@ export function consumeToken(betaToken) {
     .catch((e) => console.log(e));
   };
 }
-
-
