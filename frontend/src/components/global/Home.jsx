@@ -2,12 +2,19 @@ import Signup from '../signup/Signup.jsx';
 import BetaAccess from '../BetaAccess/BetaAccess';
 import { connect } from 'react-redux';
 
+function showBetaAcces(props) {
+  if (!Object.keys(props.session.verifiedSessionToken).length) {
+    return props.home.ui.showSignUpForm ? <Signup /> : <BetaAccess home={props.home} />;
+  }
+  return '';
+}
+
 const Home = (props) => {
   return (
     <div>
       <div className="home__illustration home">
         <h2 className="home__tagline">Vos amis ne sont pas toujours parfaits. Faites-le savoir.</h2>
-        {props.home.ui.showSignUpForm ? <Signup /> : <BetaAccess home={props.home} />}
+        {showBetaAcces(props)}
       </div>
       <div className="home__credentials">
         <div className="container">
@@ -45,6 +52,7 @@ const Home = (props) => {
 function mapStateToProps(state) {
   return {
     home: state.esteemApp.home,
+    session: state.esteemApp.signIn
   };
 }
 
