@@ -1,15 +1,13 @@
 const Footer = (props) => {
-    return (
-        <div id="footer">
-            <div className="container navbar__wrapper">
-                <div className="container-flex--inline navbar__cred">
-                    <h1>Copyright © 2016 - Vincent Taing</h1>
-                    <a href="https://github.com/vnctaing/lesti.me" className="link navbar__links">Github</a>
-                    <span>-</span>
-                    <a href="" className="link">Supdeweb</a>
-                </div>
-            </div>
-        </div>);
-}
+  return (
+    <div id="footer">
+      <div className="container navbar__wrapper">
+        <div className="container-flex--inline navbar__cred">
+          <h3 className="footer__copyright">Copyright © 2016 - 😄</h3>
+        </div>
+      </div>
+    </div>
+    );
+};
 
 export default Footer;
