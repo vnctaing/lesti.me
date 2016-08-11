@@ -30,7 +30,7 @@ const Home = (props) => {
               </p>
             </div>
             <div className="col-md-4 col-md-offset-3">
-              <img src="https://www.meetingbird.com/images/rocket.png" width="300" alt="" />
+              <img src="/assets/img/charts.svg" className="home__illustrationIcon" width="300" alt="" />
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@ const Home = (props) => {
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <img src="https://www.meetingbird.com/images/rocket.png" width="300" alt="" />
+              <img src="/assets/img/friendship.svg" className="home__illustrationIcon" width="300" alt="" />
             </div>
             <div className="col-md-5 col-md-offset-3">
               <h3 className="home__featureTitle">Récompensez ou sanctionnez vos proches</h3>
@@ -62,7 +62,7 @@ const Home = (props) => {
               </p>
             </div>
             <div className="col-md-4 col-md-offset-3">
-              <img src="https://www.meetingbird.com/images/rocket.png" width="300" alt="" />
+              <img src="/assets/img/comments.svg" className="home__illustrationIcon" width="300" alt="" />
             </div>
           </div>
         </div>

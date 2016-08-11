@@ -16,11 +16,9 @@ import * as approvalsActionCreators from '../actions/approvalsActions.js';
 
 
 const history = syncHistoryWithStore(browserHistory, store);
-
-
 /**
  * onEnter Handler function called when accessing the url 'de/:username'
- * triggers 
+ * triggers
  * @param  {Object} store : Redux Store
  */
 function onEnterActions(store) {
