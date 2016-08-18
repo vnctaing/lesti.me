@@ -18,6 +18,20 @@ const AWS = require('aws-sdk');
 AWS.config.region = 'eu-west-1';
 const s3bucket = new AWS.S3({ params: { Bucket: 'lesti' } });
 
+// s3bucket.createBucket(function() {
+//   const params = {
+//     Key: '',
+//     Body: 'Hello!'
+//   };
+//
+//   s3bucket.upload(params, function(err,data) {
+//     if(err) {
+//       console.log('Error', err)
+//     } else {
+//       console.log('Successfully uploaded')
+//     }
+//   })
+// })
 
 
 app.use(cors());

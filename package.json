@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --progress --colors --watch",
     "dev": "webpack-dev-server --progress --inline  --history-api-fallback --hot --colors --content-base frontend/",
-    "api": "nodemon api/routes/routes.js"
+    "api": "nodemon api/routes/routes.js",
+    "build": "NODE_ENV=production webpack --config webpack.config.prod.js"
   },
   "author": "",
   "license": "ISC",
