@@ -14,6 +14,10 @@ const Appraiser = require('../models/Appraiser');
 const Comment = require('../models/Comment');
 const Feed = require('../models/Feed');
 const BetaToken = require('../models/BetaToken');
+const AWS = require('aws-sdk');
+AWS.config.region = 'eu-west-1';
+const s3bucket = new AWS.S3({ params: { Bucket: 'lesti' } });
+
 
 
 app.use(cors());
@@ -288,5 +292,3 @@ app.post('/betatoken', (req, res) => {
     });
   });
 });
-
-
