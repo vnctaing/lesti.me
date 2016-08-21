@@ -24,9 +24,6 @@ module.exports = {
           path.join(__dirname, 'frontend/test'),
         ],
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react'],
-        },
       },
       {
         test: /\.css$/,
