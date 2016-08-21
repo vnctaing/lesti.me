@@ -1,9 +1,9 @@
-import LabelIllustrated from '../../icons/LabelIllustrated.jsx';
+import LabelIllustrated from '../../icons/LabelIllustrated';
 import { reduxForm } from 'redux-form';
 import * as actionCreators from '../../../actions/action.js';
 import { bindActionCreators } from 'redux';
 import AddCommentForm from './AddCommentForm';
-import Comment from './Comment.jsx';
+import Comment from './Comment';
 import moment from 'moment';
 
 const LeaderBoardComments = (props) => {

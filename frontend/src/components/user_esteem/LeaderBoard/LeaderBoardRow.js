@@ -1,5 +1,5 @@
-import LeaderBoardComments from './LeaderBoardComments.jsx';
-import LeaderBoardEstimation from './LeaderBoardEstimation.jsx';
+import LeaderBoardComments from './LeaderBoardComments';
+import LeaderBoardEstimation from './LeaderBoardEstimation';
 // import LeaderboardEdit from './LeaderboardEdit.jsx';
 
 const LeaderBoardRow = (props) => {

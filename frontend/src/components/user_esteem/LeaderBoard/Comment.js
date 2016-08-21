@@ -1,4 +1,4 @@
-import LabelIllustrated from '../../icons/LabelIllustrated.jsx';
+import LabelIllustrated from '../../icons/LabelIllustrated';
 import moment from 'moment';
 
 

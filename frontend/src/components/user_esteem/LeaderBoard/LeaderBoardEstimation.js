@@ -1,6 +1,6 @@
-import LabelIllustrated from '../../icons/LabelIllustrated.jsx';
-import UpdateAppraiseeEsteemModal from './UpdateAppraiseeEsteemModal.jsx';
-import UpdateEsteemCta from './UpdateEsteemCta.jsx';
+import LabelIllustrated from '../../icons/LabelIllustrated';
+import UpdateAppraiseeEsteemModal from './UpdateAppraiseeEsteemModal';
+import UpdateEsteemCta from './UpdateEsteemCta';
 import { initialize } from 'redux-form';
 
 const LeaderBoardEstimation = (props) => {

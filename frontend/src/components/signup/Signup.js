@@ -1,4 +1,4 @@
-import SignupForm from './SignupForm.jsx';
+import SignupForm from './SignupForm';
 import { connect } from 'react-redux';
 import { initialize } from 'redux-form';
 import * as actionCreators from '../../actions/action.js';

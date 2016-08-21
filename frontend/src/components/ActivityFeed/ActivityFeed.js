@@ -1,6 +1,5 @@
-import TableRow from '../tables/TableRow.jsx';
-import Feed from './Feed.jsx';
-
+import TableRow from '../tables/TableRow';
+import Feed from './Feed';
 
 const ActivityFeed = (props) => {
   const { feeds, name } = props.profile;

@@ -17,9 +17,12 @@ module.exports = {
         loaders: ['style-loader', 'css-loader', 'less-loader'],
       },
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         loader: 'babel-loader',
-        include: [path.resolve(__dirname, 'frontend/src')],
+        include: [
+          path.join(__dirname, 'frontend/src'),
+          path.join(__dirname, 'frontend/test'),
+        ],
         exclude: /node_modules/,
         query: {
           presets: ['es2015', 'react'],
@@ -65,7 +68,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['', '.js', '.json', '.jsx'],
+    extensions: ['', '.js', '.json'],
   },
   devServer: {
     historyApiFallback: true,

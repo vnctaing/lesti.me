@@ -1,4 +1,4 @@
-import LeaderBoardRow from './LeaderBoardRow.jsx';
+import LeaderBoardRow from './LeaderBoardRow';
 
 /**
  * LeaderBoard component

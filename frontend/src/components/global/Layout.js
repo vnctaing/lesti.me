@@ -1,6 +1,6 @@
 import { Link, IndexLink } from 'react-router';
-import Footer from './Footer.jsx';
-import Navbar from './Navbar.jsx';
+import Footer from './Footer';
+import Navbar from './Navbar';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/action.js';
 import { bindActionCreators } from 'redux';
