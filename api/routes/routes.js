@@ -18,9 +18,6 @@ const AWS = require('aws-sdk');
 AWS.config.region = 'eu-west-1';
 const s3bucket = new AWS.S3({ params: { Bucket: 'lesti' } });
 
-const AWS_ACCESS_KEY_ID = require('../../config.js').AWS_ACCESS_KEY_ID;
-const AWS_SECRET_ACCESS_KEY = require('../../config.js').AWS_SECRET_ACCESS_KEY;
-
 AWS.config.update({ region: 'eu-west-1' });
 app.use(cors());
 app.use(bodyParser.json());
@@ -296,13 +293,13 @@ app.post('/betatoken', (req, res) => {
 });
 
 app.post('/avatar/:appraiserId', (req,res) => {
-  s3bucket.createBucket(function() {
-    s3bucket.upload(params, function(err, data) {
-      if(err) {
-        console.log('Error', err)
-      } else {
-        console.log('Successfully uploaded', data)
-      }
-    })
-  });
-})
+  // s3bucket.createBucket(function() {
+  //   s3bucket.upload(params, function(err, data) {
+  //     if(err) {
+  //       console.log('Error', err)
+  //     } else {
+  //       console.log('Successfully uploaded', data)
+  //     }
+  //   })
+  // });
+});

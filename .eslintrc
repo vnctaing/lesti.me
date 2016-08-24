@@ -16,5 +16,8 @@
         "no-unused-vars": 1,
         "camelcase": 1,
         "new-cap": 0
+    },
+    "env" : {
+      "mocha": true,
     }
 }

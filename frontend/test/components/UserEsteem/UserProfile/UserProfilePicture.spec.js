@@ -7,13 +7,13 @@ import {UserProfilePicture} from '../../../../src/components/user_esteem/UserPro
 import Dropzone from 'react-dropzone';
 
 describe('UserProfilePicture', function() {
-  context('when there\'s no profile picture provided',() => {
+  context('when there\'s no profile picture provided', () => {
     it('should renders the <DropZone/ > component', () => {
       const wrapper = shallow(<UserProfilePicture profilePicture={null} />);
       expect(wrapper.find(Dropzone)).to.have.length(1);
     });
   });
-  context('when there is a profile picture provided',() => {
+  context('when there is a profile picture provided', () => {
     it('should renders the profile picture in <img>', () => {
       const wrapper = shallow(
         <UserProfilePicture profilePicture="http://lorempixel.com/150/150" />

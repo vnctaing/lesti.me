@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userProfileActions from '../../../actions/userProfileActions';
+
 
 import Dropzone from 'react-dropzone';
 
@@ -7,7 +11,9 @@ const fields = ['avatar'];
 
 export class UserProfilePicture extends Component {
   handleSubmit(data) {
-    console.log('here is the fucking picture', data);
+    const body = new FormData();
+    body.append('avatar', data[0]);
+    this.props.userProfileActions.uploadPicture(body, this.props.profile._id);
   }
 
   render() {
@@ -51,9 +57,6 @@ export class UserProfilePicture extends Component {
             >
               <p className="text-center no-margin">Changer sa photo de profil</p>
             </Dropzone>
-            <button className="btn btn-greenplain profile__validateBtn">
-              Valider
-            </button>
           </div>}
         </div>
       </form>
@@ -61,7 +64,21 @@ export class UserProfilePicture extends Component {
   }
 }
 
-export default reduxForm({
+function mapDispatchToProps(dispatch) {
+  return {
+    userProfileActions: bindActionCreators(userProfileActions, dispatch),
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    profile: state.esteemApp.profile,
+  };
+}
+
+const form = reduxForm({
   form: 'userProfilePicture',
   fields,
-})(UserProfilePicture);
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(form(UserProfilePicture));
