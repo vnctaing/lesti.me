@@ -3,6 +3,8 @@ import { reduxForm } from 'redux-form';
 
 import Dropzone from 'react-dropzone';
 
+const fields = ['avatar'];
+
 export class UserProfilePicture extends Component {
   handleSubmit(data) {
     console.log('here is the fucking picture', data);
@@ -14,7 +16,6 @@ export class UserProfilePicture extends Component {
       handleSubmit,
       resetForm,
     } = this.props;
-    const files = fields.avatar;
 
     const centeredPicture = {
       backgroundImage: `url(${this.props.profilePicture})`,
@@ -43,6 +44,7 @@ export class UserProfilePicture extends Component {
             <Dropzone
               style={rounded}
               accept="image/*"
+              multiple={false}
               onDrop={(filesToUpload) => {
                 this.handleSubmit(filesToUpload);
               }}
@@ -59,7 +61,6 @@ export class UserProfilePicture extends Component {
   }
 }
 
-const fields = ['avatar'];
 export default reduxForm({
   form: 'userProfilePicture',
   fields,
