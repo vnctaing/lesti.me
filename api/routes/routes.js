@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const crypto = require('crypto');
+const fs = require('fs');
+const multer = require('multer')
 
 // Mongoose Models Imports
 const mongoose = require('mongoose');
@@ -292,14 +294,23 @@ app.post('/betatoken', (req, res) => {
   });
 });
 
-app.post('/avatar/:appraiserId', (req,res) => {
-  // s3bucket.createBucket(function() {
-  //   s3bucket.upload(params, function(err, data) {
-  //     if(err) {
-  //       console.log('Error', err)
-  //     } else {
-  //       console.log('Successfully uploaded', data)
-  //     }
-  //   })
-  // });
+
+var upload = multer({ dest: 'uploads/' })
+
+app.post('/avatar/:appraiserId', upload.single('avatar'), (req,res) => {
+  const { file } = req;
+  s3bucket.upload(
+    {
+      ACL: 'public-read',
+      Body: fs.createReadStream(file.path),
+      Key: 'fodabitch',
+      ContentType: 'application/octet-stream',
+    }, (err, data) => {
+      if(err) {
+        console.log('error', err)
+      } else {
+        console.log('successfully uploaded', data);
+      }
+    }
+  );
 });
