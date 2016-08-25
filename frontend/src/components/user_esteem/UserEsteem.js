@@ -1,7 +1,7 @@
-import UserProfile from './UserProfile/UserProfile.jsx';
-import LeaderBoard from './LeaderBoard/LeaderBoard.jsx';
-import Panel from '../containers/Panel.jsx';
-import ActivityFeed from '../ActivityFeed/ActivityFeed.jsx';
+import UserProfile from './UserProfile/UserProfile';
+import LeaderBoard from './LeaderBoard/LeaderBoard';
+import Panel from '../containers/Panel';
+import ActivityFeed from '../ActivityFeed/ActivityFeed';
 import { initialize } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/action.js';

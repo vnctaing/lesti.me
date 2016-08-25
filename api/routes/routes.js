@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const crypto = require('crypto');
+const fs = require('fs');
+const multer = require('multer')
 
 // Mongoose Models Imports
 const mongoose = require('mongoose');
@@ -15,7 +17,13 @@ const Comment = require('../models/Comment');
 const Feed = require('../models/Feed');
 const BetaToken = require('../models/BetaToken');
 
+const upload = multer({ dest: 'uploads/' })
 
+const AWS = require('aws-sdk');
+AWS.config.region = 'eu-west-1';
+const s3bucket = new AWS.S3({ params: { Bucket: 'lesti' } });
+
+AWS.config.update({ region: 'eu-west-1' });
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Connect mongoose to mongodb server
 mongoose.connect('mongodb://localhost:27017');
+mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -290,3 +299,32 @@ app.post('/betatoken', (req, res) => {
 });
 
 
+
+app.post('/avatar/:appraiserId', upload.single('avatar'), (req, res) => {
+  const { file } = req;
+  s3bucket
+  .upload({
+    ACL: 'public-read',
+    Body: fs.createReadStream(file.path),
+    Key: `profilePicture/${req.params.appraiserId}_${Math.random().toString(36).substr(2, 8)}`,
+    ContentType: 'application/octet-stream',
+  })
+  .send((err, data) => {
+    if (err) {
+      console.log('error', err)
+    } else {
+      Appraiser
+        .findOne({ _id: req.params.appraiserId },
+          (err, doc) => {
+            if (err) console.log(err);
+            if (!doc) {
+              throw 'Did not found appraisee with correspondant _id'
+            } else {
+              doc.profilePicture = data.Location;
+              doc.save();
+            }
+            res.json({ status: 200, appraiser: doc })
+        })
+    }
+  });
+});

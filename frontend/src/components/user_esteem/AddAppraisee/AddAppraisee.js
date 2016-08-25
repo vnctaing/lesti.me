@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { initialize } from 'redux-form';
-import AddAppraiseeForm from './AddAppraiseeForm.jsx';
+import AddAppraiseeForm from './AddAppraiseeForm';
 import * as actionCreators from '../../../actions/action.js';
 import { bindActionCreators } from 'redux';
 

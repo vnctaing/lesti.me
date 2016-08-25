@@ -1,6 +1,7 @@
-import UserProfilePicture from './UserProfilePicture.jsx';
-import UserProfileStats from './UserProfileStats.jsx';
+import UserProfilePicture from './UserProfilePicture';
+import UserProfileStats from './UserProfileStats';
 import { Link } from 'react-router';
+import { reduxForm } from 'redux-form';
 
 /**
  * UserProfile Component - The component that contains
@@ -8,6 +9,7 @@ import { Link } from 'react-router';
  * picture, stats ...)
  * @param  {[Object]} props
  */
+const fields = ['avatar'];
 const UserProfile = (props) => {
   const { profile, session } = props;
   return (
@@ -40,4 +42,7 @@ const UserProfile = (props) => {
   );
 };
 
-export default UserProfile;
+export default reduxForm({
+  form: 'avatarForm',
+  fields,
+})(UserProfile);

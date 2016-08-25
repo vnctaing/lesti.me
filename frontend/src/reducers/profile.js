@@ -1,6 +1,7 @@
 import * as actions from '../actions/action.js';
 import * as commentActions from '../actions/commentActions.js';
 import * as approvalsActions from '../actions/approvalsActions.js';
+import * as userProfileActions from '../actions/userProfileActions.js';
 
 import { fromJS } from 'immutable';
 import _ from 'lodash';
@@ -15,7 +16,9 @@ const initialState = {
     show_update_appraisee_esteem_modal: {},
     isFetchingProfile: false,
     appraiseePanel: {},
-    loadingComments: {}
+    loadingComments: {},
+    showDropZone: false,
+    isUploading: false,
   },
 };
 
@@ -112,6 +115,20 @@ export default function profile(state = initialState, action) {
     case approvalsActions.CHECKING_VISITOR_APPROVALS:
       return iState
               .setIn(['approvedAppraisees'], action.approvals)
+              .toJS();
+    case userProfileActions.SUCCESSFULLY_UPLOADED_PROFILE_PICTURE:
+      return iState
+              .setIn(['profilePicture'], action.appraiser.profilePicture)
+              .setIn(['ui', 'showDropZone'], false)
+              .setIn(['ui', 'isUploading'], false)
+              .toJS();
+    case userProfileActions.UPLOADING_USER_PROFILE_PICTURE:
+      return iState
+              .setIn(['ui', 'isUploading'], true)
+              .toJS();
+    case userProfileActions.TOGGLE_DROPZONE_PROFILE_PICTURE:
+      return iState
+              .updateIn(['ui', 'showDropZone'], (v) => !v)
               .toJS();
     default:
       return state;

@@ -1,4 +1,4 @@
-import Signup from '../signup/Signup.jsx';
+import Signup from '../signup/Signup.js';
 import BetaAccess from '../BetaAccess/BetaAccess';
 import Footer from '../global/Footer'
 import { connect } from 'react-redux';

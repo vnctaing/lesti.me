@@ -17,13 +17,13 @@ module.exports = {
         loaders: ['style-loader', 'css-loader', 'less-loader'],
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
-        include: [
-          path.join(__dirname, 'frontend/src'),
-          path.join(__dirname, 'frontend/test'),
-        ],
+        include: [path.resolve(__dirname, 'frontend/src')],
         exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react'],
+        },
       },
       {
         test: /\.css$/,
@@ -60,14 +60,16 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('dev'),
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
       },
     }),
   ],
   resolve: {
-    extensions: ['', '.js', '.json'],
-  },
-  devServer: {
-    historyApiFallback: true,
+    extensions: ['', '.js', '.json', '.jsx'],
   },
 };
