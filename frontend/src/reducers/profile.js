@@ -1,6 +1,7 @@
 import * as actions from '../actions/action.js';
 import * as commentActions from '../actions/commentActions.js';
 import * as approvalsActions from '../actions/approvalsActions.js';
+import * as userProfileActions from '../actions/userProfileActions.js';
 
 import { fromJS } from 'immutable';
 import _ from 'lodash';
@@ -112,6 +113,10 @@ export default function profile(state = initialState, action) {
     case approvalsActions.CHECKING_VISITOR_APPROVALS:
       return iState
               .setIn(['approvedAppraisees'], action.approvals)
+              .toJS();
+    case userProfileActions.SUCCESSFULLY_UPLOADED_PROFILE_PICTURE:
+      return iState
+              .setIn(['profilePicture'], action.appraiser.profilePicture)
               .toJS();
     default:
       return state;

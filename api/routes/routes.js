@@ -16,6 +16,9 @@ const Appraiser = require('../models/Appraiser');
 const Comment = require('../models/Comment');
 const Feed = require('../models/Feed');
 const BetaToken = require('../models/BetaToken');
+
+const upload = multer({ dest: 'uploads/' })
+
 const AWS = require('aws-sdk');
 AWS.config.region = 'eu-west-1';
 const s3bucket = new AWS.S3({ params: { Bucket: 'lesti' } });
@@ -28,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Connect mongoose to mongodb server
 mongoose.connect('mongodb://localhost:27017');
+mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -295,22 +299,32 @@ app.post('/betatoken', (req, res) => {
 });
 
 
-var upload = multer({ dest: 'uploads/' })
 
-app.post('/avatar/:appraiserId', upload.single('avatar'), (req,res) => {
+app.post('/avatar/:appraiserId', upload.single('avatar'), (req, res) => {
   const { file } = req;
-  s3bucket.upload(
-    {
-      ACL: 'public-read',
-      Body: fs.createReadStream(file.path),
-      Key: 'fodabitch',
-      ContentType: 'application/octet-stream',
-    }, (err, data) => {
-      if(err) {
-        console.log('error', err)
-      } else {
-        console.log('successfully uploaded', data);
-      }
+  s3bucket
+  .upload({
+    ACL: 'public-read',
+    Body: fs.createReadStream(file.path),
+    Key: `profilePicture/${req.params.appraiserId}`,
+    ContentType: 'application/octet-stream',
+  })
+  .send((err, data) => {
+    if (err) {
+      console.log('error', err)
+    } else {
+      Appraiser
+        .findOne({ _id: req.params.appraiserId },
+          (err, doc) => {
+            if (err) console.log(err);
+            if (!doc) {
+              throw 'Did not found appraisee with correspondant _id'
+            } else {
+              doc.profilePicture = data.Location;
+              doc.save();
+            }
+            res.json({ status: 200, appraiser: doc })
+        })
     }
-  );
+  });
 });

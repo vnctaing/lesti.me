@@ -9,6 +9,7 @@ const appraiserSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   appraisees: [{ type: Schema.Types.ObjectId, ref: 'Appraisee' }],
   feeds: [{ type: Schema.Types.ObjectId, ref: 'Feed' }],
+  profilePicture: String,
   sessionToken: String,
 });
 
