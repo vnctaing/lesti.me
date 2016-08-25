@@ -16,7 +16,9 @@ const initialState = {
     show_update_appraisee_esteem_modal: {},
     isFetchingProfile: false,
     appraiseePanel: {},
-    loadingComments: {}
+    loadingComments: {},
+    showDropZone: false,
+    isUploading: false,
   },
 };
 
@@ -117,6 +119,16 @@ export default function profile(state = initialState, action) {
     case userProfileActions.SUCCESSFULLY_UPLOADED_PROFILE_PICTURE:
       return iState
               .setIn(['profilePicture'], action.appraiser.profilePicture)
+              .setIn(['ui', 'showDropZone'], false)
+              .setIn(['ui', 'isUploading'], false)
+              .toJS();
+    case userProfileActions.UPLOADING_USER_PROFILE_PICTURE:
+      return iState
+              .setIn(['ui', 'isUploading'], true)
+              .toJS();
+    case userProfileActions.TOGGLE_DROPZONE_PROFILE_PICTURE:
+      return iState
+              .updateIn(['ui', 'showDropZone'], (v) => !v)
               .toJS();
     default:
       return state;

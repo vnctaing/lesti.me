@@ -520,3 +520,33 @@ body {
 .home__illustrationIcon {
   height: 250px;
 }
+
+.profilePicture__container {
+  position: relative;
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  &:hover {
+    .profilePicture__overlay {
+        position: absolute;
+        top: 0px;
+        text-align: center;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        background: rgba(0,0,0,.5);
+        border-radius: 100%;
+    }
+  }
+}
+
+.profilePicture__overlay {
+  display: none;
+}
+
+.profilePicture__closeIcon {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}

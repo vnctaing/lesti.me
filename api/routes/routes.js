@@ -306,7 +306,7 @@ app.post('/avatar/:appraiserId', upload.single('avatar'), (req, res) => {
   .upload({
     ACL: 'public-read',
     Body: fs.createReadStream(file.path),
-    Key: `profilePicture/${req.params.appraiserId}`,
+    Key: `profilePicture/${req.params.appraiserId}_${Math.random().toString(36).substr(2, 8)}`,
     ContentType: 'application/octet-stream',
   })
   .send((err, data) => {

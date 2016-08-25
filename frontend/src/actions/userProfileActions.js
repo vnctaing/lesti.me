@@ -26,3 +26,10 @@ export function uploadPicture(body, appraiserId) {
     });
   };
 }
+
+export const TOGGLE_DROPZONE_PROFILE_PICTURE = 'TOGGLE_DROPZONE_PROFILE_PICTURE';
+export function toggleDropZoneProfilePicture() {
+  return {
+    type: TOGGLE_DROPZONE_PROFILE_PICTURE,
+  };
+}
