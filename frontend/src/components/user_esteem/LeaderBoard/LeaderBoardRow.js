@@ -57,10 +57,11 @@ const LeaderBoardRow = (props) => {
           show={ui.confirmationDeleteModal[appraisee._id]}
           onHide={() => actions.closeConfirmationDeleteModal(appraisee._id)}
         >
-          <div>
-            Êtes vous sur ?
-            <div>
+          <div className="deleteConfirmation__container">
+            <p>Êtes vous sûr de supprimer {appraisee.appraiseeName} de votre estime ?</p>
+            <div className="deleteConfirmation__Ctacontainer">
               <button
+                className="btn btn-greenplain deleteConfirmation__btn"
                 onClick={() => {
                   actions.deleteAppraisee(appraisee._id);
                   actions.closeConfirmationDeleteModal(appraisee._id);
@@ -69,6 +70,7 @@ const LeaderBoardRow = (props) => {
                 Oui, supprimer
               </button>
               <button
+                className="btn btn-redplain deleteConfirmation__btn"
                 onClick={() => {
                   actions.closeConfirmationDeleteModal(appraisee._id)
                 }}
