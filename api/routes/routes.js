@@ -334,22 +334,39 @@ app.post('/avatar/:appraiserId', upload.single('avatar'), (req, res) => {
 });
 
 app.delete('/appraisee/:appraiseeId', (req, res) => {
-  Appraisee
-    .findOne({_id: req.params.appraiseeId}, (err, appraisee) => {
-      if (err) throw 'Could not find an appraisee with this ID';
-      appraisee.remove();
-      return appraisee._appraiser;
-    })
-    .then(removeAppraiseeFromAppraiser);
+  const feeds = Feed
+    .find({ _appraisee: req.params.appraiseeId }, (err, docs) => {
+      docs.reduce((acc, d) => d.remove(), []);
+      return docs;
+    });
+  const comments = Comment
+    .find({ _appraisee: req.params.appraiseeId }, (err, docs) => {
+      docs.reduce((acc, d) => d.remove(), []);
+      return docs;
+    });
 
-  function removeAppraiseeFromAppraiser(appraisee) {
-    Appraiser
-      .findOne({ _id: appraisee._appraiser }, (err, appraiser) => {
-        appraiser.appraisees = appraiser.appraisees.filter(a => {
-          return a._id !== req.params.appraiseeId;
+  const appraisee = Appraisee
+    .findOne({ _id: req.params.appraiseeId }, (err, doc) => {
+      if (err) throw 'Could not find an appraisee with this ID';
+      doc.remove();
+    });
+
+  Promise
+    .all([feeds, appraisee, comments])
+    .then((p) => {
+      Appraiser
+        .findOne({ _id: p[1]._appraiser }, (err, appraiser) => {
+          appraiser.appraisees = appraiser.appraisees.filter((a) => {
+            return a._id !== req.params.appraiseeId;
+          });
+
+          appraiser.feeds = appraiser.feeds.filter(feeds => {
+            return p[0].filter(b => b._id.toString() !== feeds.toString()).length;
+          });
+
+          appraiser.save();
+
+          res.json({ status:200, appraiser });
         });
-        appraiser.save();
-        res.json({ status: 200, appraiser });
-      });
-  }
+    });
 })
