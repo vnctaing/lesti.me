@@ -46,6 +46,7 @@ const LeaderBoardRow = (props) => {
   return (
     <div>
       <div className="lst-panel">
+        <i className="fa fa-times pull-right"></i>
         {renderRow()}
       </div>
     </div>
