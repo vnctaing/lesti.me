@@ -2,3 +2,4 @@
 frontend/dist
 config.js
 /uploads
+config.prod.js

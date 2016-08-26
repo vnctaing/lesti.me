@@ -19,6 +19,7 @@ const initialState = {
     loadingComments: {},
     showDropZone: false,
     isUploading: false,
+    confirmationDeleteModal: {},
   },
 };
 
@@ -54,11 +55,27 @@ export default function profile(state = initialState, action) {
                             initMapFromArray(action.profile.appraisees, 'estimation'))
                    .setIn(['ui', 'loadingComments'],
                             initMapFromArray(action.profile.appraisees, false))
+                   .setIn(['ui', 'confirmationDeleteModal'],
+                            initMapFromArray(action.profile.appraisees, false))
                    .setIn(['ui', 'isFetchingProfile'], false)
                    .toJS();
     case actions.OPEN_APPRAISEE_UPDATE_MODAL:
       return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId],
                             action.purposeReestimation)
+                   .toJS();
+    case actions.OPEN_CONFIRMATION_DELETE_MODAL:
+      return iState.setIn(['ui', 'confirmationDeleteModal', action.appraiseeId],
+                            true)
+                   .toJS();
+    case actions.DELETING_APPRAISEE:
+      return iState.updateIn(['appraisees'], (appraisees) => {
+                      return appraisees.filter((a) => a.get('_id') !== action.appraiseeId)
+                    })
+
+                   .toJS();
+    case actions.CLOSE_CONFIRMATION_DELETE_MODAL:
+      return iState.setIn(['ui', 'confirmationDeleteModal', action.appraiseeId],
+                            false)
                    .toJS();
     case actions.UPDATING_APPRAISEE_ESTEEM:
       return iState.updateIn(

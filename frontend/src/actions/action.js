@@ -355,3 +355,48 @@ export function showEstimationSection(appraiseeId) {
     appraiseeId,
   };
 }
+
+export const CLOSE_CONFIRMATION_DELETE_MODAL = 'CLOSE_CONFIRMATION_DELETE_MODAL';
+export function closeConfirmationDeleteModal(appraiseeId) {
+  return {
+    type: CLOSE_CONFIRMATION_DELETE_MODAL,
+    appraiseeId,
+  };
+}
+
+export const OPEN_CONFIRMATION_DELETE_MODAL = 'OPEN_CONFIRMATION_DELETE_MODAL';
+export function openConfirmationDeleteModal(appraiseeId) {
+  return {
+    type: OPEN_CONFIRMATION_DELETE_MODAL,
+    appraiseeId,
+  };
+}
+
+export const DELETING_APPRAISEE = 'DELETING_APPRAISEE';
+export function deletingAppraisee(appraiseeId) {
+  return {
+    type: DELETING_APPRAISEE,
+    appraiseeId,
+  };
+}
+
+export const SUCCESSFULLY_DELETED_APPRAISEE = 'SUCCESSFULLY_DELETED_APPRAISEE';
+export function successfullyDeletedAppraisee() {
+  return {
+    type: SUCCESSFULLY_DELETED_APPRAISEE,
+  };
+}
+
+export function deleteAppraisee(appraiseeId) {
+  return (dispatch) => {
+    dispatch(deletingAppraisee(appraiseeId));
+    fetch(`${process.env.API_URL}/appraisee/${appraiseeId}`, {
+      method: 'delete',
+    })
+    .then((r) => r.json())
+    .then((json) => {
+      if (json.status === 200) dispatch(successfullyDeletedAppraisee());
+    })
+    .catch((error) => console.log(error));
+  };
+}
