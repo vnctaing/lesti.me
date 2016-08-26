@@ -25,7 +25,7 @@ const UserProfile = (props) => {
           </div>
           <div className="col-xs-8 text-right">
             <UserProfileStats profile={profile} />
-            {Object.keys(session.verifiedSessionToken).length
+            {Object.keys(session.verifiedSessionToken).length && props.isItsPage
               ? <Link to={`de/${profile.name}/add`}>
                 <button className="btn btn-redplain">
                   <i className="fa fa-plus"></i>

@@ -45,7 +45,7 @@ export default function profile(state = initialState, action) {
       return iState.setIn(['ui', 'isFetchingProfile'], true)
                    .toJS();
     case actions.RECEIVED_APPRAISER_PROFILE:
-      return iState.mergeDeep(action.profile)
+      return iState.merge(action.profile)
                    .setIn(['comments'],
                             initMapFromArray(action.profile.appraisees, []))
                    .setIn(['ui', 'show_update_appraisee_esteem_modal'],

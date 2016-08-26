@@ -39,7 +39,12 @@ const UserEsteem = (props) => {
   const isItsPage = Object.keys(props.signIn.verifiedSessionToken)[0] === profile._id;
   return (
     <div>
-      <UserProfile profile={profile} ui={ui} session={props.signIn} />
+      <UserProfile
+        profile={profile}
+        ui={ui}
+        session={props.signIn}
+        isItsPage={isItsPage}
+      />
       <div className="container">
         <div className="row">
           <div className="col-md-6">

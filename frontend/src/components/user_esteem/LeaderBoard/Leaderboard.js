@@ -10,7 +10,8 @@ const LeaderBoard = (props) => {
   return (
     <div>
         {
-          profile.appraisees.map((a) => {
+          profile.appraisees.length
+          ? profile.appraisees.map((a) => {
             return (
               <LeaderBoardRow
                 appraisee={a}
@@ -28,6 +29,7 @@ const LeaderBoard = (props) => {
               />
               );
           })
+          : <p>L'estime de {profile.name} est vide pour le moment</p>
         }
     </div>
   );

@@ -5,13 +5,16 @@ const ActivityFeed = (props) => {
   const { feeds, name } = props.profile;
   return (
     <div>
-      {feeds.map((f, i) => {
+      {feeds.length
+        ? feeds.map((f, i) => {
         return (
           <TableRow key={i}>
             <Feed feed={f} appraiserName={name} />
           </TableRow>
         );
-      })}
+      })
+      : <p>Il n'y pas encore eu d'activités l'estime de {name}</p>
+    }
     </div>
   );
 };

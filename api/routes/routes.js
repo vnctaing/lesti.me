@@ -107,9 +107,13 @@ app.post('/appraiser', (req, res) => {
         sessionToken: crypto.randomBytes(64).toString('hex'),
       });
 
-      appraiserToAdd.save((err, appraiserToAdd) => {
+      appraiserToAdd.save((err, appraiser) => {
         if (err) return console.error(err);
-        res.json({ status: 200, appraiserName: appraiserToAdd.name });
+        res.json({
+          status: 200,
+          appraiserName: appraiser.name,
+          appraiser
+        });
       });
     });
 });

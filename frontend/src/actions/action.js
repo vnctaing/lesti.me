@@ -132,7 +132,11 @@ export function signingUp(formData) {
     .then((response) => response.json())
     .then((json) => {
       if (json.status === 200) {
-        dispatch(successfullySignUp());
+        const { appraiser } = json;
+        const token = {};
+        token[appraiser._id] = appraiser.sessionToken;
+        localStorage.setItem('sessionToken', JSON.stringify(token));
+        dispatch(successfullySignIn(token));
         dispatch(push(`de/${json.appraiserName}`));
       } else {
         dispatch(failedSignUp(json.errorMessage));

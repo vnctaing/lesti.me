@@ -21,7 +21,7 @@ const UserProfileStats = (props) => {
         <div>
           <p>L'estime de {profile.name}</p>
           <p>Personnes dans son estime : {appraisees.length}</p>
-          <p>Estime Moyenne : {averageEsteem}</p>
+          <p>Estime Moyenne : {appraisees.length ? averageEsteem : '0'}</p>
           {/*<p>Dernier changement : {props.lastChange}</p>*/}
         </div>
       );
