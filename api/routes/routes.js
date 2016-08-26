@@ -332,3 +332,24 @@ app.post('/avatar/:appraiserId', upload.single('avatar'), (req, res) => {
     }
   });
 });
+
+app.delete('/appraisee/:appraiseeId', (req, res) => {
+  Appraisee
+    .findOne({_id: req.params.appraiseeId}, (err, appraisee) => {
+      if (err) throw 'Could not find an appraisee with this ID';
+      appraisee.remove();
+      return appraisee._appraiser;
+    })
+    .then(removeAppraiseeFromAppraiser);
+
+  function removeAppraiseeFromAppraiser(appraisee) {
+    Appraiser
+      .findOne({ _id: appraisee._appraiser }, (err, appraiser) => {
+        appraiser.appraisees = appraiser.appraisees.filter(a => {
+          return a._id !== req.params.appraiseeId;
+        });
+        appraiser.save();
+        res.json({ status: 200, appraiser });
+      });
+  }
+})
