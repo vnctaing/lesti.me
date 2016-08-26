@@ -23,7 +23,7 @@ export function failedAuthenticatedBetaToken() {
 export function verifyBetaAccessToken(betaToken) {
   return (dispatch) => {
     dispatch(verifyingBetaAccessToken());
-    fetch(`http://localhost:3000/betatoken/${betaToken}`)
+    fetch(`${process.env.API_URL}/betatoken/${betaToken}`)
       .then((r) => r.json())
       .then((json) => {
         json.status === 200
@@ -51,7 +51,7 @@ export function createdBetaToken(newBetaToken) {
 export function createToken() {
   return (dispatch) => {
     dispatch(creatingToken());
-    fetch('http://localhost:3000/betatoken/', {
+    fetch(`${process.env.API_URL}/betatoken/`, {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -76,7 +76,7 @@ export function consumingToken(betaToken) {
 export function consumeToken(betaToken) {
   return (dispatch) => {
     dispatch(consumingToken(betaToken));
-    fetch(`http://localhost:3000/betatoken/${betaToken}`, {
+    fetch(`${process.env.API_URL}/betatoken/${betaToken}`, {
       method: 'put',
       headers: {
         Accept: 'application/json',

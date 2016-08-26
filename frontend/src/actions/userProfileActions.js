@@ -16,7 +16,7 @@ export function successfullyUploadedProfilePicture(updatedAppraiser) {
 export function uploadPicture(body, appraiserId) {
   return (dispatch) => {
     dispatch(uploadingUserProfilePicture());
-    fetch(`http://localhost:3000/avatar/${appraiserId}`, {
+    fetch(`${process.env.API_URL}/avatar/${appraiserId}`, {
       method: 'POST',
       body,
     })

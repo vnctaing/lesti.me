@@ -41,7 +41,7 @@ export function requestingAppraiserProfile() {
 export function fetchUserProfile(appraiser) {
   return (dispatch) => {
     dispatch(requestingAppraiserProfile());
-    fetch(`http://localhost:3000/appraiser/${appraiser}`)
+    fetch(`${process.env.API_URL}/appraiser/${appraiser}`)
       .then((response) => response.json())
       .then((json) => {
         json.status === 200
@@ -63,7 +63,7 @@ export function addingAppraisee() {
 export function postingNewAppraisee(formData) {
   return (dispatch) => {
     dispatch(addingAppraisee());
-    return fetch('http://localhost:3000/appraisee', {
+    return fetch(`${process.env.API_URL}/appraisee`, {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -117,7 +117,7 @@ export function requestingSignIn() {
 export function signingUp(formData) {
   return (dispatch) => {
     dispatch(requestingSignUp());
-    fetch('http://localhost:3000/appraiser', {
+    fetch(`${process.env.API_URL}/appraiser`, {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -165,7 +165,7 @@ export function failedSignIn() {
 export function signingIn(formData) {
   return (dispatch) => {
     dispatch(requestingSignUp());
-    fetch('http://localhost:3000/login', {
+    fetch(`${process.env.API_URL}/login`, {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -251,7 +251,7 @@ export function succesfullyUpdatedAppraiseeEsteem(feed) {
 export function updateAppraiseeEsteem(formData, appraiseeId) {
   return (dispatch) => {
     dispatch(updatingAppraiseeEsteem(formData, appraiseeId));
-    fetch(`http://localhost:3000/appraisee/${appraiseeId}`, {
+    fetch(`${process.env.API_URL}/appraisee/${appraiseeId}`, {
       method: 'put',
       headers: {
         Accept: 'application/json',
@@ -297,7 +297,7 @@ export const SHOW_COMMENT_SECTION = 'SHOW_COMMENT_SECTION';
 export function showCommentSection(appraiseeId) {
   return (dispatch) => {
     dispatch(requestingAppraiseeComments(appraiseeId));
-    fetch(`http://localhost:3000/comments/${appraiseeId}`)
+    fetch(`${process.env.API_URL}/comments/${appraiseeId}`)
       .then((resp) => resp.json())
       .then((json) => {
         json.status === 200
@@ -327,7 +327,7 @@ export function failedAuthenticatedUser() {
 export function checkUserAuth() {
   return (dispatch) => {
     const token = localStorage.getItem('sessionToken');
-    fetch('http://localhost:3000/auth/token', {
+    fetch(`${process.env.API_URL}/auth/token`, {
       method: 'post',
       headers: {
         Accept: 'application/json',
