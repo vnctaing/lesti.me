@@ -18,15 +18,22 @@ class AddAppraisee extends React.Component {
       { appraiser },
       { sessionToken: this.props.session.verifiedSessionToken }
     );
-    this.props.actions.postingNewAppraisee(req);
+    this.props.actions.postingNewAppraisee(req, this.props.session.loggedInUser._id);
     this.props.initialize('add_appraisee', {}, ['appraiseeName', 'esteem', 'description', 'list']);
   }
 
   render() {
     return (
       <div>
-        <h1>AddAppraisee Page</h1>
-        <AddAppraiseeForm onSubmit={this.handleSubmit.bind(this)}/>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 col-md-offset-3">
+              <div className="panel">
+                <AddAppraiseeForm onSubmit={this.handleSubmit.bind(this)}/>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

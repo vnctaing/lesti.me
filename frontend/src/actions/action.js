@@ -1,5 +1,5 @@
 import SHA256 from 'js-sha256';
-import { push } from 'react-router-redux';
+import { push, replace } from 'react-router-redux';
 
 export const APPRAISER_PROFILE_NOT_FOUND = 'APPRAISER_PROFILE_NOT_FOUND';
 export function appraiserProfileNotFound() {
@@ -60,7 +60,7 @@ export function addingAppraisee() {
   };
 }
 
-export function postingNewAppraisee(formData) {
+export function postingNewAppraisee(formData, appraiserId) {
   return (dispatch) => {
     dispatch(addingAppraisee());
     return fetch('http://localhost:3000/appraisee', {
@@ -74,12 +74,14 @@ export function postingNewAppraisee(formData) {
         esteem: formData.esteem,
         description: formData.description,
         list: formData.list,
-        appraiser: formData.appraiser,
+        appraiserId: appraiserId,
         sessionToken: formData.sessionToken,
       }),
     })
     .then((response) => response.json())
-    .then((json) => console.log('json', json))
+    .then((json) => {
+      dispatch(replace(`/de/${json.appraiser.name}`));
+    })
     .catch((e) => console.log('error', e));
   };
 }

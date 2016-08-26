@@ -130,38 +130,27 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/appraisee', (req, res) => {
-  let appraiser = null;
-  Appraiser.findOne({ name: req.body.appraiser }, (err, person) => {
-    if (err) console.log(err);
-    person
-      ? appraiser = person._id
-      : console.log('did not found user');
-  })
-  .then((appraiser) => {
-    const appraiseeToAdd = new Appraisee({
-      appraiseeName: req.body.appraiseeName,
-      appraiserName: req.body.appraiser,
-      _appraiser: appraiser._id,
-      esteem: req.body.esteem,
-      description: req.body.description,
-    });
-
-    return appraiseeToAdd.save((err, appraiseeToAdd) => {
-      if (err) return console.error(err);
-    });
-  })
-  .then((newAppraisee) => {
-    Appraiser.update(
-      { _id: newAppraisee._appraiser },
-      {
-        $push: {
-          appraisees: newAppraisee._id,
-        },
-      },
-      { upsert: true }
-    )
-    .exec();
+  const appraiseeToAdd = new Appraisee({
+    appraiseeName: req.body.appraiseeName,
+    appraiserName: req.body.appraiser,
+    _appraiser: req.body.appraiserId,
+    esteem: req.body.esteem,
+    description: req.body.description,
   });
+
+  appraiseeToAdd.save();
+
+  Appraiser
+    .findOne({ _id: req.body.appraiserId }, (err, appraiser) => {
+      if (err) console.log(err);
+      appraiser.appraisees.push(appraiseeToAdd);
+      appraiser.save()
+      res.json({
+        status: 200,
+        appraiser,
+        appraiseeToAdd
+      })
+    })
 });
 
 app.put('/appraisee/:appraiseeId', (req, res) => {
