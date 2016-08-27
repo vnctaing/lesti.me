@@ -11,15 +11,13 @@ const loggerMiddleware = createLogger();
 
 const reactRouterMiddleware = routerMiddleware(browserHistory);
 
-const enhancer = compose(
-  applyMiddleware(
-    thunkMiddleware, // lets us dispatch() functions
-    loggerMiddleware, // neat middleware that logs actions
-    reactRouterMiddleware
-  )
-  // ,
-  // DevTools.instrument()
-);
+const middlewares = [
+  thunkMiddleware,
+  reactRouterMiddleware,
+  process.env.NODE_ENV !== 'production' && loggerMiddleware,
+].filter(Boolean);
+
+const enhancer = compose(applyMiddleware(...middlewares));
 
 // const store = ();
 

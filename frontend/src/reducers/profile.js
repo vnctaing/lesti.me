@@ -2,9 +2,9 @@ import * as actions from '../actions/action.js';
 import * as commentActions from '../actions/commentActions.js';
 import * as approvalsActions from '../actions/approvalsActions.js';
 import * as userProfileActions from '../actions/userProfileActions.js';
+import _ from 'lodash';
 
 import { fromJS } from 'immutable';
-import _ from 'lodash';
 const initialState = {
   name: '',
   profilePicture: '',
@@ -34,6 +34,12 @@ function initMapFromArray(arr, initialValue) {
   const obj = {};
   _.each(arr.map((a) => a._id),
     (id) => { obj[id] = initialValue; });
+  // const obj = arr
+  //   .map((a) => a._id)
+  //   .reduce((acc, id) => {
+  //     obj[id] = initialValue;
+  //     return acc;
+  //   }, {});
   return fromJS(obj);
 }
 
