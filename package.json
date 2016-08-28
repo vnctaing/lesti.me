@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --progress --inline  --history-api-fallback --hot --colors --content-base frontend/",
     "api": "nodemon api/routes/routes.js --harmony_destructuring --ignore /frontend/",
     "build": "webpack --config webpack.config.prod.js",
-    "start": "node api/routes/routes.js --harmony_destructuring"
+    "start": "node --harmony_destructuring api/routes/routes.js"
   },
   "author": "",
   "license": "ISC",
