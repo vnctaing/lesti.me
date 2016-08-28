@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'frontend/dist'),
     filename: 'bundle.js',
-    publicPath: 'http://localhost:8080/', // Development server
+    publicPath: '/', // Development server
   },
   module: {
     loaders: [
