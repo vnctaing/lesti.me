@@ -3,3 +3,8 @@ frontend/dist
 config.js
 /uploads
 config.prod.js
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

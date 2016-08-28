@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const crypto = require('crypto');
 const fs = require('fs');
@@ -28,6 +29,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static(path.resolve('frontend')));
+
 
 // Connect mongoose to mongodb server
 mongoose.connect('mongodb://localhost:27017');
@@ -37,6 +40,10 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('connected !');
 });
+
+app.get('/', (req,res) => {
+  res.sendFile(path.resolve('frontend/index.html'));
+})
 
 
 app.get('/appraiser/:appraiserName', (req, res) => {
