@@ -1,5 +1,5 @@
+import LeaderBoard from './LeaderBoard/Leaderboard';
 import UserProfile from './UserProfile/UserProfile';
-import LeaderBoard from './LeaderBoard/LeaderBoard';
 import Panel from '../containers/Panel';
 import ActivityFeed from '../ActivityFeed/ActivityFeed';
 import { initialize } from 'redux-form';
