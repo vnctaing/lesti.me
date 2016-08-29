@@ -206,9 +206,16 @@ app.put('/appraisee/:appraiseeId', (req, res) => {
     });
 });
 
+
+if (process.env.NODE_ENV === 'production') {
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
 });
+} else {
+  app.listen(80, () => {
+    console.log('Example app listening on port 80!');
+  });
+}
 
 app.post('/comment', (req, res) => {
   const commentToAdd = new Comment({
