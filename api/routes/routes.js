@@ -33,11 +33,10 @@ app.use(express.static(path.resolve('frontend')));
 
 // Connect mongoose to mongodb server
 if (process.env.NODE_ENV === 'production') {
-    // app.use(fallback(path.resolve('frontend/index.html')))
-    // mongoose.connect('mongodb://ec2-52-50-181-106.eu-west-1.compute.amazonaws.com');
-    mongoose.connect('mongodb://localhost:27017');
+  const {DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD, DATABASE_PORT} = require('./../../config.js');
+  mongoose.connect(`mongodb://${DATABASE_URL}:${DATABASE_PORT}`,{user: DATABASE_USER, pass: DATABASE_PASSWORD });
 } else {
-    mongoose.connect('mongodb://localhost:27017');
+  mongoose.connect('mongodb://localhost:27017');
 }
 
 mongoose.Promise = global.Promise;
