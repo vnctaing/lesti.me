@@ -8,7 +8,7 @@ const path = require('path');
 
 const crypto = require('crypto');
 const fs = require('fs');
-const multer = require('multer')
+const multer = require('multer');
 
 // Mongoose Models Imports
 const mongoose = require('mongoose');
@@ -31,9 +31,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.resolve('frontend')));
 
-
 // Connect mongoose to mongodb server
-mongoose.connect('mongodb://localhost:27017');
+if (process.env.NODE_ENV === 'production') {
+    // app.use(fallback(path.resolve('frontend/index.html')))
+    // mongoose.connect('mongodb://ec2-52-50-181-106.eu-west-1.compute.amazonaws.com');
+    mongoose.connect('mongodb://localhost:27017');
+} else {
+    mongoose.connect('mongodb://localhost:27017');
+}
+
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -366,3 +372,7 @@ app.delete('/appraisee/:appraiseeId', (req, res) => {
         });
     });
 })
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('frontend/index.html'));
+});
