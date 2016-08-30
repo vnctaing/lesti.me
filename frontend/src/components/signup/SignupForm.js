@@ -30,7 +30,7 @@ let SignupForm = (props) => {
 
 const asyncValidate = (values, dispatch) => {
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost:3000/appraiser/${values.username}`, {
+    fetch(`${process.env.API_URL}/appraiser/${values.username}`, {
       method: 'get',
       headers: {
         Accept: 'application/json',
