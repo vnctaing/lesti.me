@@ -4,10 +4,11 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const crypto = require('crypto');
 const fs = require('fs');
-const multer = require('multer')
+const multer = require('multer');
 
 // Mongoose Models Imports
 const mongoose = require('mongoose');
@@ -28,15 +29,34 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static(path.resolve('frontend')));
 
 // Connect mongoose to mongodb server
-mongoose.connect('mongodb://localhost:27017');
+if (process.env.NODE_ENV === 'production') {
+  const {
+    DATABASE_URL,
+    DATABASE_USER,
+    DATABASE_PASSWORD,
+    DATABASE_PORT } = process.env;
+
+  mongoose.connect(
+    `mongodb://${DATABASE_URL}:${DATABASE_PORT}`,
+    { user: DATABASE_USER, pass: DATABASE_PASSWORD }
+  );
+} else {
+  mongoose.connect('mongodb://localhost:27017');
+}
+
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('connected !');
 });
+
+app.get('/', (req,res) => {
+  res.sendFile(path.resolve('frontend/index.html'));
+})
 
 
 app.get('/appraiser/:appraiserName', (req, res) => {
@@ -130,38 +150,27 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/appraisee', (req, res) => {
-  let appraiser = null;
-  Appraiser.findOne({ name: req.body.appraiser }, (err, person) => {
-    if (err) console.log(err);
-    person
-      ? appraiser = person._id
-      : console.log('did not found user');
-  })
-  .then((appraiser) => {
-    const appraiseeToAdd = new Appraisee({
-      appraiseeName: req.body.appraiseeName,
-      appraiserName: req.body.appraiser,
-      _appraiser: appraiser._id,
-      esteem: req.body.esteem,
-      description: req.body.description,
-    });
-
-    return appraiseeToAdd.save((err, appraiseeToAdd) => {
-      if (err) return console.error(err);
-    });
-  })
-  .then((newAppraisee) => {
-    Appraiser.update(
-      { _id: newAppraisee._appraiser },
-      {
-        $push: {
-          appraisees: newAppraisee._id,
-        },
-      },
-      { upsert: true }
-    )
-    .exec();
+  const appraiseeToAdd = new Appraisee({
+    appraiseeName: req.body.appraiseeName,
+    appraiserName: req.body.appraiser,
+    _appraiser: req.body.appraiserId,
+    esteem: req.body.esteem,
+    description: req.body.description,
   });
+
+  appraiseeToAdd.save();
+
+  Appraiser
+    .findOne({ _id: req.body.appraiserId }, (err, appraiser) => {
+      if (err) console.log(err);
+      appraiser.appraisees.push(appraiseeToAdd);
+      appraiser.save()
+      res.json({
+        status: 200,
+        appraiser,
+        appraiseeToAdd
+      })
+    })
 });
 
 app.put('/appraisee/:appraiseeId', (req, res) => {
@@ -205,9 +214,17 @@ app.put('/appraisee/:appraiseeId', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
-});
+
+if (process.env.NODE_ENV === 'production') {
+  const listeningPort = process.env.PORT || 8080;
+  app.listen(listeningPort, () => {
+      console.log('Example app listening on port 8080!');
+    });
+} else {
+  app.listen(3000, () => {
+    console.log('Example app listening on port 3000!');
+  });
+}
 
 app.post('/comment', (req, res) => {
   const commentToAdd = new Comment({
@@ -331,4 +348,46 @@ app.post('/avatar/:appraiserId', upload.single('avatar'), (req, res) => {
         })
     }
   });
+});
+
+app.delete('/appraisee/:appraiseeId', (req, res) => {
+  const feeds = Feed
+    .find({ _appraisee: req.params.appraiseeId }, (err, docs) => {
+      docs.reduce((acc, d) => d.remove(), []);
+      return docs;
+    });
+  const comments = Comment
+    .find({ _appraisee: req.params.appraiseeId }, (err, docs) => {
+      docs.reduce((acc, d) => d.remove(), []);
+      return docs;
+    });
+
+  const appraisee = Appraisee
+    .findOne({ _id: req.params.appraiseeId }, (err, doc) => {
+      if (err) throw 'Could not find an appraisee with this ID';
+      doc.remove();
+    });
+
+  Promise
+    .all([feeds, appraisee, comments])
+    .then((p) => {
+      Appraiser
+        .findOne({ _id: p[1]._appraiser }, (err, appraiser) => {
+          appraiser.appraisees = appraiser.appraisees.filter((a) => {
+            return a._id !== req.params.appraiseeId;
+          });
+
+          appraiser.feeds = appraiser.feeds.filter(feeds => {
+            return p[0].filter(b => b._id.toString() !== feeds.toString()).length;
+          });
+
+          appraiser.save();
+
+          res.json({ status:200, appraiser });
+        });
+    });
+})
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('frontend/index.html'));
 });

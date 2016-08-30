@@ -2,9 +2,9 @@ import * as actions from '../actions/action.js';
 import * as commentActions from '../actions/commentActions.js';
 import * as approvalsActions from '../actions/approvalsActions.js';
 import * as userProfileActions from '../actions/userProfileActions.js';
+import _ from 'lodash';
 
 import { fromJS } from 'immutable';
-import _ from 'lodash';
 const initialState = {
   name: '',
   profilePicture: '',
@@ -19,6 +19,7 @@ const initialState = {
     loadingComments: {},
     showDropZone: false,
     isUploading: false,
+    confirmationDeleteModal: {},
   },
 };
 
@@ -33,6 +34,12 @@ function initMapFromArray(arr, initialValue) {
   const obj = {};
   _.each(arr.map((a) => a._id),
     (id) => { obj[id] = initialValue; });
+  // const obj = arr
+  //   .map((a) => a._id)
+  //   .reduce((acc, id) => {
+  //     obj[id] = initialValue;
+  //     return acc;
+  //   }, {});
   return fromJS(obj);
 }
 
@@ -54,11 +61,27 @@ export default function profile(state = initialState, action) {
                             initMapFromArray(action.profile.appraisees, 'estimation'))
                    .setIn(['ui', 'loadingComments'],
                             initMapFromArray(action.profile.appraisees, false))
+                   .setIn(['ui', 'confirmationDeleteModal'],
+                            initMapFromArray(action.profile.appraisees, false))
                    .setIn(['ui', 'isFetchingProfile'], false)
                    .toJS();
     case actions.OPEN_APPRAISEE_UPDATE_MODAL:
       return iState.setIn(['ui', 'show_update_appraisee_esteem_modal', action.appraiseeId],
                             action.purposeReestimation)
+                   .toJS();
+    case actions.OPEN_CONFIRMATION_DELETE_MODAL:
+      return iState.setIn(['ui', 'confirmationDeleteModal', action.appraiseeId],
+                            true)
+                   .toJS();
+    case actions.DELETING_APPRAISEE:
+      return iState.updateIn(['appraisees'], (appraisees) => {
+                      return appraisees.filter((a) => a.get('_id') !== action.appraiseeId)
+                    })
+
+                   .toJS();
+    case actions.CLOSE_CONFIRMATION_DELETE_MODAL:
+      return iState.setIn(['ui', 'confirmationDeleteModal', action.appraiseeId],
+                            false)
                    .toJS();
     case actions.UPDATING_APPRAISEE_ESTEEM:
       return iState.updateIn(

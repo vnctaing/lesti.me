@@ -1,4 +1,4 @@
-import SignInForm from './SignInForm';
+import SignInForm from './SigninForm';
 import { connect } from 'react-redux';
 import { initialize } from 'redux-form';
 import * as actionCreators from '../../actions/action.js';

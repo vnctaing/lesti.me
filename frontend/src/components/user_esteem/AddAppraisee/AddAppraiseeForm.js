@@ -18,22 +18,11 @@ let AddAppraiseeForm = (props) => {
           <label htmlFor="">Description</label>
           <textarea name="" id="" cols="30" rows="10" {...description}></textarea>
         </div>
-        <div>
-          <label htmlFor="">Liste</label>
-          <select name="B" {...list}>
-            <option value="A">wesh</option>
-            <option value="B">aloors</option>
-            <option value="C">jul</option>
-          </select>
-        </div>        
         <button onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   );
 };
-// 
-// 
-
 
 AddAppraiseeForm = reduxForm({
   form: 'add_appraisee',

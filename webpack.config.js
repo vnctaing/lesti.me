@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'frontend/dist'),
     filename: 'bundle.js',
-    publicPath: 'http://localhost:8080/', // Development server
+    publicPath: '/',
   },
   module: {
     loaders: [
@@ -61,7 +61,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('dev'),
-        API_URL: JSON.stringify(require('./config.dev.js').API_URL),
+        API_URL: JSON.stringify('http://localhost:3000'),
       },
     }),
   ],

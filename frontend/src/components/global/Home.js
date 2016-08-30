@@ -1,6 +1,6 @@
 import Signup from '../signup/Signup.js';
 import BetaAccess from '../BetaAccess/BetaAccess';
-import Footer from '../global/Footer'
+import Footer from '../global/Footer';
 import { connect } from 'react-redux';
 
 function showBetaAcces(props) {

@@ -1,5 +1,5 @@
 import SHA256 from 'js-sha256';
-import { push } from 'react-router-redux';
+import { push, replace } from 'react-router-redux';
 
 export const APPRAISER_PROFILE_NOT_FOUND = 'APPRAISER_PROFILE_NOT_FOUND';
 export function appraiserProfileNotFound() {
@@ -60,7 +60,7 @@ export function addingAppraisee() {
   };
 }
 
-export function postingNewAppraisee(formData) {
+export function postingNewAppraisee(formData, appraiserId) {
   return (dispatch) => {
     dispatch(addingAppraisee());
     return fetch(`${process.env.API_URL}/appraisee`, {
@@ -74,12 +74,14 @@ export function postingNewAppraisee(formData) {
         esteem: formData.esteem,
         description: formData.description,
         list: formData.list,
-        appraiser: formData.appraiser,
+        appraiserId: appraiserId,
         sessionToken: formData.sessionToken,
       }),
     })
     .then((response) => response.json())
-    .then((json) => console.log('json', json))
+    .then((json) => {
+      dispatch(replace(`/de/${json.appraiser.name}`));
+    })
     .catch((e) => console.log('error', e));
   };
 }
@@ -351,5 +353,50 @@ export function showEstimationSection(appraiseeId) {
   return {
     type: SHOW_ESTIMATION_SECTION,
     appraiseeId,
+  };
+}
+
+export const CLOSE_CONFIRMATION_DELETE_MODAL = 'CLOSE_CONFIRMATION_DELETE_MODAL';
+export function closeConfirmationDeleteModal(appraiseeId) {
+  return {
+    type: CLOSE_CONFIRMATION_DELETE_MODAL,
+    appraiseeId,
+  };
+}
+
+export const OPEN_CONFIRMATION_DELETE_MODAL = 'OPEN_CONFIRMATION_DELETE_MODAL';
+export function openConfirmationDeleteModal(appraiseeId) {
+  return {
+    type: OPEN_CONFIRMATION_DELETE_MODAL,
+    appraiseeId,
+  };
+}
+
+export const DELETING_APPRAISEE = 'DELETING_APPRAISEE';
+export function deletingAppraisee(appraiseeId) {
+  return {
+    type: DELETING_APPRAISEE,
+    appraiseeId,
+  };
+}
+
+export const SUCCESSFULLY_DELETED_APPRAISEE = 'SUCCESSFULLY_DELETED_APPRAISEE';
+export function successfullyDeletedAppraisee() {
+  return {
+    type: SUCCESSFULLY_DELETED_APPRAISEE,
+  };
+}
+
+export function deleteAppraisee(appraiseeId) {
+  return (dispatch) => {
+    dispatch(deletingAppraisee(appraiseeId));
+    fetch(`${process.env.API_URL}/appraisee/${appraiseeId}`, {
+      method: 'delete',
+    })
+    .then((r) => r.json())
+    .then((json) => {
+      if (json.status === 200) dispatch(successfullyDeletedAppraisee());
+    })
+    .catch((error) => console.log(error));
   };
 }
