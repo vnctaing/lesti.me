@@ -13,7 +13,7 @@ const ActivityFeed = (props) => {
           </TableRow>
         );
       })
-      : <p>Il n'y pas encore eu d'activités l'estime de {name}</p>
+      : <p>Il n'y pas encore eu d'activité dans l'estime de {name}</p>
     }
     </div>
   );

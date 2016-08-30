@@ -39,7 +39,6 @@ const LeaderBoardEstimation = (props) => {
           {appraisee.esteem} pts <span>dans l'estime de Vincent</span>
         </p>
       </div>
-      {isItsPage ? <i className="fa fa-pencil leaderboard__icon--right"></i> : ''}
       <p className="leaderboard__description">{appraisee.description}</p>
       <div className="leaderboard__socialContainer" onClick={displayCommentPanel}>
         <LabelIllustrated icon="fa-thumbs-o-up" label={appraisee.approvals} />
