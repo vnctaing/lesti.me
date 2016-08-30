@@ -44,14 +44,18 @@ export class UserProfilePicture extends Component {
             style={centeredPicture}
             className="img-responsive img-circle profile_picture"
           />
-          <p
-            className="profilePicture__overlay"
-            onClick={() => {
-              this.props.userProfileActions.toggleDropZoneProfilePicture()
-            }}
-          >
-            Changer sa photo de profil
-          </p>
+          {
+            this.props.isItsPage
+            ? <p
+              className="profilePicture__overlay lst-cursor"
+              onClick={() => {
+                this.props.userProfileActions.toggleDropZoneProfilePicture()
+              }}
+            >
+              Changer sa photo de profil
+            </p>
+          : ''
+        }
         </div>
       );
     }

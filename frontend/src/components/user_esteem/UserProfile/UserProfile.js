@@ -20,7 +20,7 @@ const UserProfile = (props) => {
             {
               profile.ui.isFetchingProfile
               ? <i className="fa fa-spin fa-spinner fa-4x"></i>
-              : <UserProfilePicture profilePicture={profile.profilePicture} />
+              : <UserProfilePicture profilePicture={profile.profilePicture} isItsPage={props.isItsPage}/>
             }
           </div>
           <div className="col-xs-8 text-right">
