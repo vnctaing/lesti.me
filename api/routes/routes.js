@@ -208,13 +208,13 @@ app.put('/appraisee/:appraiseeId', (req, res) => {
 
 
 if (process.env.NODE_ENV === 'production') {
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
-});
-} else {
   app.listen(8080, () => {
-    console.log('Example app listening on port 8080!');
-  });
+      console.log('Example app listening on port 8080!');
+    });
+} else {
+  app.listen(3000, () => {
+    console.log('Example app listening on port 3000!');
+  });  
 }
 
 app.post('/comment', (req, res) => {
