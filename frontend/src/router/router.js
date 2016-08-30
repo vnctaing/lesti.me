@@ -12,6 +12,7 @@ import Home from '../components/global/Home';
 import SecretBetaAccessGenerator from '../components/BetaAccess/SecretBetaAccessGenerator';
 import * as actionCreators from '../actions/action.js';
 import * as approvalsActionCreators from '../actions/approvalsActions.js';
+import ReactGA from 'react-ga';
 
 
 const history = syncHistoryWithStore(browserHistory, store);
@@ -34,9 +35,14 @@ function checkAuth(store) {
   };
 }
 
+function fireTracking() {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+}
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router onUpdate={fireTracking} history={history}>
       <Route path="/" component={Layout} onEnter={checkAuth(store)}>
         <IndexRoute component={Home} />
         <Route path="de/:appraiser" component={UserEsteem} onEnter={onEnterActions(store)} />
