@@ -212,8 +212,8 @@ app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
 });
 } else {
-  app.listen(80, () => {
-    console.log('Example app listening on port 80!');
+  app.listen(8080, () => {
+    console.log('Example app listening on port 8080!');
   });
 }
 
