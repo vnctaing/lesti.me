@@ -21,10 +21,20 @@ const BetaToken = require('../models/BetaToken');
 const upload = multer({ dest: 'uploads/' })
 
 const AWS = require('aws-sdk');
-AWS.config.region = 'eu-west-1';
+
+
+if (process.env.NODE_ENV === 'production') {
+  AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: 'eu-west-1',
+  });
+} else {
+  AWS.config.update({ region: 'eu-west-1' });
+}
+
 const s3bucket = new AWS.S3({ params: { Bucket: 'lesti' } });
 
-AWS.config.update({ region: 'eu-west-1' });
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
