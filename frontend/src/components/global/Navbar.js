@@ -11,12 +11,9 @@ const Navbar = (props) => {
     <div>
       <nav className="navbar lst-navbar">
         <div className="container">
-          <div className="navbar-header">
+          <div className="navbar__container">
             <IndexLink to="/"><img src="/assets/img/logo.svg" alt="Logo Lesti"></img></IndexLink>
-          </div>
-
-          <div className="collapse navbar-collapse" id="navbar-collapse">
-            <ul className="navbar-right navbar__list">
+            <ul className="navbar__list">
               {
                 Object.keys(session.verifiedSessionToken).length
                 ? <li className="navbar__greeting navbar__item">

@@ -3,7 +3,7 @@ const Footer = (props) => {
     <div id="footer">
       <div className="container navbar__wrapper">
         <div className="container-flex--inline navbar__cred">
-          <h3 className="footer__copyright">Copyright © 2016 - 😄</h3>
+          <h3 className="footer__copyright">VT - Copyright © 2016 - 😄</h3>
         </div>
       </div>
     </div>
