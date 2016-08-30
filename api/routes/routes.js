@@ -33,7 +33,7 @@ app.use(express.static(path.resolve('frontend')));
 
 // Connect mongoose to mongodb server
 if (process.env.NODE_ENV === 'production') {
-  const {DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD, DATABASE_PORT} = require('./../../config.js');
+  // const {DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD, DATABASE_PORT} = require('./../../config.js');
   mongoose.connect(`mongodb://${DATABASE_URL}:${DATABASE_PORT}`,{user: DATABASE_USER, pass: DATABASE_PASSWORD });
 } else {
   mongoose.connect('mongodb://localhost:27017');
@@ -208,13 +208,14 @@ app.put('/appraisee/:appraiseeId', (req, res) => {
 
 
 if (process.env.NODE_ENV === 'production') {
-  app.listen(8080, () => {
+  const listeningPort = process.env.PORT || 8080;
+  app.listen(listeningPort, () => {
       console.log('Example app listening on port 8080!');
     });
 } else {
   app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
-  });  
+  });
 }
 
 app.post('/comment', (req, res) => {
