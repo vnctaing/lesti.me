@@ -35,7 +35,7 @@ export function requestAppraiseeApproval(appraiseeId, opts) {
       delete appraiseeApprovals[appraiseeId];
     }
 
-    fetch(`http://localhost:3000/approvals/${appraiseeId}`, {
+    fetch(`${process.env.API_URL}/approvals/${appraiseeId}`, {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -67,4 +67,3 @@ export function checkVisitorApprovals() {
     dispatch(checkingVisitorApprovals(approvals));
   };
 }
-

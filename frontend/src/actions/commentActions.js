@@ -9,7 +9,7 @@ export function addingComment(appraiseeId, comment) {
 
 export function postingComment(formData) {
   return (dispatch) => {
-    return fetch('http://localhost:3000/comment', {
+    return fetch(`${process.env.API_URL}/comment`, {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -44,4 +44,3 @@ export function receivedComments(appraiseeId) {
     appraiseeId,
   };
 }
-
