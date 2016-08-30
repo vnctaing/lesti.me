@@ -12,7 +12,15 @@ const Navbar = (props) => {
       <nav className="navbar lst-navbar">
         <div className="container">
           <div className="navbar__container">
-            <IndexLink to="/"><img src="/assets/img/logo.svg" alt="Logo Lesti"></img></IndexLink>
+            <IndexLink to="/">
+              <img
+                src="/assets/img/logo.svg"
+                alt="Logo Lesti"
+                className="navbar__brandLogo"
+              >
+              </img>
+
+            </IndexLink>
             <ul className="navbar__list">
               {
                 Object.keys(session.verifiedSessionToken).length
