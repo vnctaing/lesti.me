@@ -33,7 +33,7 @@ app.use(express.static(path.resolve('frontend')));
 
 // Connect mongoose to mongodb server
 if (process.env.NODE_ENV === 'production') {
-  // const {DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD, DATABASE_PORT} = require('./../../config.js');
+  const { DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD, DATABASE_PORT } = process.env;
   mongoose.connect(`mongodb://${DATABASE_URL}:${DATABASE_PORT}`,{user: DATABASE_USER, pass: DATABASE_PASSWORD });
 } else {
   mongoose.connect('mongodb://localhost:27017');
