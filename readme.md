@@ -31,13 +31,15 @@ git push heroku master
 
 ## Built With
 
-* Dropwizard - Bla bla bla
-* Maven - Maybe
-* Atom - ergaerga
+* [React](https://github.com/facebook/react) - A declarative, efficient, and flexible JavaScript library for building user interfaces.
+* [Redux](https://github.com/reactjs/redux) - Predictable state container for JavaScript apps
+* [Webpack](https://github.com/webpack/webpack) - A bundler for javascript and friends
+* [Immutable](https://github.com/facebook/immutable-js) - Immutable persistent data collections for Javascript which increase efficiency and simplicity.
+* [Express](https://github.com/expressjs/express) - Fast, unopinionated, minimalist web framework for node.
+* [Mongoose](https://github.com/Automattic/mongoose) - MongoDB object modeling designed to work in an asynchronous environment
+* [MongoDB](https://www.mongodb.com/) - Non-relational database
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+I'm looking forward experimenting GraphQL, Relay and drop MongoDB/Mongoose
 
 ## Authors
 
