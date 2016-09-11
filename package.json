@@ -6,9 +6,12 @@
     "test:front": "mocha --compilers js:babel-core/register frontend/test --require ignore-styles --watch --recursive",
     "webpack": "webpack --progress --colors --watch",
     "dev": "webpack-dev-server --progress --inline  --history-api-fallback --hot --colors --content-base frontend/",
-    "api": "nodemon --harmony_destructuring api/routes/routes.js --ignore /frontend/",
+    "api": "nodemon api/routes/routes.js --ignore /frontend/",
     "build": "webpack --config webpack.config.prod.js",
-    "start": "npm run build && NODE_ENV=production node --harmony-destructuring api/routes/routes.js"
+    "start": "npm run build && NODE_ENV=production node api/routes/routes.js"
+  },
+  "engines": {
+    "node": "6.4.0"
   },
   "author": "",
   "license": "ISC",
