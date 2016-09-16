@@ -43,7 +43,7 @@ I'm looking forward experimenting GraphQL, Relay and drop MongoDB/Mongoose
 
 ## Authors
 
-* **Vincent Taing** - *Initial work* - [vnctaing](https://github.com/PurpleBooth)
+* **Vincent Taing** - *Initial work* - [vnctaing](https://github.com/vnctaing)
 
 ## License
 
