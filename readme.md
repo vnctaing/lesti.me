@@ -1,5 +1,5 @@
 # Lesti.me
-
+[![Stories in Ready](https://badge.waffle.io/vnctaing/lesti.me.png?label=ready&title=Ready)](http://waffle.io/vnctaing/lesti.me)
 Lesti.me is a webapp that lets you keep a leaderboard of your friends. 
 
 ## Getting Started
